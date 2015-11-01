@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CharacterSheet</string>
+    <string name="title_charactersheet_detail">CharacterSheet Detail</string>
+</resources>

@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">CharacterSheet</string>
     <string name="title_charactersheet_detail">CharacterSheet Detail</string>
+    <string name="title_activity_character_sheet_view_pager">CharacterSheetViewPagerActivity
+    </string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

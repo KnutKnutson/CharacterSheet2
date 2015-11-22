@@ -2,31 +2,21 @@ package com.boredombabies.charactersheet.model;
 
 import com.boredombabies.charactersheet.model.klass.CharacterClass;
 import com.boredombabies.charactersheet.model.race.CharacterRace;
-
-import java.util.ArrayList;
-
-import javax.inject.Inject;
-
 import io.realm.RealmObject;
 
 /**
  * Created by mark.knutson on 3/22/15.
  */
 public class Profile extends RealmObject {
-    private String name;
+    //private String name; Moved to PC
     private int level;
 
     public Profile() {
-        this.name = "New Character";
+        //this.name = "New Character";
         this.level = 1;
     }
 
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
+
     public int getLevel() {
         return level;
     }

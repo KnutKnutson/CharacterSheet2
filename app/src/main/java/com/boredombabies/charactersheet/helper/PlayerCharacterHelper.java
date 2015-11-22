@@ -6,7 +6,6 @@ import com.boredombabies.charactersheet.interfaces.DaggerPlayerCharacterInterfac
 import com.boredombabies.charactersheet.model.PlayerCharacter;
 import com.boredombabies.charactersheet.module.PlayerCharacterModule;
 
-import dagger.Module;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -18,25 +17,39 @@ public class PlayerCharacterHelper {
     private static RealmResults<PlayerCharacter> characters;
     private static PlayerCharacter activeCharacter;
 
-    public static PlayerCharacter newPlayerCharacter(Context context) {
+    public static PlayerCharacter newPlayerCharacter(Realm realm) {
         PlayerCharacter newCharacter =
                 DaggerPlayerCharacterInterface.builder()
                 .playerCharacterModule(new PlayerCharacterModule())
                 .build()
                 .providePlayerCharacter();
 
-        Realm realm = Realm.getInstance(context);
         realm.beginTransaction();
         PlayerCharacter realmCharacter = realm.copyToRealm(newCharacter);
         realm.commitTransaction();
-        return realmCharacter;
+        setActiveCharacter(realmCharacter);
+        return getActiveCharacter();
     }
 
-    public static RealmResults<PlayerCharacter> getCharacters(Context context) {
+    public static void deletePlayerCharacter(Realm realm, PlayerCharacter honoredDead) {
+        realm.beginTransaction();
+        honoredDead.removeFromRealm();
+        realm.commitTransaction();
+    }
+
+    public static RealmResults<PlayerCharacter> getCharacters(Realm realm) {
         if (characters == null) {
-            Realm realm = Realm.getInstance(context);
-            realm.allObjects( PlayerCharacter.class );
+            characters = realm.allObjects( PlayerCharacter.class );
+            characters.sort("name");
         }
         return characters;
+    }
+
+    public static PlayerCharacter getActiveCharacter() {
+        return activeCharacter;
+    }
+
+    public static void setActiveCharacter(PlayerCharacter playerCharacter) {
+        activeCharacter = playerCharacter;
     }
 }

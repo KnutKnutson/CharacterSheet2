@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/activatedBackgroundIndicator">
+
+    <ImageView
+        android:id="@+id/characterIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true" />
+    <TextView
+        android:id="@+id/characterName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/characterIcon"
+        android:layout_marginLeft="5dp"
+        android:textSize="18sp"/>
+    <TextView
+        android:id="@+id/characterLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/characterIcon"
+        android:layout_below="@+id/characterName"
+        android:layout_marginLeft="5dp"/>
+    <TextView
+        android:id="@+id/characterRace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/characterName"
+        android:layout_toRightOf="@+id/characterLevel"
+        android:layout_marginLeft="5dp"/>
+    <TextView
+        android:id="@+id/characterClass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/characterRace"
+        android:layout_below="@id/characterName"
+        android:layout_marginLeft="5dp"/>
+
+</RelativeLayout>

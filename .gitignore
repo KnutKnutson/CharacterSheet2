@@ -6,6 +6,9 @@
 /build
 /captures
 
+### Database ###
+*.realm*
+
 # Created by http://www.gitignore.io
 
 ### Android ###

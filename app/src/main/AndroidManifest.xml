@@ -27,6 +27,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.CharacterSheetListActivity" />
         </activity>
+        <activity
+            android:name=".activity.CharacterSheetViewPagerActivity"
+            android:label="@string/title_activity_character_sheet_view_pager"
+            android:parentActivityName=".activity.CharacterSheetListActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.CharacterSheetListActivity" />
+        </activity>
     </application>
 
 </manifest>

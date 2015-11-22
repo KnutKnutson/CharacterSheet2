@@ -6,10 +6,20 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.view.MenuItem;
 
 import com.boredombabies.charactersheet.R;
+import com.boredombabies.charactersheet.fragment.CharacterProfileFragment;
+import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
+import com.boredombabies.charactersheet.model.PlayerCharacter;
+
+import io.realm.Realm;
+
+/**
+ * This is just a fragment in the viewpager and shouldn't be needed
+ */
 
 /**
  * An activity representing a single CharacterSheet detail screen. This
@@ -22,21 +32,15 @@ import com.boredombabies.charactersheet.R;
  */
 public class CharacterProfileActivity extends AppCompatActivity {
 
+    private Realm realm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        realm = Realm.getInstance(this);
         setContentView(R.layout.activity_charactersheet_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         // Show the Up button in the action bar.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -78,5 +82,11 @@ public class CharacterProfileActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
     }
 }

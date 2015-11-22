@@ -6,9 +6,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 
 import com.boredombabies.charactersheet.R;
+import com.boredombabies.charactersheet.adapter.CharacterListAdapter;
+import com.boredombabies.charactersheet.fragment.CharacterProfileFragment;
+import com.boredombabies.charactersheet.fragment.CharacterSheetListFragment;
+import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
+import com.boredombabies.charactersheet.model.PlayerCharacter;
+
+import io.realm.Realm;
 
 /**
  *  CHARACTER SHEET FRAGMENTS
@@ -45,6 +53,8 @@ import com.boredombabies.charactersheet.R;
 public class CharacterSheetListActivity extends AppCompatActivity
         implements CharacterSheetListFragment.Callbacks {
 
+    private Realm realm;
+
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
@@ -54,20 +64,14 @@ public class CharacterSheetListActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        realm = Realm.getInstance(this);
         setContentView(R.layout.activity_charactersheet_app_bar);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        CharacterSheetListFragment listFragment;
 
         if (findViewById(R.id.charactersheet_detail_container) != null) {
             // The detail container view will be present only in the
@@ -82,6 +86,23 @@ public class CharacterSheetListActivity extends AppCompatActivity
                     .findFragmentById(R.id.charactersheet_list))
                     .setActivateOnItemClick(true);
         }
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final PlayerCharacter newPlayerCharacter = PlayerCharacterHelper.newPlayerCharacter(realm);
+                refreshListAdapter();
+                Snackbar.make(view, "Undo New Character", Snackbar.LENGTH_LONG)
+                        .setAction("Undo", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                PlayerCharacterHelper.deletePlayerCharacter(realm, newPlayerCharacter);
+                                refreshListAdapter();
+                            }
+                        }).show();
+            }
+        });
 
         // TODO: If exposing deep links into your app, handle intents here.
     }
@@ -110,6 +131,21 @@ public class CharacterSheetListActivity extends AppCompatActivity
             Intent detailIntent = new Intent(this, CharacterProfileActivity.class);
             detailIntent.putExtra(CharacterProfileFragment.ARG_ITEM_ID, id);
             startActivity(detailIntent);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
+    }
+
+    private void refreshListAdapter() {
+        if (mTwoPane) {
+            CharacterListAdapter listAdapter = ((CharacterSheetListFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.charactersheet_list))
+                    .getListAdapter();
+            listAdapter.notifyDataSetChanged();
         }
     }
 }

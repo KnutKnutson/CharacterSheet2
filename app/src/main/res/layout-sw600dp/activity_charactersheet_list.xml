@@ -19,12 +19,15 @@
 
     <fragment
         android:id="@+id/charactersheet_list"
-        android:name="com.boredombabies.charactersheet.activity.CharacterSheetListFragment"
+        android:name="com.boredombabies.charactersheet.fragment.CharacterSheetListFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         tools:layout="@android:layout/list_content" />
 
+    <!--
+    Replace This with an image
+    -->
     <FrameLayout
         android:id="@+id/charactersheet_detail_container"
         android:layout_width="0dp"

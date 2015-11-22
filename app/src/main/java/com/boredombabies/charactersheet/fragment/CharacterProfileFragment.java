@@ -1,4 +1,4 @@
-package com.boredombabies.charactersheet.activity;
+package com.boredombabies.charactersheet.fragment;
 
 import android.app.Activity;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -12,7 +12,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.boredombabies.charactersheet.R;
+import com.boredombabies.charactersheet.activity.CharacterProfileActivity;
+import com.boredombabies.charactersheet.activity.CharacterSheetListActivity;
 import com.boredombabies.charactersheet.dummy.DummyContent;
+import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
+import com.boredombabies.charactersheet.model.PlayerCharacter;
 
 /**
  * A fragment representing a single CharacterSheet detail screen.
@@ -28,9 +32,10 @@ public class CharacterProfileFragment extends Fragment {
     public static final String ARG_ITEM_ID = "item_id";
 
     /**
-     * The dummy content this fragment is presenting.
+     * The Player Character this fragment is presenting.
      */
-    private DummyContent.DummyItem mItem;
+    //private DummyContent.DummyItem mItem;
+    PlayerCharacter playerCharacter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -43,6 +48,13 @@ public class CharacterProfileFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        playerCharacter = PlayerCharacterHelper.getActiveCharacter();
+        Activity activity = this.getActivity();
+        CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
+        if (appBarLayout != null) {
+            appBarLayout.setTitle(playerCharacter.getName());
+        }
+        /*
         if (getArguments().containsKey(ARG_ITEM_ID)) {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
@@ -55,6 +67,7 @@ public class CharacterProfileFragment extends Fragment {
                 appBarLayout.setTitle(mItem.content);
             }
         }
+        */
     }
 
     @Override
@@ -64,19 +77,19 @@ public class CharacterProfileFragment extends Fragment {
         LinearLayout profile = (LinearLayout) rootView.findViewById(R.id.charactersheet_detail);
 
         // Show the dummy content as text in a TextView.
-        if (mItem != null) {
+        if (playerCharacter != null) {
             //((TextView) rootView.findViewById(R.id.charactersheet_detail)).setText(mItem.details);
             for (int i = 0; i < 5; i++) {
                 EditText mainEditTextComponent = (EditText) inflater.inflate(R.layout.component_main_edit_text, container, false);
-                mainEditTextComponent.setText(Integer.toString(i));
+                mainEditTextComponent.setText(playerCharacter.getName() + Integer.toString(i));
                 profile.addView(mainEditTextComponent);
             }
             for (int i = 0; i < 10; i++) {
                 View abilityScoreComponent = inflater.inflate(R.layout.component_ability_score, container, false);
                 EditText abilityModifier = (EditText) abilityScoreComponent.findViewById(R.id.ability_modifier);
                 EditText abilityScore = (EditText) abilityScoreComponent.findViewById(R.id.ability_score);
-                abilityModifier.setText(mItem.id + i);
-                abilityScore.setText(mItem.id + 10);
+                abilityModifier.setText("mod");
+                abilityScore.setText("10");
                 profile.addView(abilityScoreComponent);
             }
         }

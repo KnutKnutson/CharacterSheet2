@@ -1,13 +1,16 @@
-package com.boredombabies.charactersheet.activity;
+package com.boredombabies.charactersheet.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.boredombabies.charactersheet.dummy.DummyContent;
+import com.boredombabies.charactersheet.adapter.CharacterListAdapter;
+import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
+
+import io.realm.Realm;
 
 /**
  * A list fragment representing a list of CharacterSheets. This fragment
@@ -19,6 +22,10 @@ import com.boredombabies.charactersheet.dummy.DummyContent;
  * interface.
  */
 public class CharacterSheetListFragment extends ListFragment {
+
+    private Realm realm;
+
+    private CharacterListAdapter listAdapter;
 
     /**
      * The serialization (saved instance state) Bundle key representing the
@@ -69,13 +76,14 @@ public class CharacterSheetListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        realm = Realm.getInstance(getActivity());
+        Log.w("", "path: " + realm.getPath());
 
+        listAdapter = new CharacterListAdapter(getActivity(), PlayerCharacterHelper.getCharacters(realm));
+        setListAdapter(listAdapter);
         // TODO: replace with a real list adapter.
-        setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(
-                getActivity(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
-                DummyContent.ITEMS));
+        //setListAdapter(new ArrayAdapter<PlayerCharacter>( getActivity(), android.R.layout.simple_list_item_activated_1, android.R.id.text1, PlayerCharacterHelper.getCharacters(realm)));
+
     }
 
     @Override
@@ -113,9 +121,14 @@ public class CharacterSheetListFragment extends ListFragment {
     public void onListItemClick(ListView listView, View view, int position, long id) {
         super.onListItemClick(listView, view, position, id);
 
+        PlayerCharacterHelper.setActiveCharacter(PlayerCharacterHelper.getCharacters(realm).get(position));
+
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-        mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
+        mCallbacks.onItemSelected(PlayerCharacterHelper
+                                    .getCharacters(realm)
+                                    .get(position)
+                                    .getName());
     }
 
     @Override
@@ -125,6 +138,12 @@ public class CharacterSheetListFragment extends ListFragment {
             // Serialize and persist the activated item position.
             outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        realm.close();
     }
 
     /**
@@ -147,5 +166,9 @@ public class CharacterSheetListFragment extends ListFragment {
         }
 
         mActivatedPosition = position;
+    }
+
+    public CharacterListAdapter getListAdapter() {
+        return listAdapter;
     }
 }

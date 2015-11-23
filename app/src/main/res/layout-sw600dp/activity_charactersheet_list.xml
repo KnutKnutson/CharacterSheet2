@@ -1,37 +1,41 @@
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    android:baselineAligned="false"
-    android:divider="?android:attr/dividerHorizontal"
-    android:orientation="horizontal"
-    android:showDividers="middle"
     tools:context=".CharacterSheetListActivity">
 
-    <!--
-    This layout is a two-pane layout for the CharacterSheets
-    master/detail flow.
-    
-    -->
-
-    <fragment
-        android:id="@+id/charactersheet_list"
-        android:name="com.boredombabies.charactersheet.fragment.CharacterSheetListFragment"
-        android:layout_width="0dp"
+    <!-- TODO: make this image not suck -->
+    <ImageView
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        tools:layout="@android:layout/list_content" />
+        android:src="@drawable/main"
+        android:alpha=".4"
+        android:scaleType="centerCrop"/>
 
-    <!--
-    Replace This with an image
-    -->
-    <FrameLayout
-        android:id="@+id/charactersheet_detail_container"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="3" />
+        android:baselineAligned="false"
+        android:divider="?android:attr/dividerHorizontal"
+        android:orientation="horizontal"
+        android:showDividers="middle"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
 
-</LinearLayout>
+        <fragment
+            android:id="@+id/charactersheet_list"
+            android:name="com.boredombabies.charactersheet.fragment.CharacterSheetListFragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:layout="@android:layout/list_content" />
+
+        <FrameLayout
+            android:id="@+id/charactersheet_detail_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3" />
+    </LinearLayout>
+
+</FrameLayout>

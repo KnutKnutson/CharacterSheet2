@@ -5,4 +5,23 @@
     </string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+
+    <!--CHARACTER PROFILE LABELS-->
+    <string name="label_character_name">CHARACTER NAME</string>
+    <string name="label_player_name">PLAYER NAME</string>
+    <string name="label_character_level">LEVEL</string>
+    <string name="label_character_race">RACE</string>
+    <string name="label_character_class">CLASS</string>
+    <string name="label_character_experience_points">XP</string>
+    <string name="label_character_background">BACKGROUND</string>
+    <string name="label_character_alignment">ALIGNMENT</string>
+    <string name="label_character_age">AGE</string>
+    <string name="label_character_height">HEIGHT</string>
+    <string name="label_character_weight">WEIGHT</string>
+    <string name="label_character_eyes">EYES</string>
+    <string name="label_character_skin">SKIN</string>
+    <string name="label_character_hair">HAIR</string>
+
+    <string name="label_inspiration">INSPIRATION</string>
+    <string name="label_proficiency_bonus">PROFICIENCY BONUS</string>
 </resources>

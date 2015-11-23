@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 
 import com.boredombabies.charactersheet.R;
-import com.boredombabies.charactersheet.adapter.CharacterListAdapter;
 import com.boredombabies.charactersheet.fragment.CharacterProfileFragment;
 import com.boredombabies.charactersheet.fragment.CharacterSheetListFragment;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
@@ -71,8 +70,6 @@ public class CharacterSheetListActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
-        CharacterSheetListFragment listFragment;
-
         if (findViewById(R.id.charactersheet_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-large and
@@ -113,25 +110,27 @@ public class CharacterSheetListActivity extends AppCompatActivity
      */
     @Override
     public void onItemSelected(String id) {
-        if (mTwoPane) {
-            // In two-pane mode, show the detail view in this activity by
-            // adding or replacing the detail fragment using a
-            // fragment transaction.
-            Bundle arguments = new Bundle();
-            arguments.putString(CharacterProfileFragment.ARG_ITEM_ID, id);
-            CharacterProfileFragment fragment = new CharacterProfileFragment();
-            fragment.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.charactersheet_detail_container, fragment)
-                    .commit();
-
-        } else {
-            // In single-pane mode, simply start the detail activity
-            // for the selected item ID.
-            Intent detailIntent = new Intent(this, CharacterProfileActivity.class);
-            detailIntent.putExtra(CharacterProfileFragment.ARG_ITEM_ID, id);
-            startActivity(detailIntent);
-        }
+//        if (mTwoPane) {
+//            // In two-pane mode, show the detail view in this activity by
+//            // adding or replacing the detail fragment using a
+//            // fragment transaction.
+//            Bundle arguments = new Bundle();
+//            arguments.putString(CharacterProfileFragment.ARG_ITEM_ID, id);
+//            CharacterProfileFragment fragment = new CharacterProfileFragment();
+//            fragment.setArguments(arguments);
+//            getSupportFragmentManager().beginTransaction()
+//                    .replace(R.id.charactersheet_detail_container, fragment)
+//                    .commit();
+//
+//        } else {
+//            // In single-pane mode, simply start the detail activity
+//            // for the selected item ID.
+//            Intent detailIntent = new Intent(this, CharacterProfileActivity.class);
+//            detailIntent.putExtra(CharacterProfileFragment.ARG_ITEM_ID, id);
+//            startActivity(detailIntent);
+//        }
+        Intent detailIntent = new Intent(this, CharacterSheetViewPagerActivity.class);
+        startActivity(detailIntent);
     }
 
     @Override
@@ -141,11 +140,9 @@ public class CharacterSheetListActivity extends AppCompatActivity
     }
 
     private void refreshListAdapter() {
-        if (mTwoPane) {
-            CharacterListAdapter listAdapter = ((CharacterSheetListFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.charactersheet_list))
-                    .getListAdapter();
-            listAdapter.notifyDataSetChanged();
-        }
+        ((CharacterSheetListFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.charactersheet_list))
+                .getListAdapter()
+                .notifyDataSetChanged();
     }
 }

@@ -143,7 +143,7 @@ public class CharacterSheetListFragment extends ListFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        realm.close();
+        //realm.close();
     }
 
     /**

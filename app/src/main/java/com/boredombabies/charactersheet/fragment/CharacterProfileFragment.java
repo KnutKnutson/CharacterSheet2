@@ -78,12 +78,6 @@ public class CharacterProfileFragment extends Fragment {
 
         // Show the dummy content as text in a TextView.
         if (playerCharacter != null) {
-            //((TextView) rootView.findViewById(R.id.charactersheet_detail)).setText(mItem.details);
-            for (int i = 0; i < 5; i++) {
-                EditText mainEditTextComponent = (EditText) inflater.inflate(R.layout.component_main_edit_text, container, false);
-                mainEditTextComponent.setText(playerCharacter.getName() + Integer.toString(i));
-                profile.addView(mainEditTextComponent);
-            }
             for (int i = 0; i < 10; i++) {
                 View abilityScoreComponent = inflater.inflate(R.layout.component_ability_score, container, false);
                 EditText abilityModifier = (EditText) abilityScoreComponent.findViewById(R.id.ability_modifier);

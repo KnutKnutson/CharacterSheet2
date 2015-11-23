@@ -31,6 +31,7 @@
         <include layout="@layout/activity_charactersheet_list" />
     </FrameLayout>
 
+    <!-- TODO: remove this fab -->
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

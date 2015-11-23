@@ -1,8 +1,10 @@
 package com.boredombabies.charactersheet.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import com.boredombabies.charactersheet.adapter.FragmentSmartPagerAdapter;
 import com.boredombabies.charactersheet.adapter.SmartFragmentStatePagerAdapter;
 import com.boredombabies.charactersheet.helper.Constants;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
+import com.boredombabies.charactersheet.model.PlayerCharacter;
 
 /**
  * Created by mark.knutson on 4/11/15.
@@ -24,7 +27,7 @@ public class CharacterSheetViewPagerFragment extends Fragment {
     private ViewPager viewPager;
     private int viewPagerPreferencesNumber;
 
-    //private OnPagerAdapterFragmentListener mListener;
+    PlayerCharacter playerCharacter;
 
     public static CharacterSheetViewPagerFragment newInstance(int viewPagerPreferencesNumber) {
         CharacterSheetViewPagerFragment fragment = new CharacterSheetViewPagerFragment();
@@ -41,25 +44,33 @@ public class CharacterSheetViewPagerFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        playerCharacter = PlayerCharacterHelper.getActiveCharacter();
         if (getArguments() != null) {
             viewPagerPreferencesNumber = getArguments().getInt(Constants.VIEW_PAGER_PREF_NUMBER);
+        }
+        Activity activity = this.getActivity();
+        CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
+        if (appBarLayout != null) {
+            appBarLayout.setTitle(playerCharacter.getName());
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View result = inflater.inflate(R.layout.activity_character_sheet_view_pager, container, false);
+        View result = inflater.inflate(R.layout.fragment_character_sheet_view_pager, container, false);
         viewPager = (ViewPager) result.findViewById(R.id.viewPager);
         viewPagerAdapter = new FragmentSmartPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
-        viewPager.setOnPageChangeListener(getOnPageChangeListener());
+        viewPager.addOnPageChangeListener(getOnPageChangeListener());
         viewPager.setCurrentItem(getActiveFragmentPage());
 
         return(result);
     }
 
     private void saveActiveFragmentPage(int activeFragment) {
+        // TODO: save active fragment in background thread
         Context context = getActivity();
         SharedPreferences sharedPref = context.getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();

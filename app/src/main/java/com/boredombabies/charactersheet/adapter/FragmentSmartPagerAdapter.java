@@ -36,13 +36,13 @@ public class FragmentSmartPagerAdapter extends SmartFragmentStatePagerAdapter {
             case 0:
                 return new CharacterProfileFragment();
             case 1:
-                //return SkillsFragment.newInstance();
+                return new CharacterProfileFragment();
             case 2:
-                //return AttacksAndSpellsFragment.newInstance();
+                return new CharacterProfileFragment();
             case 3:
-                //return AbilityScoresFragment.newInstance();
+                return new CharacterProfileFragment();
             case 4:
-                //return CombatStatsFragment.newInstance();
+                return new CharacterProfileFragment();
             /*
             case 5:
                 return BackgroundDetailsFragment.newInstance();

@@ -1,20 +1,26 @@
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/charactersheet_detail"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp">
-</LinearLayout>
 
-<!--<TextView -->
-    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:tools="http://schemas.android.com/tools" -->
-    <!--android:id="@+id/charactersheet_detail" -->
-    <!--style="?android:attr/textAppearanceLarge" -->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent" -->
-    <!--android:padding="16dp" -->
-    <!--android:textIsSelectable="true"-->
-    <!--tools:context=".CharacterSheetDetailFragment" />-->
+    <LinearLayout
+        android:id="@+id/charactersheet_detail"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/characterName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/component_main_edit_text"/>
+
+        <include
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            layout="@layout/component_main_text_view"
+            android:text="@string/label_character_name"/>
+    </LinearLayout>
+</ScrollView>

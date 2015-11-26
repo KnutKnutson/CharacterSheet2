@@ -8,12 +8,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.fragment.CharacterProfileFragment;
 import com.boredombabies.charactersheet.fragment.CharacterSheetListFragment;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
+import com.squareup.picasso.Picasso;
 
 import io.realm.Realm;
 
@@ -76,6 +78,9 @@ public class CharacterSheetListActivity extends AppCompatActivity
             // res/values-sw600dp). If this view is present, then the
             // activity should be in two-pane mode.
             mTwoPane = true;
+
+            ImageView splash = (ImageView) findViewById(R.id.main_splash);
+            Picasso.with(this).load(R.drawable.main).into(splash);
 
             // In two-pane mode, list items should be given the
             // 'activated' state when touched.

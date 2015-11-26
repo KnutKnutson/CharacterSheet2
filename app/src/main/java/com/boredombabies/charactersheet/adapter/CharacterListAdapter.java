@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -40,6 +41,7 @@ public class CharacterListAdapter extends ArrayAdapter<PlayerCharacter> {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.adapter_item_character, parent, false);
+
             viewHolder.characterIcon  = (ImageView) convertView.findViewById(R.id.characterIcon);
             viewHolder.characterName  = (TextView) convertView.findViewById(R.id.characterName);
             viewHolder.characterLevel = (TextView) convertView.findViewById(R.id.characterLevel);
@@ -50,7 +52,12 @@ public class CharacterListAdapter extends ArrayAdapter<PlayerCharacter> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         // Populate the data into the template view using the data object
-        viewHolder.characterIcon.setImageResource(R.drawable.ic_person_outline_24dp);
+        Picasso.with(getContext()).load(R.drawable.human_barbarian)
+                .placeholder(R.drawable.ic_person_outline_24dp)
+                .resize(100, 100)
+                .centerCrop()
+                .into(viewHolder.characterIcon);
+        //viewHolder.characterIcon.setImageResource(R.drawable.ic_person_outline_24dp);
         viewHolder.characterName.setText(character.getName());
         viewHolder.characterLevel.setText("lvl: " + character.getProfile().getLevel());
         viewHolder.characterRace.setText("Race");

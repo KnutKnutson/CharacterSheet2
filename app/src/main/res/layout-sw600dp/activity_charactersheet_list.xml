@@ -5,11 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".CharacterSheetListActivity">
 
-    <!-- TODO: make this image not suck -->
     <ImageView
+        android:id="@+id/main_splash"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/main"
         android:alpha=".4"
         android:scaleType="centerCrop"/>
 

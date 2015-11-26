@@ -5,9 +5,11 @@ import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.fragment.CharacterSheetViewPagerFragment;
+import com.squareup.picasso.Picasso;
 
 public class CharacterSheetViewPagerActivity extends AppCompatActivity {
 
@@ -22,6 +24,9 @@ public class CharacterSheetViewPagerActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Picasso.with(this).load(R.drawable.human_barbarian)
+                .into((ImageView) findViewById(R.id.header_image));
 
         if (findViewById(R.id.charactersheet_view_pager_2) != null) {
             mTwoPane = true;

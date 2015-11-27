@@ -3,7 +3,6 @@ package com.boredombabies.charactersheet.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
@@ -25,7 +24,7 @@ public class CharacterSheetViewPagerActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Picasso.with(this).load(R.drawable.human_barbarian)
+        Picasso.with(this).load(R.drawable.human_male_barbarian)
                 .into((ImageView) findViewById(R.id.header_image));
 
         if (findViewById(R.id.charactersheet_view_pager_2) != null) {

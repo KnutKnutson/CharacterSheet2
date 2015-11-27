@@ -1,23 +1,19 @@
 package com.boredombabies.charactersheet.model;
 
-import com.boredombabies.charactersheet.model.race.CharacterRace;
-import com.boredombabies.charactersheet.model.klass.CharacterClass;
-
 import java.util.UUID;
 
 import javax.inject.Inject;
 
 import dagger.Module;
 import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
 
 @Module
 public class PlayerCharacter extends RealmObject {
 
     private String id;
     private String name;
-//    private CharacterRace characterRace;
-//    private CharacterClass characterClass;
+    private String characterRace;
+    private String characterClass;
     private Profile profile;
 
     public PlayerCharacter() {}
@@ -28,11 +24,11 @@ public class PlayerCharacter extends RealmObject {
 //                         CharacterRace characterRace,
                            Profile profile
                           ) {
-//        this.characterClass = characterClass;
-//        this.characterRace  = characterRace;
         this.id = UUID.randomUUID().toString();
         this.name = "New Character";
         this.profile = profile;
+        this.characterRace = "";
+        this.characterClass = "";
     }
 
     public String getId() {
@@ -52,5 +48,17 @@ public class PlayerCharacter extends RealmObject {
     }
     public void setProfile(Profile profile) {
         this.profile = profile;
+    }
+    public String getCharacterRace() {
+        return characterRace;
+    }
+    public void setCharacterRace(String characterRace) {
+        this.characterRace = characterRace;
+    }
+    public String getCharacterClass() {
+        return characterClass;
+    }
+    public void setCharacterClass(String characterClass) {
+        this.characterClass = characterClass;
     }
 }

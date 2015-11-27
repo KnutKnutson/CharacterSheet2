@@ -52,7 +52,7 @@ public class CharacterListAdapter extends ArrayAdapter<PlayerCharacter> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         // Populate the data into the template view using the data object
-        Picasso.with(getContext()).load(R.drawable.human_barbarian)
+        Picasso.with(getContext()).load(R.drawable.human_male_barbarian)
                 .placeholder(R.drawable.ic_person_outline_24dp)
                 .resize(100, 100)
                 .centerCrop()

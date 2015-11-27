@@ -2,8 +2,6 @@ package com.boredombabies.charactersheet.module;
 
 import com.boredombabies.charactersheet.model.PlayerCharacter;
 import com.boredombabies.charactersheet.model.Profile;
-import com.boredombabies.charactersheet.model.klass.CharacterClass;
-import com.boredombabies.charactersheet.model.race.CharacterRace;
 
 import dagger.Module;
 import dagger.Provides;
@@ -18,20 +16,8 @@ public class PlayerCharacterModule {
     @Provides
     PlayerCharacter providePlayerCharacter() {
         return new PlayerCharacter(
-//                new CharacterClass(),
-//                new CharacterRace(),
-                new Profile()
+            new Profile()
         );
-    }
-
-    @Provides
-    CharacterClass provideCharacterClass() {
-        return new CharacterClass();
-    }
-
-    @Provides
-    CharacterRace provideCharacterRace() {
-        return new CharacterRace();
     }
 
     @Provides

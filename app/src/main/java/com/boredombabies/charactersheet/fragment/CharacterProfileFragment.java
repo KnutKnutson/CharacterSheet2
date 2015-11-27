@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,8 @@ import com.boredombabies.charactersheet.activity.CharacterSheetListActivity;
 import com.boredombabies.charactersheet.dummy.DummyContent;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
+
+import io.realm.Realm;
 
 /**
  * A fragment representing a single CharacterSheet detail screen.
@@ -37,6 +41,8 @@ public class CharacterProfileFragment extends Fragment {
     //private DummyContent.DummyItem mItem;
     PlayerCharacter playerCharacter;
 
+    Realm realm;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -49,6 +55,10 @@ public class CharacterProfileFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         playerCharacter = PlayerCharacterHelper.getActiveCharacter();
+
+        realm = Realm.getInstance(getActivity());
+
+        // unneeded?
         Activity activity = this.getActivity();
         CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
         if (appBarLayout != null) {
@@ -76,17 +86,34 @@ public class CharacterProfileFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_character_profile, container, false);
         LinearLayout profile = (LinearLayout) rootView.findViewById(R.id.charactersheet_detail);
 
-        // Show the dummy content as text in a TextView.
-        if (playerCharacter != null) {
-            for (int i = 0; i < 10; i++) {
-                View abilityScoreComponent = inflater.inflate(R.layout.component_ability_score, container, false);
-                EditText abilityModifier = (EditText) abilityScoreComponent.findViewById(R.id.ability_modifier);
-                EditText abilityScore = (EditText) abilityScoreComponent.findViewById(R.id.ability_score);
-                abilityModifier.setText("mod");
-                abilityScore.setText("10");
-                profile.addView(abilityScoreComponent);
+        EditText name = (EditText) rootView.findViewById(R.id.characterName);
+        name.setText(playerCharacter.getName());
+        name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
-        }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void afterTextChanged(final Editable s) {
+                realm.beginTransaction();
+                playerCharacter.setName(s.toString());
+                realm.commitTransaction();
+            }
+        });
+
+        // Show the dummy content as text in a TextView.
+//        if (playerCharacter != null) {
+//            for (int i = 0; i < 10; i++) {
+//                View abilityScoreComponent = inflater.inflate(R.layout.component_ability_score, container, false);
+//                EditText abilityModifier = (EditText) abilityScoreComponent.findViewById(R.id.ability_modifier);
+//                EditText abilityScore = (EditText) abilityScoreComponent.findViewById(R.id.ability_score);
+//                abilityModifier.setText("mod");
+//                abilityScore.setText("10");
+//                profile.addView(abilityScoreComponent);
+//            }
+//        }
 
         return rootView;
     }

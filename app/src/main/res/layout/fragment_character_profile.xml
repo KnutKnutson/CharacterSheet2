@@ -5,22 +5,254 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/charactersheet_detail"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
+        <EditText
+            style="@style/BaseEditTextView"
             android:id="@+id/characterName"
+            android:layout_alignParentTop="true"/>
+
+        <TextView
+            style="@style/BaseTextView"
+            android:id="@+id/characterNameLabel"
+            android:text="@string/label_character_name"
+            android:layout_below="@+id/characterName" />
+
+        <View
+            android:id="@+id/class_race_strut"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            android:layout_below="@+id/characterNameLabel"
+            android:layout_centerHorizontal="true"/>
+
+        <EditText
+            style="@style/BaseEditTextView"
+            android:id="@+id/characterClass"
+            android:layout_below="@+id/characterNameLabel"
+            android:layout_toLeftOf="@+id/class_race_strut"/>
+
+        <TextView
+            style="@style/BaseTextView"
+            android:id="@+id/characterClassLabel"
+            android:text="@string/label_character_class"
+            android:layout_below="@+id/characterClass"/>
+
+        <EditText
+            style="@style/BaseEditTextView"
+            android:id="@+id/characterRace"
+            android:layout_below="@+id/characterNameLabel"
+            android:layout_toRightOf="@+id/class_race_strut"/>
+
+        <TextView
+            style="@style/BaseTextView"
+            android:id="@+id/characterRaceLabel"
+            android:text="@string/label_character_race"
+            android:layout_below="@+id/characterRace"
+            android:layout_toRightOf="@+id/class_race_strut"/>
+
+        <EditText
+            style="@style/BaseEditTextView"
+            android:id="@+id/characterLevel"
+            android:inputType="number"
+            android:layout_width="80dp"
+            android:layout_height="90dp"
+            android:background="@drawable/circle"
+            android:gravity="center_horizontal"
+            android:paddingTop="3dp"
+            android:paddingLeft="0dp"
+            android:textSize="25sp"
+            android:layout_below="@+id/characterRaceLabel"/>
+
+        <TextView
+            style="@style/BaseTextView"
+            android:id="@+id/characterLevelText"
+            android:text="@string/label_character_level"
+            android:elevation="4dp"
+            android:layout_marginTop="-34dp"
+            android:layout_marginLeft="25dp"
+            android:layout_below="@+id/characterLevel"/>
+
+        <EditText
+            style="@style/BaseEditTextView"
+            android:id="@+id/characterXP"
+            android:layout_below="@+id/characterClassLabel"
+            android:layout_toRightOf="@+id/characterLevel"
+            android:layout_toLeftOf="@+id/class_race_strut"/>
+
+        <TextView
+            style="@style/BaseTextView"
+            android:id="@+id/characterXPLabel"
+            android:text="@string/label_character_experience_points"
+            android:layout_below="@+id/characterXP"
+            android:layout_toRightOf="@+id/characterLevel"/>
+
+        <EditText
+            style="@style/BaseEditTextView"
+            android:id="@+id/characterBackground"
+            android:layout_below="@+id/characterRaceLabel"
+            android:layout_toRightOf="@+id/class_race_strut"/>
+
+        <TextView
+            style="@style/BaseTextView"
+            android:id="@+id/characterBackgroundLabel"
+            android:text="@string/label_character_background"
+            android:layout_below="@+id/characterBackground"
+            android:layout_toRightOf="@+id/class_race_strut"/>
+
+        <EditText
+            style="@style/BaseEditTextView"
+            android:id="@+id/characterAlignment"
+            android:layout_below="@+id/characterXPLabel"
+            android:layout_toRightOf="@+id/characterLevel"
+            android:layout_toLeftOf="@+id/class_race_strut"/>
+
+        <TextView
+            style="@style/BaseTextView"
+            android:id="@+id/characterAlignmentLabel"
+            android:text="@string/label_character_alignment"
+            android:layout_below="@+id/characterAlignment"
+            android:layout_toRightOf="@+id/characterLevel"/>
+
+        <EditText
+            style="@style/BaseEditTextView"
+            android:id="@+id/playerName"
+            android:layout_below="@+id/characterBackgroundLabel"
+            android:layout_toRightOf="@+id/class_race_strut"/>
+
+        <TextView
+            style="@style/BaseTextView"
+            android:id="@+id/playerNameLabel"
+            android:text="@string/label_player_name"
+            android:layout_below="@+id/playerName"
+            android:layout_toRightOf="@+id/class_race_strut"/>
+
+        <LinearLayout
+            android:id="@+id/three_column_row_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            layout="@layout/component_main_edit_text"/>
+            android:orientation="horizontal"
+            android:layout_below="@+id/playerNameLabel">
 
-        <include
-            android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/row_1_column_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <EditText
+                    style="@style/BaseEditTextView"
+                    android:id="@+id/age"
+                    android:layout_alignParentTop="true"/>
+
+                <TextView
+                    style="@style/BaseTextView"
+                    android:id="@+id/ageLabel"
+                    android:text="@string/label_character_age"
+                    android:layout_below="@+id/age"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/row_1_column_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <EditText
+                    style="@style/BaseEditTextView"
+                    android:id="@+id/height"
+                    android:layout_alignParentTop="true"/>
+
+                <TextView
+                    style="@style/BaseTextView"
+                    android:id="@+id/heightLabel"
+                    android:text="@string/label_character_height"
+                    android:layout_below="@+id/height"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/row_1_column_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <EditText
+                    style="@style/BaseEditTextView"
+                    android:id="@+id/weight"
+                    android:layout_alignParentTop="true"/>
+
+                <TextView
+                    style="@style/BaseTextView"
+                    android:id="@+id/weightLabel"
+                    android:text="@string/label_character_weight"
+                    android:layout_below="@+id/weight"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/three_column_row_2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            layout="@layout/component_main_text_view"
-            android:text="@string/label_character_name"/>
-    </LinearLayout>
+            android:orientation="horizontal"
+            android:layout_below="@+id/three_column_row_1">
+
+            <RelativeLayout
+                android:id="@+id/row_2_column_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <EditText
+                    style="@style/BaseEditTextView"
+                    android:id="@+id/eyes"
+                    android:layout_alignParentTop="true"/>
+
+                <TextView
+                    style="@style/BaseTextView"
+                    android:id="@+id/eyesLabel"
+                    android:text="@string/label_character_eyes"
+                    android:layout_below="@+id/eyes"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/row_2_column_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <EditText
+                    style="@style/BaseEditTextView"
+                    android:id="@+id/skin"
+                    android:layout_alignParentTop="true"/>
+
+                <TextView
+                    style="@style/BaseTextView"
+                    android:id="@+id/skinLabel"
+                    android:text="@string/label_character_skin"
+                    android:layout_below="@+id/skin"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/row_2_column_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <EditText
+                    style="@style/BaseEditTextView"
+                    android:id="@+id/hair"
+                    android:layout_alignParentTop="true"/>
+
+                <TextView
+                    style="@style/BaseTextView"
+                    android:id="@+id/hairLabel"
+                    android:text="@string/label_character_hair"
+                    android:layout_below="@+id/hair"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
 </ScrollView>

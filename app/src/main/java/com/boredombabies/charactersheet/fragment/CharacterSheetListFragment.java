@@ -77,13 +77,9 @@ public class CharacterSheetListFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         realm = Realm.getInstance(getActivity());
-        Log.w("", "path: " + realm.getPath());
 
         listAdapter = new CharacterListAdapter(getActivity(), PlayerCharacterHelper.getCharacters(realm));
         setListAdapter(listAdapter);
-        // TODO: replace with a real list adapter.
-        //setListAdapter(new ArrayAdapter<PlayerCharacter>( getActivity(), android.R.layout.simple_list_item_activated_1, android.R.id.text1, PlayerCharacterHelper.getCharacters(realm)));
-
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.boredombabies.charactersheet.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,7 +18,10 @@ import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.activity.CharacterProfileActivity;
 import com.boredombabies.charactersheet.activity.CharacterSheetListActivity;
 import com.boredombabies.charactersheet.dummy.DummyContent;
+import com.boredombabies.charactersheet.helper.Constants;
+import com.boredombabies.charactersheet.helper.EditTextTextWatcher;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
+import com.boredombabies.charactersheet.interfaces.CharacterSheetFragmentCallbacks;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
 
 import io.realm.Realm;
@@ -43,6 +47,10 @@ public class CharacterProfileFragment extends Fragment {
 
     Realm realm;
 
+    CharacterSheetFragmentCallbacks callbacks;
+
+    private int viewPagerPreferencesNumber;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -58,11 +66,9 @@ public class CharacterProfileFragment extends Fragment {
 
         realm = Realm.getInstance(getActivity());
 
-        // unneeded?
-        Activity activity = this.getActivity();
-        CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
-        if (appBarLayout != null) {
-            appBarLayout.setTitle(playerCharacter.getName());
+        Bundle parentBundle = this.getParentFragment().getArguments();
+        if (parentBundle != null) {
+            this.viewPagerPreferencesNumber = parentBundle.getInt(Constants.VIEW_PAGER_PREF_NUMBER);
         }
         /*
         if (getArguments().containsKey(ARG_ITEM_ID)) {
@@ -84,22 +90,18 @@ public class CharacterProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_character_profile, container, false);
-        LinearLayout profile = (LinearLayout) rootView.findViewById(R.id.charactersheet_detail);
 
         EditText name = (EditText) rootView.findViewById(R.id.characterName);
         name.setText(playerCharacter.getName());
-        name.addTextChangedListener(new TextWatcher() {
+        name.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-            @Override
-            public void afterTextChanged(final Editable s) {
-                realm.beginTransaction();
+            public void inTransactionCallback(Editable s) {
                 playerCharacter.setName(s.toString());
-                realm.commitTransaction();
+            }
+            @Override
+            public void afterTextChangedCallback(Editable s) {
+                //callbacks.refreshFragments(viewPagerPreferencesNumber);
+                callbacks.setHeaderText(s.toString());
             }
         });
 
@@ -116,5 +118,17 @@ public class CharacterProfileFragment extends Fragment {
 //        }
 
         return rootView;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        // Activities containing this fragment must implement its callbacks.
+        if (!(context instanceof CharacterSheetFragmentCallbacks)) {
+            throw new IllegalStateException("Activity must implement fragment's callbacks.");
+        }
+
+        callbacks = (CharacterSheetFragmentCallbacks) context;
     }
 }

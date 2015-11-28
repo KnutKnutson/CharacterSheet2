@@ -1,5 +1,8 @@
 package com.boredombabies.charactersheet.activity;
 
+import android.app.Activity;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
@@ -8,11 +11,16 @@ import android.widget.ImageView;
 
 import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.fragment.CharacterSheetViewPagerFragment;
+import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
+import com.boredombabies.charactersheet.interfaces.CharacterSheetFragmentCallbacks;
 import com.squareup.picasso.Picasso;
 
-public class CharacterSheetViewPagerActivity extends AppCompatActivity {
+public class CharacterSheetViewPagerActivity extends AppCompatActivity
+        implements CharacterSheetFragmentCallbacks {
 
     private boolean mTwoPane;
+
+    private final int numViewPagerFragments = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,21 +32,21 @@ public class CharacterSheetViewPagerActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Picasso.with(this).load(R.drawable.human_male_barbarian)
-                .into((ImageView) findViewById(R.id.header_image));
+        setHeaderText(PlayerCharacterHelper.getActiveCharacter().getName());
+        setHeaderImage(R.drawable.human_male_barbarian);
 
-        if (findViewById(R.id.charactersheet_view_pager_2) != null) {
+        if (findViewById(getFragmentId(2)) != null) {
             mTwoPane = true;
         }
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.charactersheet_view_pager, CharacterSheetViewPagerFragment.newInstance(1))
+                    .add(getFragmentId(1), CharacterSheetViewPagerFragment.newInstance(1))
                     .commit();
             if (mTwoPane) {
                 getSupportFragmentManager().beginTransaction()
-                        .add(R.id.charactersheet_view_pager_2, CharacterSheetViewPagerFragment.newInstance(2))
-                        .add(R.id.charactersheet_view_pager_3, CharacterSheetViewPagerFragment.newInstance(3))
+                        .add(getFragmentId(2), CharacterSheetViewPagerFragment.newInstance(2))
+                        .add(getFragmentId(3), CharacterSheetViewPagerFragment.newInstance(3))
                         .commit();
             }
         }
@@ -65,5 +73,46 @@ public class CharacterSheetViewPagerActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void setHeaderText(String s) {
+        CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+        if (appBarLayout != null) {
+            appBarLayout.setTitle(s);
+        }
+    }
+
+    @Override
+    public void setHeaderImage(int drawable) {
+        Picasso.with(this).load(drawable)
+            .into((ImageView) findViewById(R.id.header_image));
+    }
+
+    @Override
+    public void refreshFragments(int callingFragmentId) {
+        if (mTwoPane) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            for (int i = 1; i <= numViewPagerFragments; i++){
+                if (i != callingFragmentId) {
+                    ft.detach(getSupportFragmentManager().findFragmentById(getFragmentId(i)));
+                    ft.attach(getSupportFragmentManager().findFragmentById(getFragmentId(i)));
+                }
+            }
+            ft.commit();
+        }
+    }
+
+    private int getFragmentId(int fragment) {
+        switch (fragment) {
+            case 1:
+                return R.id.charactersheet_view_pager;
+            case 2:
+                return R.id.charactersheet_view_pager_2;
+            case 3:
+                return R.id.charactersheet_view_pager_3;
+            default:
+                return 0;
+        }
     }
 }

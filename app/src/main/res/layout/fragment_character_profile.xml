@@ -32,27 +32,27 @@
 
         <EditText
             style="@style/BaseEditTextView"
-            android:id="@+id/characterClass"
+            android:id="@+id/characterRace"
             android:layout_below="@+id/characterNameLabel"
             android:layout_toLeftOf="@+id/class_race_strut"/>
 
         <TextView
             style="@style/BaseTextView"
-            android:id="@+id/characterClassLabel"
-            android:text="@string/label_character_class"
-            android:layout_below="@+id/characterClass"/>
+            android:id="@+id/characterRaceLabel"
+            android:text="@string/label_character_race"
+            android:layout_below="@+id/characterRace"/>
 
         <EditText
             style="@style/BaseEditTextView"
-            android:id="@+id/characterRace"
+            android:id="@+id/characterClass"
             android:layout_below="@+id/characterNameLabel"
             android:layout_toRightOf="@+id/class_race_strut"/>
 
         <TextView
             style="@style/BaseTextView"
-            android:id="@+id/characterRaceLabel"
-            android:text="@string/label_character_race"
-            android:layout_below="@+id/characterRace"
+            android:id="@+id/characterClassLabel"
+            android:text="@string/label_character_class"
+            android:layout_below="@+id/characterClass"
             android:layout_toRightOf="@+id/class_race_strut"/>
 
         <EditText
@@ -63,9 +63,9 @@
             android:layout_height="90dp"
             android:background="@drawable/circle"
             android:gravity="center_horizontal"
-            android:paddingTop="3dp"
+            android:paddingTop="15dp"
             android:paddingLeft="0dp"
-            android:textSize="25sp"
+            android:textSize="30sp"
             android:layout_below="@+id/characterRaceLabel"/>
 
         <TextView
@@ -80,6 +80,7 @@
         <EditText
             style="@style/BaseEditTextView"
             android:id="@+id/characterXP"
+            android:inputType="number"
             android:layout_below="@+id/characterClassLabel"
             android:layout_toRightOf="@+id/characterLevel"
             android:layout_toLeftOf="@+id/class_race_strut"/>
@@ -254,5 +255,19 @@
                     android:layout_below="@+id/hair"/>
             </RelativeLayout>
         </LinearLayout>
+
+        <TextView
+            style="@style/BaseTextView"
+            android:id="@+id/backstoryLabel"
+            android:text="@string/label_character_backstory"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/three_column_row_2"
+            android:layout_centerHorizontal="true"/>
+
+        <EditText
+            style="@style/BaseEditTextView"
+            android:id="@+id/backstory"
+            android:minLines="4"
+            android:layout_below="@+id/backstoryLabel"/>
     </RelativeLayout>
 </ScrollView>

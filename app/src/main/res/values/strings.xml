@@ -21,6 +21,7 @@
     <string name="label_character_eyes">EYES</string>
     <string name="label_character_skin">SKIN</string>
     <string name="label_character_hair">HAIR</string>
+    <string name="label_character_backstory">BACKSTORY</string>
 
     <string name="label_inspiration">INSPIRATION</string>
     <string name="label_proficiency_bonus">PROFICIENCY BONUS</string>

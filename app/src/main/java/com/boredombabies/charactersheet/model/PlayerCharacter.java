@@ -11,9 +11,9 @@ import io.realm.RealmObject;
 public class PlayerCharacter extends RealmObject {
 
     private String id;
-    private String name;
-    private String characterRace;
-    private String characterClass;
+    private String name = "New Character";
+    private String characterRace = "";
+    private String characterClass = "";
     private Profile profile;
 
     public PlayerCharacter() {}
@@ -25,10 +25,7 @@ public class PlayerCharacter extends RealmObject {
                            Profile profile
                           ) {
         this.id = UUID.randomUUID().toString();
-        this.name = "New Character";
         this.profile = profile;
-        this.characterRace = "";
-        this.characterClass = "";
     }
 
     public String getId() {

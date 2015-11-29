@@ -17,6 +17,7 @@ public class Profile extends RealmObject {
     private String eyes = "";
     private String skin = "";
     private String hair = "";
+    private String backstory = "";
 
     public Profile() { }
 
@@ -85,5 +86,11 @@ public class Profile extends RealmObject {
     }
     public void setHair(String hair) {
         this.hair = hair;
+    }
+    public String getBackstory() {
+        return backstory;
+    }
+    public void setBackstory(String backstory) {
+        this.backstory = backstory;
     }
 }

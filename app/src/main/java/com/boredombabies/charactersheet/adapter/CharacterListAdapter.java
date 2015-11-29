@@ -60,8 +60,8 @@ public class CharacterListAdapter extends ArrayAdapter<PlayerCharacter> {
         //viewHolder.characterIcon.setImageResource(R.drawable.ic_person_outline_24dp);
         viewHolder.characterName.setText(character.getName());
         viewHolder.characterLevel.setText("lvl: " + character.getProfile().getLevel());
-        viewHolder.characterRace.setText("Race");
-        viewHolder.characterClass.setText("Class");
+        viewHolder.characterRace.setText(character.getCharacterRace());
+        viewHolder.characterClass.setText(character.getCharacterClass());
         // Return the completed view to render on screen
         return convertView;
     }

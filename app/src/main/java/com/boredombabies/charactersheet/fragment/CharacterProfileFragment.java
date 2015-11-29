@@ -70,20 +70,6 @@ public class CharacterProfileFragment extends Fragment {
         if (parentBundle != null) {
             this.viewPagerPreferencesNumber = parentBundle.getInt(Constants.VIEW_PAGER_PREF_NUMBER);
         }
-        /*
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
-            // Load the dummy content specified by the fragment
-            // arguments. In a real-world scenario, use a Loader
-            // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
-
-            Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
-            if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem.content);
-            }
-        }
-        */
     }
 
     @Override
@@ -102,6 +88,134 @@ public class CharacterProfileFragment extends Fragment {
             public void afterTextChangedCallback(Editable s) {
                 //callbacks.refreshFragments(viewPagerPreferencesNumber);
                 callbacks.setHeaderText(s.toString());
+            }
+        });
+
+        EditText characterClass = (EditText) rootView.findViewById(R.id.characterClass);
+        characterClass.setText(playerCharacter.getCharacterClass());
+        characterClass.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                playerCharacter.setCharacterClass(s.toString());
+            }
+        });
+
+        EditText characterRace = (EditText) rootView.findViewById(R.id.characterRace);
+        characterRace.setText(playerCharacter.getCharacterRace());
+        characterRace.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                playerCharacter.setCharacterRace(s.toString());
+            }
+        });
+
+        EditText level = (EditText) rootView.findViewById(R.id.characterLevel);
+        level.setText(Integer.toString(playerCharacter.getProfile().getLevel()));
+        level.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                int lvl = (s.toString().isEmpty() ? 0 : Integer.parseInt(s.toString()));
+                playerCharacter.getProfile().setLevel(lvl);
+            }
+        });
+
+        EditText xp = (EditText) rootView.findViewById(R.id.characterXP);
+        xp.setText(Integer.toString(playerCharacter.getProfile().getExperiencePoints()));
+        xp.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                int xp = (s.toString().isEmpty() ? 0 : Integer.parseInt(s.toString()));
+                playerCharacter.getProfile().setExperiencePoints(xp);
+            }
+        });
+
+        EditText background = (EditText) rootView.findViewById(R.id.characterBackground);
+        background.setText(playerCharacter.getProfile().getBackground());
+        background.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                playerCharacter.getProfile().setBackground(s.toString());
+            }
+        });
+
+        EditText alignment = (EditText) rootView.findViewById(R.id.characterAlignment);
+        alignment.setText(playerCharacter.getProfile().getAlignment());
+        alignment.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                playerCharacter.getProfile().setAlignment(s.toString());
+            }
+        });
+
+        EditText playerName = (EditText) rootView.findViewById(R.id.playerName);
+        playerName.setText(playerCharacter.getProfile().getPlayerName());
+        playerName.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                playerCharacter.getProfile().setPlayerName(s.toString());
+            }
+        });
+
+        EditText age = (EditText) rootView.findViewById(R.id.age);
+        age.setText(playerCharacter.getProfile().getAge());
+        age.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                playerCharacter.getProfile().setAge(s.toString());
+            }
+        });
+
+        EditText height = (EditText) rootView.findViewById(R.id.height);
+        height.setText(playerCharacter.getProfile().getHeight());
+        height.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                playerCharacter.getProfile().setHeight(s.toString());
+            }
+        });
+
+        EditText weight = (EditText) rootView.findViewById(R.id.weight);
+        weight.setText(playerCharacter.getProfile().getWeight());
+        weight.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                playerCharacter.getProfile().setWeight(s.toString());
+            }
+        });
+
+        EditText eyes = (EditText) rootView.findViewById(R.id.eyes);
+        eyes.setText(playerCharacter.getProfile().getEyes());
+        eyes.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                playerCharacter.getProfile().setEyes(s.toString());
+            }
+        });
+
+        EditText skin = (EditText) rootView.findViewById(R.id.skin);
+        skin.setText(playerCharacter.getProfile().getSkin());
+        skin.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                playerCharacter.getProfile().setSkin(s.toString());
+            }
+        });
+
+        EditText hair = (EditText) rootView.findViewById(R.id.hair);
+        hair.setText(playerCharacter.getProfile().getHair());
+        hair.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                playerCharacter.getProfile().setHair(s.toString());
+            }
+        });
+
+        EditText backstory = (EditText) rootView.findViewById(R.id.backstory);
+        backstory.setText(playerCharacter.getProfile().getBackstory());
+        backstory.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                playerCharacter.getProfile().setBackstory(s.toString());
             }
         });
 

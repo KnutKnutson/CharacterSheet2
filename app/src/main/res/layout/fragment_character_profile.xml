@@ -7,7 +7,6 @@
 
     <RelativeLayout
         android:id="@+id/charactersheet_detail"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -267,7 +266,11 @@
         <EditText
             style="@style/BaseEditTextView"
             android:id="@+id/backstory"
+            android:lines="6"
             android:minLines="4"
+            android:maxLines="10"
+            android:scrollbars="vertical"
+            android:inputType="textMultiLine"
             android:layout_below="@+id/backstoryLabel"/>
     </RelativeLayout>
 </ScrollView>

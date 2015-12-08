@@ -15,6 +15,7 @@ public class PlayerCharacter extends RealmObject {
     private String characterRace = "";
     private String characterClass = "";
     private Profile profile;
+    private Attributes attributes;
 
     public PlayerCharacter() {}
 
@@ -22,10 +23,12 @@ public class PlayerCharacter extends RealmObject {
     public PlayerCharacter(
 //                         CharacterClass characterClass,
 //                         CharacterRace characterRace,
-                           Profile profile
+                           Profile profile,
+                           Attributes attributes
                           ) {
         this.id = UUID.randomUUID().toString();
         this.profile = profile;
+        this.attributes = attributes;
     }
 
     public String getId() {
@@ -57,5 +60,11 @@ public class PlayerCharacter extends RealmObject {
     }
     public void setCharacterClass(String characterClass) {
         this.characterClass = characterClass;
+    }
+    public Attributes getAttributes() {
+        return attributes;
+    }
+    public void setAttributes(Attributes attributes) {
+        this.attributes = attributes;
     }
 }

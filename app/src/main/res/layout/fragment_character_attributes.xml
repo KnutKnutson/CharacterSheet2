@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/strut"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"/>
+
+        <EditText
+            style="@style/CircularEditText"
+            android:id="@+id/inspiration"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            style="@style/CircularEditTextLabel"
+            android:id="@+id/inspirationText"
+            android:text="@string/label_inspiration"
+            android:layout_toLeftOf="@+id/strut"
+            android:layout_toRightOf="@+id/inspiration"/>
+
+        <EditText
+            style="@style/CircularEditText"
+            android:id="@+id/proficiencyBonus"
+            android:layout_toRightOf="@+id/strut"/>
+
+        <TextView
+            style="@style/CircularEditTextLabel"
+            android:id="@+id/proficiencyBonusText"
+            android:text="@string/label_proficiency_bonus"
+            android:layout_toRightOf="@+id/proficiencyBonus"/>
+
+        <EditText
+            style="@style/CircularEditText"
+            android:id="@+id/passiveWisdom"
+            android:layout_below="@id/inspiration"/>
+
+        <TextView
+            style="@style/CircularEditTextLabel"
+            android:id="@+id/passiveWisdomText"
+            android:text="@string/label_passive_wisdom"
+            android:layout_below="@+id/inspiration"
+            android:layout_toRightOf="@+id/inspiration"/>
+
+        <LinearLayout
+            android:id="@+id/abilities_skills"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/passiveWisdom"
+            android:layout_marginTop="5dp"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:id="@+id/ability_scores"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="2"
+                android:background="@color/divider">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_ability_scores"
+                    android:textColor="@color/secondary_text"
+                    android:gravity="center_horizontal"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:id="@+id/savingThrows"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_saving_throws"
+                        android:textColor="@color/secondary_text"
+                        android:gravity="center_horizontal"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/skills"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_skills"
+                        android:textColor="@color/secondary_text"
+                        android:gravity="center_horizontal"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            style="@style/BaseTextView"
+            android:id="@+id/languages_label"
+            android:text="@string/label_languages"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/abilities_skills"
+            android:layout_centerHorizontal="true"/>
+
+        <EditText
+            style="@style/BaseEditTextView"
+            android:id="@+id/languages"
+            android:lines="6"
+            android:minLines="4"
+            android:maxLines="10"
+            android:scrollbars="vertical"
+            android:inputType="textMultiLine"
+            android:layout_below="@+id/languages_label"/>
+    </RelativeLayout>
+</ScrollView>

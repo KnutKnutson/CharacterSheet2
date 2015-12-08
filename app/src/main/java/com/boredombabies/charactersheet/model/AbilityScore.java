@@ -1,60 +1,40 @@
 package com.boredombabies.charactersheet.model;
 
 
+import io.realm.RealmObject;
+import io.realm.annotations.Ignore;
+
 /**
  * Created by mark.knutson on 5/5/15.
  */
-public class AbilityScore {
+public class AbilityScore extends RealmObject {
 
     private String name;
-    private String abilityScore;
-    private String abilityModifier;
-    private PlayerCharacter playerCharacter;
+    private int abilityScore = 10;
 
-    public AbilityScore() {
-        super();
-    }
+    @Ignore
+    private int abilityModifier;
 
-    public AbilityScore(PlayerCharacter playerCharacter) {
-        super();
-        this.playerCharacter = playerCharacter;
-    }
+    public AbilityScore() { }
 
-    public AbilityScore(PlayerCharacter playerCharacter, String name) {
-        super();
-        this.playerCharacter = playerCharacter;
+    public AbilityScore(String name) {
         this.name = name;
     }
 
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getAbilityScore() {
+    public int getAbilityScore() {
         return abilityScore;
     }
-
-    public void setAbilityScore(String abilityScore) {
+    public void setAbilityScore(int abilityScore) {
         this.abilityScore = abilityScore;
     }
-
-    public String getAbilityModifier() {
-        return abilityModifier;
-    }
-
-    public void setAbilityModifier(String abilityModifier) {
-        this.abilityModifier = abilityModifier;
-    }
-
-    public PlayerCharacter getPlayerCharacter() {
-        return playerCharacter;
-    }
-
-    public void setPlayerCharacter(PlayerCharacter playerCharacter) {
-        this.playerCharacter = playerCharacter;
+    public int getAbilityModifier() {
+        int base = getAbilityScore() - 10;
+        return (base < 0 ? (base - 1) / 2 : base / 2);
     }
 }

@@ -23,8 +23,27 @@
     <string name="label_character_hair">HAIR</string>
     <string name="label_character_backstory">BACKSTORY</string>
 
+    <!--ATTRIBUTES -->
+    <string name="label_passive_wisdom">PASSIVE WISDOM (PERCEPTION)</string>
     <string name="label_inspiration">INSPIRATION</string>
     <string name="label_proficiency_bonus">PROFICIENCY BONUS</string>
+    <string name="label_languages">OTHER PROFICIENCIES &amp; LANGUAGES</string>
+    <string name="label_ability_scores">ABILITY SCORES</string>
+    <string name="label_saving_throws">SAVING THROWS</string>
+    <string name="label_skills">SKILLS</string>
+
+    <!--COMBAT STATS-->
+    <string name="label_armor_class">ARMOR CLASS</string>
+    <string name="label_initiative">INITIATIVE</string>
+    <string name="label_speed">SPEED</string>
+    <string name="label_hit_point_maximum">Hit Point Maximum</string>
+    <string name="label_current_hit_points">CURRENT HIT POINTS</string>
+    <string name="label_temporary_hit_points">TEMPORARY HIT POINTS</string>
+    <string name="label_hit_dice_total">Total</string>
+    <string name="label_hit_dice">HIT DICE</string>
+    <string name="label_death_saves">DEATH SAVES</string>
+    <string name="label_death_saves_successes">SUCCESSES</string>
+    <string name="label_death_saves_failures">FAILURES</string>
 
 
     <string name="clear_cache_menu">Clear Caches</string>

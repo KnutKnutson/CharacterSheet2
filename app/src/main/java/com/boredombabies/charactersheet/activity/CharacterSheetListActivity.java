@@ -21,7 +21,6 @@ import io.realm.Realm;
 /**
  *  CHARACTER SHEET FRAGMENTS
  *  - Profile (Languages?)
- *  - Portrait
  *  - Attributes (Abilities?) (Ability Scores?)
  *  - Equipment
  *  - Skills (Proficiencies? )

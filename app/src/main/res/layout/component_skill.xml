@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <CheckBox
+        android:id="@+id/skillTrained"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        />
+
+    <EditText
+        android:id="@+id/skillBonus"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:layout_toRightOf="@+id/skillTrained"
+        android:layout_centerInParent="true"
+        android:textColor="@color/primary_text"
+        android:elevation="4dp"
+        android:background="@drawable/rectangle"
+        android:paddingLeft="2dp"
+        android:paddingTop="2dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="2dp"
+        android:inputType="textNoSuggestions"
+        />
+
+    <TextView
+        android:id="@+id/skillName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/secondary_text"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="-3dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toRightOf="@+id/skillBonus"
+        android:layout_centerVertical="true"
+        android:textSize="14sp"
+        />
+
+    <TextView
+        android:id="@+id/skillModifier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/secondary_text"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="-3dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toRightOf="@+id/skillName"
+        android:layout_centerVertical="true"
+        android:textSize="12sp"
+        />
+
+</RelativeLayout>

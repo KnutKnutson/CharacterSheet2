@@ -7,6 +7,7 @@
     android:gravity="center_horizontal">
 
     <TextView
+        android:id="@+id/ability_score_name"
         android:text="Ability Score"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,11 +33,11 @@
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="0dp"
-        android:inputType="textNoSuggestions"
+        android:inputType="number"
         android:textSize="36sp"
         />
 
-    <EditText
+    <TextView
         android:id="@+id/ability_modifier"
         android:layout_width="54dp"
         android:layout_height="36dp"
@@ -52,7 +53,6 @@
         android:paddingTop="2dp"
         android:paddingRight="2dp"
         android:paddingBottom="0dp"
-        android:inputType="textNoSuggestions"
         android:textSize="18sp"
         />
 

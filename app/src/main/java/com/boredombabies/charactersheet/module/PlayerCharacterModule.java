@@ -1,5 +1,6 @@
 package com.boredombabies.charactersheet.module;
 
+import com.boredombabies.charactersheet.model.Attributes;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
 import com.boredombabies.charactersheet.model.Profile;
 
@@ -16,12 +17,18 @@ public class PlayerCharacterModule {
     @Provides
     PlayerCharacter providePlayerCharacter() {
         return new PlayerCharacter(
-            new Profile()
+            new Profile(),
+            new Attributes()
         );
     }
 
     @Provides
     Profile provideProfile() {
         return new Profile();
+    }
+
+    @Provides
+    Attributes provideAttributes() {
+        return new Attributes();
     }
 }

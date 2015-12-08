@@ -3,13 +3,14 @@ package com.boredombabies.charactersheet.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
+import com.boredombabies.charactersheet.fragment.CharacterAttributesFragment;
 import com.boredombabies.charactersheet.fragment.CharacterProfileFragment;
 
 /**
  * Created by mark.knutson on 4/9/15.
  */
 public class FragmentSmartPagerAdapter extends SmartFragmentStatePagerAdapter {
-    private static int NUM_FRAGMENTS = 5;
+    private static int NUM_FRAGMENTS = 10;
 
     public FragmentSmartPagerAdapter(FragmentManager fragmentManager) { super(fragmentManager); }
 
@@ -36,24 +37,42 @@ public class FragmentSmartPagerAdapter extends SmartFragmentStatePagerAdapter {
             case 0:
                 return new CharacterProfileFragment();
             case 1:
-                return new CharacterProfileFragment();
+                /**
+                 * Attributes include:
+                 * ability scores, inspiration, prof. bonus, skills, passive wisdom,
+                 * other proficiencies and languages
+                 */
+                return new CharacterAttributesFragment();
+
             case 2:
+                /**
+                 * Combat
+                 * AC, initiative, speed, hp max, current hp, hit dice, hit dice total, death saves,
+                 * equipped weapons (name, bonus, damage/type), attacks, readied spells
+                 */
                 return new CharacterProfileFragment();
             case 3:
+                /**
+                 * Equipment
+                 */
                 return new CharacterProfileFragment();
             case 4:
+                /**
+                 * Traits
+                 * personality traits, ideals, bonds, flaws, features & traits
+                 */
+                return new CharacterProfileFragment();
+            case 5:
+                return new CharacterProfileFragment();
+            case 6:
+                return new CharacterProfileFragment();
+            case 7:
+                return new CharacterProfileFragment();
+            case 8:
+                return new CharacterProfileFragment();
+            case 9:
                 return new CharacterProfileFragment();
             /*
-            case 5:
-                return BackgroundDetailsFragment.newInstance();
-            case 6:
-                return FeaturesAndTraitsFragment.newInstance();
-            case 7:
-                return EquipmentFragment.newInstance();
-            case 8:
-                return ProficienciesAndLanguagesFragment.newInstance();
-            case 9:
-                return TreasureFragment.newInstance();
             case 10:
                 return SpellsFragment.newInstance();
             case 11:

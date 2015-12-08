@@ -81,8 +81,7 @@ public class CharacterSheetViewPagerFragment extends Fragment {
     }
 
     private String viewPagerActivePageKey() {
-        return "View Pager Preference File " +
-                PlayerCharacterHelper.getActiveCharacter().getId() +
+        return PlayerCharacterHelper.getActiveCharacter().getId() +
                 Integer.toString(viewPagerPreferencesNumber);
     }
 

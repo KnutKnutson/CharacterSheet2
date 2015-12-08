@@ -1,23 +1,15 @@
 package com.boredombabies.charactersheet.fragment;
 
-import android.app.Activity;
 import android.content.Context;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.boredombabies.charactersheet.R;
-import com.boredombabies.charactersheet.activity.CharacterProfileActivity;
-import com.boredombabies.charactersheet.activity.CharacterSheetListActivity;
-import com.boredombabies.charactersheet.dummy.DummyContent;
 import com.boredombabies.charactersheet.helper.Constants;
 import com.boredombabies.charactersheet.helper.EditTextTextWatcher;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
@@ -26,12 +18,7 @@ import com.boredombabies.charactersheet.model.PlayerCharacter;
 
 import io.realm.Realm;
 
-/**
- * A fragment representing a single CharacterSheet detail screen.
- * This fragment is either contained in a {@link CharacterSheetListActivity}
- * in two-pane mode (on tablets) or a {@link CharacterProfileActivity}
- * on handsets.
- */
+
 public class CharacterProfileFragment extends Fragment {
     /**
      * The fragment argument representing the item ID that this fragment
@@ -218,18 +205,6 @@ public class CharacterProfileFragment extends Fragment {
                 playerCharacter.getProfile().setBackstory(s.toString());
             }
         });
-
-        // Show the dummy content as text in a TextView.
-//        if (playerCharacter != null) {
-//            for (int i = 0; i < 10; i++) {
-//                View abilityScoreComponent = inflater.inflate(R.layout.component_ability_score, container, false);
-//                EditText abilityModifier = (EditText) abilityScoreComponent.findViewById(R.id.ability_modifier);
-//                EditText abilityScore = (EditText) abilityScoreComponent.findViewById(R.id.ability_score);
-//                abilityModifier.setText("mod");
-//                abilityScore.setText("10");
-//                profile.addView(abilityScoreComponent);
-//            }
-//        }
 
         return rootView;
     }

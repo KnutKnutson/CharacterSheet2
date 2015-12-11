@@ -11,8 +11,10 @@ import android.widget.ImageView;
 
 import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.fragment.CharacterSheetViewPagerFragment;
+import com.boredombabies.charactersheet.helper.Formulas;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
 import com.boredombabies.charactersheet.interfaces.CharacterSheetFragmentCallbacks;
+import com.boredombabies.charactersheet.model.PlayerCharacter;
 import com.squareup.picasso.Picasso;
 
 public class CharacterSheetViewPagerActivity extends AppCompatActivity
@@ -32,8 +34,9 @@ public class CharacterSheetViewPagerActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        setHeaderText(PlayerCharacterHelper.getActiveCharacter().getName());
-        setHeaderImage(R.drawable.human_male_barbarian);
+        PlayerCharacter character = PlayerCharacterHelper.getActiveCharacter();
+        setHeaderText(character.getName());
+        setHeaderImage(Formulas.getClassImage(character.getCharacterClass()));
 
         if (findViewById(getFragmentId(2)) != null) {
             mTwoPane = true;

@@ -8,6 +8,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,9 +39,7 @@ public class CharacterSheetViewPagerFragment extends Fragment {
         return fragment;
     }
 
-    public CharacterSheetViewPagerFragment() {
-        // Required empty public constructor
-    }
+    public CharacterSheetViewPagerFragment() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,6 +48,7 @@ public class CharacterSheetViewPagerFragment extends Fragment {
         playerCharacter = PlayerCharacterHelper.getActiveCharacter();
         if (getArguments() != null) {
             viewPagerPreferencesNumber = getArguments().getInt(Constants.VIEW_PAGER_PREF_NUMBER);
+            Log.e("preference number:", Integer.toString(viewPagerPreferencesNumber));
         }
     }
 
@@ -68,7 +68,8 @@ public class CharacterSheetViewPagerFragment extends Fragment {
     private void saveActiveFragmentPage(int activeFragment) {
         // TODO: save active fragment in background thread
         Context context = getActivity();
-        SharedPreferences sharedPref = context.getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt(viewPagerActivePageKey(), activeFragment);
         editor.commit();
@@ -76,7 +77,8 @@ public class CharacterSheetViewPagerFragment extends Fragment {
 
     private int getActiveFragmentPage() {
         Context context = getActivity();
-        SharedPreferences sharedPref = context.getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         return sharedPref.getInt(viewPagerActivePageKey(), viewPagerPreferencesNumber);
     }
 

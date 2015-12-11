@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.boredombabies.charactersheet.R;
+import com.boredombabies.charactersheet.helper.Formulas;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
 import com.squareup.picasso.Picasso;
 
@@ -52,7 +53,7 @@ public class CharacterListAdapter extends ArrayAdapter<PlayerCharacter> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         // Populate the data into the template view using the data object
-        Picasso.with(getContext()).load(R.drawable.human_male_barbarian)
+        Picasso.with(getContext()).load(Formulas.getClassImage(character.getCharacterClass()))
                 .placeholder(R.drawable.ic_person_outline_24dp)
                 .resize(100, 100)
                 .centerCrop()

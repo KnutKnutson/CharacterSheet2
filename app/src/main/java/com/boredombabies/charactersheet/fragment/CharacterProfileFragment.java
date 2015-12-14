@@ -12,6 +12,7 @@ import android.widget.EditText;
 import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.helper.Constants;
 import com.boredombabies.charactersheet.helper.EditTextTextWatcher;
+import com.boredombabies.charactersheet.helper.Formulas;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
 import com.boredombabies.charactersheet.interfaces.CharacterSheetFragmentCallbacks;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
@@ -52,11 +53,6 @@ public class CharacterProfileFragment extends Fragment {
         playerCharacter = PlayerCharacterHelper.getActiveCharacter();
 
         realm = Realm.getInstance(getActivity());
-
-        Bundle parentBundle = this.getParentFragment().getArguments();
-        if (parentBundle != null) {
-            this.viewPagerPreferencesNumber = parentBundle.getInt(Constants.VIEW_PAGER_PREF_NUMBER);
-        }
     }
 
     @Override
@@ -84,6 +80,13 @@ public class CharacterProfileFragment extends Fragment {
             @Override
             public void inTransactionCallback(Editable s) {
                 playerCharacter.setCharacterClass(s.toString());
+            }
+            @Override
+            public void afterTextChangedCallback(Editable s) {
+                int headerImage = Formulas.getClassImage(playerCharacter.getCharacterClass());
+                if (headerImage != 0) {
+                    callbacks.setHeaderImage(headerImage);
+                }
             }
         });
 

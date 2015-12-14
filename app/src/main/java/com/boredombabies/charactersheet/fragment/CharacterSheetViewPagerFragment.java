@@ -1,12 +1,9 @@
 package com.boredombabies.charactersheet.fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,13 +25,14 @@ public class CharacterSheetViewPagerFragment extends Fragment {
     private SmartFragmentStatePagerAdapter viewPagerAdapter;
     private ViewPager viewPager;
     private int viewPagerPreferencesNumber;
+    private String preferencesKey;
 
     PlayerCharacter playerCharacter;
 
-    public static CharacterSheetViewPagerFragment newInstance(int viewPagerPreferencesNumber) {
+    public static CharacterSheetViewPagerFragment newInstance(int viewPagerPreferenceNumber) {
         CharacterSheetViewPagerFragment fragment = new CharacterSheetViewPagerFragment();
         Bundle args = new Bundle();
-        args.putInt(Constants.VIEW_PAGER_PREF_NUMBER, viewPagerPreferencesNumber);
+        args.putInt(Constants.VIEW_PAGER_PREF_NUMBER, viewPagerPreferenceNumber);
         fragment.setArguments(args);
         return fragment;
     }
@@ -48,7 +46,9 @@ public class CharacterSheetViewPagerFragment extends Fragment {
         playerCharacter = PlayerCharacterHelper.getActiveCharacter();
         if (getArguments() != null) {
             viewPagerPreferencesNumber = getArguments().getInt(Constants.VIEW_PAGER_PREF_NUMBER);
-            Log.e("preference number:", Integer.toString(viewPagerPreferencesNumber));
+            preferencesKey = "vPAKey" + "dkude" + Integer.toString(viewPagerPreferencesNumber);
+//            Log.e("On Create Pref Number:", Integer.toString(viewPagerPreferencesNumber));
+//            Log.e("On Create Pref Key:", preferencesKey);
         }
     }
 
@@ -60,30 +60,36 @@ public class CharacterSheetViewPagerFragment extends Fragment {
         viewPagerAdapter = new FragmentSmartPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.addOnPageChangeListener(getOnPageChangeListener());
+//        Log.e("Create View Pref #:", Integer.toString(viewPagerPreferencesNumber));
+//        Log.e("Create View Page #: ", Integer.toString(getActiveFragmentPage()));
         viewPager.setCurrentItem(getActiveFragmentPage());
 
         return(result);
     }
 
     private void saveActiveFragmentPage(int activeFragment) {
-        // TODO: save active fragment in background thread
+//        Log.e("saving fragment page", Integer.toString(activeFragment));
+//        Log.e("saving fragment pref", Integer.toString(viewPagerPreferencesNumber));
+//        Log.e("saving fragment key", preferencesKey);
         Context context = getActivity();
-        SharedPreferences sharedPref = context.getSharedPreferences(
-                Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = context.getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt(viewPagerActivePageKey(), activeFragment);
-        editor.commit();
+        editor.putInt(preferencesKey, activeFragment);
+        editor.apply();
     }
 
     private int getActiveFragmentPage() {
         Context context = getActivity();
         SharedPreferences sharedPref = context.getSharedPreferences(
                 Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
-        return sharedPref.getInt(viewPagerActivePageKey(), viewPagerPreferencesNumber);
+        int number = sharedPref.getInt(preferencesKey, viewPagerPreferencesNumber);
+//        Log.e("getting fragment page #", Integer.toString(number));
+        return number;
     }
 
     private String viewPagerActivePageKey() {
-        return PlayerCharacterHelper.getActiveCharacter().getId() +
+        return  "vPAKey" +
+                PlayerCharacterHelper.getActiveCharacter().getId() +
                 Integer.toString(viewPagerPreferencesNumber);
     }
 

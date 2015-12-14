@@ -32,7 +32,6 @@ public class CharacterAttributesFragment extends Fragment {
     Realm realm;
     PlayerCharacter playerCharacter;
     CharacterSheetFragmentCallbacks callbacks;
-    private int viewPagerPreferencesNumber;
 
     public CharacterAttributesFragment() {
     }
@@ -42,11 +41,6 @@ public class CharacterAttributesFragment extends Fragment {
         super.onCreate(savedInstanceState);
         playerCharacter = PlayerCharacterHelper.getActiveCharacter();
         realm = Realm.getInstance(getActivity());
-
-        Bundle parentBundle = this.getParentFragment().getArguments();
-        if (parentBundle != null) {
-            this.viewPagerPreferencesNumber = parentBundle.getInt(Constants.VIEW_PAGER_PREF_NUMBER);
-        }
     }
 
     @Override

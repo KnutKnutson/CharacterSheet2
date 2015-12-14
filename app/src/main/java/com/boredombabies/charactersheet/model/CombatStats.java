@@ -1,8 +1,7 @@
 package com.boredombabies.charactersheet.model;
 
 
-import java.util.List;
-
+import io.realm.RealmList;
 import io.realm.RealmObject;
 
 /**
@@ -19,8 +18,8 @@ public class CombatStats extends RealmObject {
     private String hitPointTemp;
     private String hitDiceTotal;
     private String hitDice;
-    private List<Boolean> deathSaveSuccesses;
-    private List<Boolean> deathSaveFailures;
+//    private List<Boolean> deathSaveSuccesses;
+//    private List<Boolean> deathSaveFailures;
     private boolean deathSaveSuccess0;
     private boolean deathSaveSuccess1;
     private boolean deathSaveSuccess2;
@@ -28,8 +27,12 @@ public class CombatStats extends RealmObject {
     private boolean deathSaveFailure1;
     private boolean deathSaveFailure2;
 
-    public CombatStats() {
+    private RealmList<Attack> attacks = new RealmList<>();
 
+    public CombatStats() {
+        for (int i = 0; i < 3; i++) {
+            attacks.add(new Attack());
+        }
     }
 
     public String getArmorClass() {
@@ -117,16 +120,23 @@ public class CombatStats extends RealmObject {
         this.deathSaveFailure2 = deathSaveFailure2;
     }
 
-    public List<Boolean> getDeathSaveSuccesses() {
-        return deathSaveSuccesses;
+    public RealmList<Attack> getAttacks() {
+        return attacks;
     }
-    public void setDeathSaveSuccesses(List<Boolean> deathSaveSuccesses) {
-        this.deathSaveSuccesses = deathSaveSuccesses;
+
+    public void setAttacks(RealmList<Attack> attacks) {
+        this.attacks = attacks;
     }
-    public List<Boolean> getDeathSaveFailures() {
-        return deathSaveFailures;
-    }
-    public void setDeathSaveFailures(List<Boolean> deathSaveFailures) {
-        this.deathSaveFailures = deathSaveFailures;
-    }
+    //    public List<Boolean> getDeathSaveSuccesses() {
+//        return deathSaveSuccesses;
+//    }
+//    public void setDeathSaveSuccesses(List<Boolean> deathSaveSuccesses) {
+//        this.deathSaveSuccesses = deathSaveSuccesses;
+//    }
+//    public List<Boolean> getDeathSaveFailures() {
+//        return deathSaveFailures;
+//    }
+//    public void setDeathSaveFailures(List<Boolean> deathSaveFailures) {
+//        this.deathSaveFailures = deathSaveFailures;
+//    }
 }

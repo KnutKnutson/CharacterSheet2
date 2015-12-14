@@ -1,26 +1,18 @@
 package com.boredombabies.charactersheet.model;
 
+import io.realm.RealmObject;
+
 /**
  * Created by mark.knutson on 4/7/15.
  */
 
 
-public class Attack {
+public class Attack extends RealmObject {
     private String name;
     private String attackBonus;
-    // private int attackBonus;
-    private String damage;
-    // private Die damage;
-    private String damageType; // unused this version
-    private AttackRange range; // unused this version
-    private PlayerCharacter playerCharacter;
+    private String damageAndType;
 
-    public Attack() { super(); }
-
-    public Attack(PlayerCharacter playerCharacter) {
-        super();
-        this.playerCharacter = playerCharacter;
-    }
+    public Attack() { }
 
     public String getName() {
         return name;
@@ -38,27 +30,11 @@ public class Attack {
         this.attackBonus = attackBonus;
     }
 
-    public String getDamage() {
-        return damage;
+    public String getDamageAndType() {
+        return damageAndType;
     }
 
-    public void setDamage(String damage) {
-        this.damage = damage;
-    }
-
-    public String getDamageType() {
-        return damageType;
-    }
-
-    public void setDamageType(String damageType) {
-        this.damageType = damageType;
-    }
-
-    public AttackRange getRange() {
-        return range;
-    }
-
-    public void setRange(AttackRange range) {
-        this.range = range;
+    public void setDamageAndType(String damageAndType) {
+        this.damageAndType = damageAndType;
     }
 }

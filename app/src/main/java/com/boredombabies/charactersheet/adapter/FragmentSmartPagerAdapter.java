@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import com.boredombabies.charactersheet.fragment.CharacterAttributesFragment;
+import com.boredombabies.charactersheet.fragment.CharacterCombatStatsFragment;
 import com.boredombabies.charactersheet.fragment.CharacterProfileFragment;
 
 /**
@@ -50,7 +51,7 @@ public class FragmentSmartPagerAdapter extends SmartFragmentStatePagerAdapter {
                  * AC, initiative, speed, hp max, current hp, hit dice, hit dice total, death saves,
                  * equipped weapons (name, bonus, damage/type), attacks, readied spells
                  */
-                return new CharacterProfileFragment();
+                return new CharacterCombatStatsFragment();
             case 3:
                 /**
                  * Equipment

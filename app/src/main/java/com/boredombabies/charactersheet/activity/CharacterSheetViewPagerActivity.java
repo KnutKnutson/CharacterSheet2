@@ -36,7 +36,8 @@ public class CharacterSheetViewPagerActivity extends AppCompatActivity
 
         PlayerCharacter character = PlayerCharacterHelper.getActiveCharacter();
         setHeaderText(character.getName());
-        setHeaderImage(Formulas.getClassImage(character.getCharacterClass()));
+        int headerImage = Formulas.getClassImage(character.getCharacterClass());
+        setHeaderImage((headerImage == 0 ? R.drawable.barbarian_small : headerImage));
 
         if (findViewById(getFragmentId(2)) != null) {
             mTwoPane = true;

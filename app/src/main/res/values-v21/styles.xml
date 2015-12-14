@@ -52,4 +52,12 @@
         <item name="android:layout_marginBottom">4dp</item>
         <item name="android:textColor">@color/secondary_text</item>
     </style>
+
+    <style name="CombatStatsTopRowEditText" parent="@style/CircularEditText">
+
+    </style>
+
+    <style name="CombatStatsTopRowLabel" parent="@style/CircularEditTextLabel">
+
+    </style>
 </resources>

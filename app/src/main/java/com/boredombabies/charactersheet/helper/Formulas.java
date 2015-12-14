@@ -33,7 +33,7 @@ public class Formulas {
             case "wizard":
                 return R.drawable.wizard_small;
             default:
-                return R.drawable.barbarian_small;
+                return 0;
         }
     }
 }

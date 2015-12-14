@@ -1,10 +1,143 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.boredombabies.charactersheet.fragment.CharacterCombatStatsFragment">
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <RelativeLayout
+        android:id="@+id/charactersheet_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/combatStatsLayout"
+            android:background="@drawable/deep_background">
+
+            <EditText
+                style="@style/CombatStatsTopRowEditText"
+                android:id="@+id/armorClass"
+                android:layout_toLeftOf="@+id/initiative"/>
+
+            <TextView
+                style="@style/CombatStatsTopRowLabel"
+                android:id="@+id/armorClassLabel"
+                android:text="@string/label_armor_class"
+                android:layout_below="@+id/armorClass"
+                android:layout_toLeftOf="@+id/initiative"/>
+
+            <EditText
+                style="@style/CombatStatsTopRowEditText"
+                android:id="@+id/initiative"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentTop="true"/>
+
+            <TextView
+                style="@style/CombatStatsTopRowLabel"
+                android:id="@+id/initiativeLabel"
+                android:text="@string/label_initiative"
+                android:layout_below="@+id/initiative"
+                android:layout_centerHorizontal="true"/>
+
+            <EditText
+                style="@style/CombatStatsTopRowEditText"
+                android:id="@+id/speed"
+                android:layout_toRightOf="@id/initiative"/>
+
+            <TextView
+                style="@style/CombatStatsTopRowLabel"
+                android:id="@+id/speedLabel"
+                android:text="@string/label_speed"
+                android:layout_below="@+id/speed"
+                android:layout_toRightOf="@+id/initiative"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/currentHitPointsLayout"
+                android:layout_below="@+id/armorClass">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/temporaryHitPointsLayout"
+                android:layout_below="@+id/currentHitPointsLayout">
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/strut"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="invisible"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/hitDiceLayout"
+                android:layout_toLeftOf="@+id/strut"
+                android:layout_below="@+id/temporaryHitPointsLayout">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/deathSavesLayout"
+                android:layout_toRightOf="@+id/strut"
+                android:layout_below="@+id/temporaryHitPointsLayout">
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/attacksAndSpellcastingLayout"
+            android:layout_below="@+id/combatStatsLayout">
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/attacksAndSpells">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="NAME"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center_horizontal"
+                    android:text="ATK BONUS"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:gravity="right"
+                    android:text="DAMAGE/TYPE"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</ScrollView>

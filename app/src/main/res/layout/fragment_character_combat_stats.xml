@@ -10,96 +10,117 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/combatStatsLayout"
+            android:orientation="horizontal"
             android:background="@drawable/deep_background">
 
-            <EditText
-                style="@style/CombatStatsTopRowEditText"
-                android:id="@+id/armorClass"
-                android:layout_toLeftOf="@+id/initiative"/>
-
-            <TextView
-                style="@style/CombatStatsTopRowLabel"
-                android:id="@+id/armorClassLabel"
-                android:text="@string/label_armor_class"
-                android:layout_below="@+id/armorClass"
-                android:layout_toLeftOf="@+id/initiative"/>
-
-            <EditText
-                style="@style/CombatStatsTopRowEditText"
-                android:id="@+id/initiative"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentTop="true"/>
-
-            <TextView
-                style="@style/CombatStatsTopRowLabel"
-                android:id="@+id/initiativeLabel"
-                android:text="@string/label_initiative"
-                android:layout_below="@+id/initiative"
-                android:layout_centerHorizontal="true"/>
-
-            <EditText
-                style="@style/CombatStatsTopRowEditText"
-                android:id="@+id/speed"
-                android:layout_toRightOf="@id/initiative"/>
-
-            <TextView
-                style="@style/CombatStatsTopRowLabel"
-                android:id="@+id/speedLabel"
-                android:text="@string/label_speed"
-                android:layout_below="@+id/speed"
-                android:layout_toRightOf="@+id/initiative"/>
-
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:id="@+id/currentHitPointsLayout"
-                android:layout_below="@+id/armorClass">
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:id="@+id/temporaryHitPointsLayout"
-                android:layout_below="@+id/currentHitPointsLayout">
-
-            </LinearLayout>
-
-            <View
-                android:id="@+id/strut"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:visibility="invisible"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:id="@+id/hitDiceLayout"
-                android:layout_toLeftOf="@+id/strut"
-                android:layout_below="@+id/temporaryHitPointsLayout">
+                android:layout_weight="1">
+
+                <EditText
+                    style="@style/CombatStatsTopRowEditText"
+                    android:id="@+id/armorClass"
+                    android:layout_gravity="center_horizontal"/>
+
+                <TextView
+                    style="@style/CombatStatsTopRowLabel"
+                    android:id="@+id/armorClassLabel"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/label_armor_class"/>
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:id="@+id/deathSavesLayout"
-                android:layout_toRightOf="@+id/strut"
-                android:layout_below="@+id/temporaryHitPointsLayout">
+                android:layout_weight="1">
+
+                <EditText
+                    style="@style/CombatStatsTopRowEditText"
+                    android:id="@+id/initiative"
+                    android:layout_gravity="center_horizontal"/>
+
+                <TextView
+                    style="@style/CombatStatsTopRowLabel"
+                    android:id="@+id/initiativeLabel"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/label_initiative"/>
 
             </LinearLayout>
 
-        </RelativeLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <EditText
+                    style="@style/CombatStatsTopRowEditText"
+                    android:id="@+id/speed"
+                    android:layout_gravity="center_horizontal"/>
+
+                <TextView
+                    style="@style/CombatStatsTopRowLabel"
+                    android:id="@+id/speedLabel"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/label_speed"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/currentHitPointsLayout"
+            android:layout_below="@+id/combatStatsLayout">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/temporaryHitPointsLayout"
+            android:layout_below="@+id/combatStatsLayout">
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/strut"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/hitDiceLayout"
+            android:layout_toLeftOf="@+id/strut"
+            android:layout_below="@+id/temporaryHitPointsLayout">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/deathSavesLayout"
+            android:layout_toRightOf="@+id/strut"
+            android:layout_below="@+id/temporaryHitPointsLayout">
+
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -119,12 +140,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
+                    android:layout_margin="4dp"
                     android:text="NAME"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:layout_margin="4dp"
                     android:gravity="center_horizontal"
                     android:text="ATK BONUS"/>
 
@@ -132,6 +155,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
+                    android:layout_margin="4dp"
                     android:gravity="right"
                     android:text="DAMAGE/TYPE"/>
 

@@ -26,8 +26,8 @@ public class CombatStats extends RealmObject {
     private boolean deathSaveFailure0;
     private boolean deathSaveFailure1;
     private boolean deathSaveFailure2;
-
     private RealmList<Attack> attacks = new RealmList<>();
+    private String attackAndSpellNotes;
 
     public CombatStats() {
         for (int i = 0; i < 3; i++) {
@@ -126,6 +126,12 @@ public class CombatStats extends RealmObject {
 
     public void setAttacks(RealmList<Attack> attacks) {
         this.attacks = attacks;
+    }
+    public String getAttackAndSpellNotes() {
+        return attackAndSpellNotes;
+    }
+    public void setAttackAndSpellNotes(String attackAndSpellNotes) {
+        this.attackAndSpellNotes = attackAndSpellNotes;
     }
     //    public List<Boolean> getDeathSaveSuccesses() {
 //        return deathSaveSuccesses;

@@ -2,7 +2,7 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="72dp">
 
     <ImageView
         android:layout_width="match_parent"
@@ -13,43 +13,43 @@
 
     <RelativeLayout
         android:background="?android:attr/activatedBackgroundIndicator"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/characterIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true" />
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
         <TextView
             android:id="@+id/characterName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_toRightOf="@+id/characterIcon"
-            android:layout_marginLeft="5dp"
             android:textSize="18sp"/>
         <TextView
             android:id="@+id/characterLevel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/characterIcon"
-            android:layout_below="@+id/characterName"
-            android:layout_marginLeft="5dp"/>
+            android:layout_below="@+id/characterName"/>
         <TextView
             android:id="@+id/characterRace"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_below="@+id/characterName"
-            android:layout_toRightOf="@+id/characterLevel"
-            android:layout_marginLeft="5dp"/>
+            android:layout_toRightOf="@+id/characterLevel"/>
         <TextView
             android:id="@+id/characterClass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_toRightOf="@+id/characterRace"
-            android:layout_below="@id/characterName"
-            android:layout_marginLeft="5dp"/>
+            android:layout_below="@id/characterName"/>
 
     </RelativeLayout>
 </FrameLayout>

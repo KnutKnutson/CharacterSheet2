@@ -53,11 +53,24 @@
         <item name="android:textColor">@color/secondary_text</item>
     </style>
 
-    <style name="CombatStatsTopRowEditText" parent="@style/CircularEditText">
+    <style name="CombatStatsTopRowEditText">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">80dp</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:elevation">4dp</item>
+        <item name="android:background">@drawable/rectangle</item>
+        <item name="android:inputType">number</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">25sp</item>
 
     </style>
 
-    <style name="CombatStatsTopRowLabel" parent="@style/CircularEditTextLabel">
+    <style name="CombatStatsTopRowLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:textColor">@color/secondary_text</item>
 
     </style>
 </resources>

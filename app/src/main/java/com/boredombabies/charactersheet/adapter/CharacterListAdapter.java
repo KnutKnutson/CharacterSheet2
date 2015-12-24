@@ -56,7 +56,7 @@ public class CharacterListAdapter extends ArrayAdapter<PlayerCharacter> {
         int headerImage = Formulas.getClassImage(character.getCharacterClass());
         Picasso.with(getContext()).load((headerImage != 0 ? headerImage : R.drawable.barbarian_small))
                 .placeholder(R.drawable.ic_person_outline_24dp)
-                .resize(100, 100)
+                .resize(72, 72)
                 .centerCrop()
                 .into(viewHolder.characterIcon);
         //viewHolder.characterIcon.setImageResource(R.drawable.ic_person_outline_24dp);

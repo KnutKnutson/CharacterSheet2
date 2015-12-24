@@ -44,13 +44,15 @@
     <string name="label_death_saves">DEATH SAVES</string>
     <string name="label_death_saves_successes">SUCCESSES</string>
     <string name="label_death_saves_failures">FAILURES</string>
+    <string name="label_atk_and_spell_name">NAME</string>
+    <string name="label_atk_and_spell_bonus">ATK BONUS</string>
+    <string name="label_atk_and_spell_damage">DAMAGE/TYPE</string>
+    <string name="label_attacks_and_spellcasting">ATTACKS &amp; SPELLCASTING</string>
 
 
     <string name="clear_cache_menu">Clear Caches</string>
     <string name="clear_cache_complete_toast">Caches have been cleared</string>
     <string name="imageview_description">Image Thumbnail</string>
     <string name="no_network_connection_toast">No network connection found</string>
-
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    
 </resources>

@@ -1,11 +1,16 @@
 package com.boredombabies.charactersheet.helper;
 
 import com.boredombabies.charactersheet.R;
+import com.boredombabies.charactersheet.model.PlayerCharacter;
 
 /**
  * Created by mark.knutson on 12/7/15.
  */
 public class Formulas {
+    static public String getInitiative(PlayerCharacter playerCharacter) {
+        return playerCharacter.getCombatStats().getInitiative();
+    }
+
     static public int getClassImage(String className) {
         switch (className.toLowerCase()) {
             case "barbarian":

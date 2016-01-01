@@ -6,7 +6,58 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
-    <!--CHARACTER PROFILE LABELS-->
+    <!-- ALLIES -->
+    <string name="label_allies_and_orgs">ALLIES &amp; ORGANIZATIONS</string>
+    <string name="label_organization_name">NAME</string>
+    <string name="label_organization_symbol">SYMBOL</string>
+
+    <!-- ATTRIBUTES -->
+    <string name="label_passive_wisdom">PASSIVE WISDOM (PERCEPTION)</string>
+    <string name="label_inspiration">INSPIRATION</string>
+    <string name="label_proficiency_bonus">PROFICIENCY BONUS</string>
+    <string name="label_languages">OTHER PROFICIENCIES &amp; LANGUAGES</string>
+    <string name="label_ability_scores">ABILITY SCORES</string>
+    <string name="label_saving_throws">SAVING THROWS</string>
+    <string name="label_skills">SKILLS</string>
+
+    <!-- BACKSTORY -->
+    <string name="label_backstory">CHARACTER APPEARANCE</string>
+    <string name="label_appearance">CHARACTER BACKSTORY</string>
+
+    <!-- COMBAT STATS -->
+    <string name="label_armor_class">ARMOR\nCLASS</string>
+    <string name="label_initiative">INITIATIVE</string>
+    <string name="label_speed">SPEED</string>
+    <string name="label_hit_point_maximum">Hit Point Maximum</string>
+    <string name="label_current_hit_points">CURRENT HIT POINTS</string>
+    <string name="label_temporary_hit_points">TEMPORARY HIT POINTS</string>
+    <string name="label_hit_dice_total">Total</string>
+    <string name="label_hit_dice">HIT DICE</string>
+    <string name="label_death_saves">DEATH SAVES</string>
+    <string name="label_death_saves_successes">SUCCESSES</string>
+    <string name="label_death_saves_failures">FAILURES</string>
+    <string name="label_atk_and_spell_name">NAME</string>
+    <string name="label_atk_and_spell_bonus">ATK BONUS</string>
+    <string name="label_atk_and_spell_damage">DAMAGE/TYPE</string>
+    <string name="label_attacks_and_spellcasting">ATTACKS &amp; SPELLCASTING</string>
+
+    <!-- EQUIPMENT -->
+    <string name="label_treasure">TREASURE</string>
+    <string name="label_equipment">EQUIPMENT</string>
+    <string name="label_copper">CP</string>
+    <string name="label_silver">SP</string>
+    <string name="label_electrum">EP</string>
+    <string name="label_gold">GP</string>
+    <string name="label_platinum">PP</string>
+
+    <!-- FEATURES -->
+    <string name="label_personality_traits">PERSONALITY TRAITS</string>
+    <string name="label_ideals">IDEALS</string>
+    <string name="label_bonds">BONDS</string>
+    <string name="label_flaws">FLAWS</string>
+    <string name="label_features_and_traits">FEATURES &amp; TRAITS</string>
+
+    <!-- PROFILE -->
     <string name="label_character_name">CHARACTER NAME</string>
     <string name="label_player_name">PLAYER NAME</string>
     <string name="label_character_level">LEVEL</string>
@@ -23,31 +74,17 @@
     <string name="label_character_hair">HAIR</string>
     <string name="label_character_backstory">BACKSTORY</string>
 
-    <!--ATTRIBUTES -->
-    <string name="label_passive_wisdom">PASSIVE WISDOM (PERCEPTION)</string>
-    <string name="label_inspiration">INSPIRATION</string>
-    <string name="label_proficiency_bonus">PROFICIENCY BONUS</string>
-    <string name="label_languages">OTHER PROFICIENCIES &amp; LANGUAGES</string>
-    <string name="label_ability_scores">ABILITY SCORES</string>
-    <string name="label_saving_throws">SAVING THROWS</string>
-    <string name="label_skills">SKILLS</string>
-
-    <!--COMBAT STATS-->
-    <string name="label_armor_class">ARMOR\nCLASS</string>
-    <string name="label_initiative">INITIATIVE</string>
-    <string name="label_speed">SPEED</string>
-    <string name="label_hit_point_maximum">Hit Point Maximum</string>
-    <string name="label_current_hit_points">CURRENT HIT POINTS</string>
-    <string name="label_temporary_hit_points">TEMPORARY HIT POINTS</string>
-    <string name="label_hit_dice_total">Total</string>
-    <string name="label_hit_dice">HIT DICE</string>
-    <string name="label_death_saves">DEATH SAVES</string>
-    <string name="label_death_saves_successes">SUCCESSES</string>
-    <string name="label_death_saves_failures">FAILURES</string>
-    <string name="label_atk_and_spell_name">NAME</string>
-    <string name="label_atk_and_spell_bonus">ATK BONUS</string>
-    <string name="label_atk_and_spell_damage">DAMAGE/TYPE</string>
-    <string name="label_attacks_and_spellcasting">ATTACKS &amp; SPELLCASTING</string>
+    <!-- SPELLS -->
+    <string name="label_spellcasting_ability">SPELLCASTING\nABILITY</string>
+    <string name="label_spell_save_dc">SPELL SAVE DC</string>
+    <string name="label_spell_attack_bonus">SPELL ATTACK\nBONUS</string>
+    <string name="label_spell_level">SPELL\nLEVEL</string>
+    <string name="label_slots_total">SLOTS TOTAL</string>
+    <string name="label_slots_expended">SLOTS EXPENDED</string>
+    <string name="label_spell_name">SPELL NAME</string>
+    <string name="label_spell_prepared">PREPARED</string>
+    <string name="label_spells_known">SPELLS KNOWN</string>
+    <string name="label_cantrips">CANTRIPS</string>
 
 
     <string name="clear_cache_menu">Clear Caches</string>

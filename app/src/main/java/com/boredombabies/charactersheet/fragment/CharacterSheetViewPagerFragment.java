@@ -27,8 +27,6 @@ public class CharacterSheetViewPagerFragment extends Fragment {
     private int viewPagerPreferencesNumber;
     private String preferencesKey;
 
-    PlayerCharacter playerCharacter;
-
     public static CharacterSheetViewPagerFragment newInstance(int viewPagerPreferenceNumber) {
         CharacterSheetViewPagerFragment fragment = new CharacterSheetViewPagerFragment();
         Bundle args = new Bundle();
@@ -43,7 +41,14 @@ public class CharacterSheetViewPagerFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        playerCharacter = PlayerCharacterHelper.getActiveCharacter();
+        if (savedInstanceState != null) {
+            Log.d("VIEWPAGERFRAGMENT", "SAVEDSTATE");
+            for (String key : savedInstanceState.keySet()) {
+                Object value = savedInstanceState.get(key);
+                Log.d("SAVEDSTATE", String.format("%s %s (%s)", key,
+                        value.toString(), value.getClass().getName()));
+            }
+        }
         if (getArguments() != null) {
             viewPagerPreferencesNumber = getArguments().getInt(Constants.VIEW_PAGER_PREF_NUMBER);
             preferencesKey = "vPAKey" + "dkude" + Integer.toString(viewPagerPreferencesNumber);
@@ -58,11 +63,12 @@ public class CharacterSheetViewPagerFragment extends Fragment {
         View result = inflater.inflate(R.layout.fragment_character_sheet_view_pager, container, false);
         viewPager = (ViewPager) result.findViewById(R.id.viewPager);
         viewPagerAdapter = new FragmentSmartPagerAdapter(getChildFragmentManager());
+        //viewPagerAdapter.
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.addOnPageChangeListener(getOnPageChangeListener());
 //        Log.e("Create View Pref #:", Integer.toString(viewPagerPreferencesNumber));
 //        Log.e("Create View Page #: ", Integer.toString(getActiveFragmentPage()));
-        viewPager.setCurrentItem(getActiveFragmentPage());
+        viewPager.setCurrentItem(viewPagerPreferencesNumber);
 
         return(result);
     }

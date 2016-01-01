@@ -18,8 +18,6 @@ public class CombatStats extends RealmObject {
     private String hitPointTemp;
     private String hitDiceTotal;
     private String hitDice;
-//    private List<Boolean> deathSaveSuccesses;
-//    private List<Boolean> deathSaveFailures;
     private boolean deathSaveSuccess0;
     private boolean deathSaveSuccess1;
     private boolean deathSaveSuccess2;

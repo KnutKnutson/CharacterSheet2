@@ -33,7 +33,7 @@
     <string name="label_skills">SKILLS</string>
 
     <!--COMBAT STATS-->
-    <string name="label_armor_class">ARMOR CLASS</string>
+    <string name="label_armor_class">ARMOR\nCLASS</string>
     <string name="label_initiative">INITIATIVE</string>
     <string name="label_speed">SPEED</string>
     <string name="label_hit_point_maximum">Hit Point Maximum</string>

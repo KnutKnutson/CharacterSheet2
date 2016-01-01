@@ -7,11 +7,22 @@ import com.boredombabies.charactersheet.fragment.CharacterAttributesFragment;
 import com.boredombabies.charactersheet.fragment.CharacterCombatStatsFragment;
 import com.boredombabies.charactersheet.fragment.CharacterProfileFragment;
 
+import java.util.ArrayList;
+
 /**
  * Created by mark.knutson on 4/9/15.
  */
 public class FragmentSmartPagerAdapter extends SmartFragmentStatePagerAdapter {
-    private static int NUM_FRAGMENTS = 10;
+    private static int NUM_FRAGMENTS = 8;
+//    public static ArrayList<Integer> activeFragments;
+//    static {
+//        activeFragments = new ArrayList<>();
+//        for (int i = 0; i < 3; i++) {
+//            activeFragments.add(i);
+//        }
+//    }
+//
+//    public int pagerNumber = 0;
 
     public FragmentSmartPagerAdapter(FragmentManager fragmentManager) { super(fragmentManager); }
 
@@ -55,6 +66,7 @@ public class FragmentSmartPagerAdapter extends SmartFragmentStatePagerAdapter {
             case 3:
                 /**
                  * Equipment
+                 * equipment, treasure
                  */
                 return new CharacterProfileFragment();
             case 4:
@@ -64,24 +76,23 @@ public class FragmentSmartPagerAdapter extends SmartFragmentStatePagerAdapter {
                  */
                 return new CharacterProfileFragment();
             case 5:
+                /**
+                 * Backstory
+                 * appearance, backstory
+                 * (can add picture here)
+                 */
                 return new CharacterProfileFragment();
             case 6:
+                /**
+                 * Spells
+                 */
                 return new CharacterProfileFragment();
             case 7:
+                /**
+                 * Allies & Organizations
+                 * (links to other characters?)
+                 */
                 return new CharacterProfileFragment();
-            case 8:
-                return new CharacterProfileFragment();
-            case 9:
-                return new CharacterProfileFragment();
-            /*
-            case 10:
-                return SpellsFragment.newInstance();
-            case 11:
-                return AlliesAndOrganizationsFragment.newInstance();
-            case 12:
-                // Make this? get rid of other notesy type fragments?
-                return NotesFragment.newInstance();
-                */
             default:
                 return null;
         }

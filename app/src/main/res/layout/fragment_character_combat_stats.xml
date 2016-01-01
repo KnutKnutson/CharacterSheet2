@@ -20,7 +20,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/combatStatsLayout"
-                android:layout_marginTop="4dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -38,7 +37,8 @@
                         style="@style/CombatStatsTopRowLabel"
                         android:id="@+id/armorClassLabel"
                         android:layout_gravity="center_horizontal"
-                        android:text="@string/label_armor_class"/>
+                        android:text="@string/label_armor_class"
+                        android:layout_marginTop="-38dp"/>
 
                 </LinearLayout>
 
@@ -132,9 +132,9 @@
                     android:layout_toRightOf="@+id/hitDieTotalLabel"
                     android:id="@+id/hitDieTotalValue"
                     android:paddingLeft="4dp"
-                    android:paddingTop="4dp"
+                    android:paddingTop="0dp"
                     android:paddingRight="0dp"
-                    android:paddingBottom="0dp"/>
+                    android:paddingBottom="4dp"/>
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -165,56 +165,56 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SUCCESSES"
-                    android:layout_alignParentLeft="true"
+                    android:text="@string/label_death_saves_successes"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignBottom="@+id/success0"
+                    android:layout_marginBottom="8dp"
                     android:id="@+id/success_label"/>
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@+id/success1"
-                    android:layout_below="@+id/success_label"
+                    android:layout_toStartOf="@+id/success1"
                     android:id="@+id/success0"/>
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@+id/success2"
-                    android:layout_below="@+id/success_label"
+                    android:layout_toStartOf="@+id/success2"
                     android:id="@+id/success1"/>
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@+id/success_label"
+                    android:layout_alignParentEnd="true"
                     android:id="@+id/success2"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="FAILURES"
-                    android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/success0"
+                    android:text="@string/label_death_saves_failures"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignBottom="@+id/failure0"
+                    android:layout_marginBottom="8dp"
                     android:id="@+id/failure_label"/>
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@+id/failure1"
-                    android:layout_below="@+id/failure_label"
+                    android:layout_toStartOf="@+id/failure1"
+                    android:layout_below="@+id/success0"
                     android:id="@+id/failure0"/>
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/failure_label"
-                    android:layout_toLeftOf="@+id/failure2"
+                    android:layout_below="@+id/success0"
+                    android:layout_toStartOf="@+id/failure2"
                     android:id="@+id/failure1"/>
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/failure_label"
-                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/success0"
+                    android:layout_alignParentEnd="true"
                     android:id="@+id/failure2"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="DEATH SAVES"
+                    android:text="@string/label_death_saves"
                     android:layout_below="@+id/failure2"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"

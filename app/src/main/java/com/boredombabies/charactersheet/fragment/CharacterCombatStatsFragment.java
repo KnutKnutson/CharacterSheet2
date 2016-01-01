@@ -4,6 +4,8 @@ package com.boredombabies.charactersheet.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,18 +28,33 @@ import io.realm.Realm;
 /**
  * A simple {@link Fragment} subclass.
  */
+//TODO: remove debug log lines
 public class CharacterCombatStatsFragment extends Fragment {
     Realm realm;
     PlayerCharacter playerCharacter;
     CharacterSheetFragmentCallbacks callbacks;
+    int viewPagerPreferencesNumber;
 
     public CharacterCombatStatsFragment() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        Log.i("on create", "creating it");
+//        if (savedInstanceState != null) {
+//            for (String key : savedInstanceState.keySet()) {
+//                Object value = savedInstanceState.get(key);
+//                Log.d("SAVEDSTATE", String.format("%s %s (%s)", key,
+//                        value.toString(), value.getClass().getName()));
+//            }
+//        }
         playerCharacter = PlayerCharacterHelper.getActiveCharacter();
         realm = Realm.getInstance(getActivity());
+
+        Bundle parentBundle = this.getParentFragment().getArguments();
+        if (parentBundle != null) {
+            this.viewPagerPreferencesNumber = parentBundle.getInt(Constants.VIEW_PAGER_PREF_NUMBER);
+        }
     }
 
     @Override
@@ -160,31 +177,35 @@ public class CharacterCombatStatsFragment extends Fragment {
         // Attacks
         LinearLayout attacksAndSpellcastingLayout = (LinearLayout) rootView.findViewById(R.id.attacksAndSpellcastingLayout);
 
-        for (final Attack attack : playerCharacter.getCombatStats().getAttacks()) {
+        for (Attack attack : playerCharacter.getCombatStats().getAttacks()) {
             View attackComponent = inflater.inflate(R.layout.component_attack, container, false);
+            final Attack thisAttack = attack;
 
             EditText attackName = (EditText) attackComponent.findViewById(R.id.attackName);
-            attackName.setText(attack.getName());
+            attackName.setId(View.generateViewId());
+            attackName.setText(thisAttack.getName());
             attackName.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
                 @Override
                 public void inTransactionCallback(Editable s) {
-                    attack.setName(s.toString());
+                    thisAttack.setName(s.toString());
                 }
             });
             EditText attackBonus = (EditText) attackComponent.findViewById(R.id.attackBonus);
-            attackBonus.setText(attack.getAttackBonus());
+            attackBonus.setId(View.generateViewId());
+            attackBonus.setText(thisAttack.getAttackBonus());
             attackBonus.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
                 @Override
                 public void inTransactionCallback(Editable s) {
-                    attack.setAttackBonus(s.toString());
+                    thisAttack.setAttackBonus(s.toString());
                 }
             });
             EditText attackDamage = (EditText) attackComponent.findViewById(R.id.attackDamageAndType);
-            attackDamage.setText(attack.getDamageAndType());
+            attackDamage.setId(View.generateViewId());
+            attackDamage.setText(thisAttack.getDamageAndType());
             attackDamage.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
                 @Override
                 public void inTransactionCallback(Editable s) {
-                    attack.setDamageAndType(s.toString());
+                    thisAttack.setDamageAndType(s.toString());
                 }
             });
 

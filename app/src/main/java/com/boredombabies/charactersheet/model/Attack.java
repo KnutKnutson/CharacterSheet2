@@ -17,23 +17,18 @@ public class Attack extends RealmObject {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public String getAttackBonus() {
         return attackBonus;
     }
-
     public void setAttackBonus(String attackBonus) {
         this.attackBonus = attackBonus;
     }
-
     public String getDamageAndType() {
         return damageAndType;
     }
-
     public void setDamageAndType(String damageAndType) {
         this.damageAndType = damageAndType;
     }

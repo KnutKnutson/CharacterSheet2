@@ -71,7 +71,7 @@ public class FragmentSmartPagerAdapter extends SmartFragmentStatePagerAdapter {
                 return new CharacterProfileFragment();
             case 4:
                 /**
-                 * Traits
+                 * Features
                  * personality traits, ideals, bonds, flaws, features & traits
                  */
                 return new CharacterProfileFragment();

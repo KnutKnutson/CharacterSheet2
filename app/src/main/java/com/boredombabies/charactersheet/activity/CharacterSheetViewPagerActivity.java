@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
@@ -95,16 +96,17 @@ public class CharacterSheetViewPagerActivity extends AppCompatActivity
 
     @Override
     public void refreshFragments(int callingFragmentId) {
-        if (mTwoPane) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            for (int i = 1; i <= numViewPagerFragments; i++){
-                if (i != callingFragmentId) {
-                    ft.detach(getSupportFragmentManager().findFragmentById(getFragmentId(i)));
-                    ft.attach(getSupportFragmentManager().findFragmentById(getFragmentId(i)));
-                }
-            }
-            ft.commit();
-        }
+        //  adapterViewPager.getRegisteredFragment(0);
+//        if (mTwoPane) {
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            for (int i = 1; i <= numViewPagerFragments; i++){
+//                if (i != callingFragmentId) {
+//                    ft.detach(getSupportFragmentManager().findFragmentById(getFragmentId(i)));
+//                    ft.attach(getSupportFragmentManager().findFragmentById(getFragmentId(i)));
+//                }
+//            }
+//            ft.commit();
+//        }
     }
 
     private int getFragmentId(int fragment) {

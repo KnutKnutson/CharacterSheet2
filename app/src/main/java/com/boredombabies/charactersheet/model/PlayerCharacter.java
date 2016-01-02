@@ -17,6 +17,7 @@ public class PlayerCharacter extends RealmObject {
     private Profile profile;
     private Attributes attributes;
     private CombatStats combatStats;
+    private SpellCasting spellCasting;
 
     public PlayerCharacter() {}
 
@@ -26,12 +27,14 @@ public class PlayerCharacter extends RealmObject {
 //                         CharacterRace characterRace,
                            Profile profile,
                            Attributes attributes,
-                           CombatStats combatStats
+                           CombatStats combatStats,
+                           SpellCasting spellCasting
                           ) {
         this.id = UUID.randomUUID().toString();
         this.profile = profile;
         this.attributes = attributes;
         this.combatStats = combatStats;
+        this.spellCasting = spellCasting;
     }
 
     public String getId() {
@@ -75,5 +78,11 @@ public class PlayerCharacter extends RealmObject {
     }
     public void setCombatStats(CombatStats combatStats) {
         this.combatStats = combatStats;
+    }
+    public SpellCasting getSpellCasting() {
+        return spellCasting;
+    }
+    public void setSpellCasting(SpellCasting spellCasting) {
+        this.spellCasting = spellCasting;
     }
 }

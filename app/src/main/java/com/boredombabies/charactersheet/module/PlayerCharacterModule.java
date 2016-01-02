@@ -4,6 +4,7 @@ import com.boredombabies.charactersheet.model.Attributes;
 import com.boredombabies.charactersheet.model.CombatStats;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
 import com.boredombabies.charactersheet.model.Profile;
+import com.boredombabies.charactersheet.model.SpellCasting;
 
 import dagger.Module;
 import dagger.Provides;
@@ -20,7 +21,8 @@ public class PlayerCharacterModule {
         return new PlayerCharacter(
             new Profile(),
             new Attributes(),
-            new CombatStats()
+            new CombatStats(),
+            new SpellCasting()
         );
     }
 
@@ -36,4 +38,7 @@ public class PlayerCharacterModule {
 
     @Provides
     CombatStats provideCombatStats() { return new CombatStats(); }
+
+    @Provides
+    SpellCasting provideSpellCasting() { return new SpellCasting(); }
 }

@@ -27,19 +27,21 @@ public class PlayerCharacterHelper {
         realm.beginTransaction();
         PlayerCharacter realmCharacter = realm.copyToRealm(newCharacter);
         realm.commitTransaction();
+
         setActiveCharacter(realmCharacter);
         return getActiveCharacter();
     }
 
     public static void deletePlayerCharacter(Realm realm, PlayerCharacter honoredDead) {
         realm.beginTransaction();
-        honoredDead.removeFromRealm();
+        honoredDead.removeFromRealm(); // I used realm just for this line.
         realm.commitTransaction();
     }
 
     public static RealmResults<PlayerCharacter> getCharacters(Realm realm) {
         if (characters == null) {
             characters = realm.allObjects( PlayerCharacter.class );
+            // Ideally this would sort by last updated, but that's not currently tracked.
             characters.sort("name");
         }
         return characters;

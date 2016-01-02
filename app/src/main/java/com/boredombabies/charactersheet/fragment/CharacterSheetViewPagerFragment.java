@@ -101,7 +101,7 @@ public class CharacterSheetViewPagerFragment extends Fragment {
         SharedPreferences sharedPref = context.getSharedPreferences(
                 Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         printPreferences(sharedPref);
-        int number = sharedPref.getInt(preferencesKey, viewPagerPreferencesNumber);
+        int number = sharedPref.getInt(preferencesKey, viewPagerPreferencesNumber - 1);
         Log.e("getActiveFragmentPage", "Returning Page Number: " + Integer.toString(number));
         return number;
     }

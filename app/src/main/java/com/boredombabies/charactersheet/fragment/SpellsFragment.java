@@ -52,6 +52,24 @@ public class SpellsFragment extends Fragment {
             }
         });
 
+        EditText spellSaveDC = (EditText) rootView.findViewById(R.id.spellSaveDC);
+        spellSaveDC.setText(playerCharacter.getSpellCasting().getSpellCastingDC());
+        spellSaveDC.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                playerCharacter.getSpellCasting().setSpellCastingDC(s.toString());
+            }
+        });
+
+        EditText spellAttackBonus = (EditText) rootView.findViewById(R.id.spellAttackBonus);
+        spellAttackBonus.setText(playerCharacter.getSpellCasting().getSpellAttackBonus());
+        spellAttackBonus.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                playerCharacter.getSpellCasting().setSpellAttackBonus(s.toString());
+            }
+        });
+
         spellSlotRecyclerView = (RecyclerView) rootView.findViewById(R.id.spellSlotsExpListView);
 
         // Spell Slots List
@@ -70,6 +88,8 @@ public class SpellsFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        // TODO: rotate arrow when expanded.
+        Log.d("onSaveInstanceState", outState.toString());
         ((SpellSlotExpandableListAdapter) spellSlotRecyclerView.getAdapter()).onSaveInstanceState(outState);
     }
 }

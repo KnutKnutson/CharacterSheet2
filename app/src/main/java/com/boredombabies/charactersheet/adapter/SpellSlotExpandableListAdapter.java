@@ -21,9 +21,11 @@ public class SpellSlotExpandableListAdapter extends
         ExpandableRecyclerAdapter<SpellSlotViewHolder, SpellViewHolder> {
 
     private LayoutInflater inflater;
+    private Context context;
 
     public SpellSlotExpandableListAdapter(Context context, List<? extends ParentListItem> itemList) {
         super(itemList);
+        this.context = context;
         inflater = LayoutInflater.from(context);
     }
 
@@ -42,12 +44,12 @@ public class SpellSlotExpandableListAdapter extends
     @Override
     public void onBindParentViewHolder(SpellSlotViewHolder parentViewHolder, int position, ParentListItem parentListItem) {
         SpellSlot spellSlot = (SpellSlot) parentListItem;
-        parentViewHolder.spellSlotLevel.setText(spellSlot.getLevel());
+        parentViewHolder.bind(spellSlot, context);
     }
 
     @Override
     public void onBindChildViewHolder(SpellViewHolder childViewHolder, int position, Object childListItem) {
         Spell spell = (Spell) childListItem;
-        childViewHolder.spellName.setText(spell.getName());
+        childViewHolder.bind(spell, context);
     }
 }

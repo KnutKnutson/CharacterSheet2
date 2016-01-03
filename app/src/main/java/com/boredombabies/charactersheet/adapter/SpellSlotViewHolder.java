@@ -2,7 +2,9 @@ package com.boredombabies.charactersheet.adapter;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.os.Build;
+import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -11,6 +13,8 @@ import android.widget.TextView;
 
 import com.bignerdranch.expandablerecyclerview.ViewHolder.ParentViewHolder;
 import com.boredombabies.charactersheet.R;
+import com.boredombabies.charactersheet.helper.EditTextTextWatcher;
+import com.boredombabies.charactersheet.model.SpellSlot;
 
 /**
  * Created on 1/2/16.
@@ -34,6 +38,26 @@ public class SpellSlotViewHolder extends ParentViewHolder {
         spellSlotLevel = (TextView) itemView.findViewById(R.id.spellSlotLevel);
         slotsTotal = (EditText) itemView.findViewById(R.id.slotsTotal);
         slotsExpended = (EditText) itemView.findViewById(R.id.slotsExpended);
+    }
+
+    public void bind(final SpellSlot spellSlot, Context context) {
+        spellSlotLevel.setText(spellSlot.getLevel());
+
+        slotsTotal.setText(spellSlot.getSlotsTotal());
+        slotsTotal.addTextChangedListener(new EditTextTextWatcher(context) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                spellSlot.setSlotsTotal(s.toString());
+            }
+        });
+
+        slotsExpended.setText(spellSlot.getSlotsExpended());
+        slotsExpended.addTextChangedListener(new EditTextTextWatcher(context) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                spellSlot.setSlotsExpended(s.toString());
+            }
+        });
     }
 
     @Override

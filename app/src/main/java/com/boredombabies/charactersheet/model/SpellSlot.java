@@ -21,7 +21,7 @@ public class SpellSlot extends RealmObject implements ParentListItem {
     @Ignore
     private List<?> childItemList;
     @Ignore
-    private boolean initiallyExpanded = true;
+    private boolean initiallyExpanded = false;
 
     public SpellSlot() {
         this(null);
@@ -30,8 +30,7 @@ public class SpellSlot extends RealmObject implements ParentListItem {
     public SpellSlot(Integer level) {
         if (level != null) {
             this.level = Integer.toString(level);
-            //SpellCastingHelper.getSpellsPerSlotLevel(level)
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < SpellCastingHelper.getSpellsPerSlotLevel(level); i++) {
                 spells.add(new Spell());
             }
         }

@@ -7,25 +7,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/spellCastingHeader"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@drawable/deep_background">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
             android:layout_weight="1">
 
             <EditText
-                style="@style/CombatStatsTopRowEditText"
+                style="@style/SpellCastingHeaderEditText"
                 android:id="@+id/spellCastingAbility"
                 android:layout_gravity="center_horizontal"/>
 
             <TextView
-                style="@style/CombatStatsTopRowLabel"
+                style="@style/SpellCastingHeaderLabel"
                 android:id="@+id/spellCastingAbilityLabel"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/label_spellcasting_ability"
-                android:layout_marginTop="-38dp"/>
+                android:text="@string/label_spellcasting_ability"/>
 
         </LinearLayout>
 
@@ -36,14 +36,13 @@
             android:layout_weight="1">
 
             <EditText
-                style="@style/CombatStatsTopRowEditText"
+                style="@style/SpellCastingHeaderEditText"
                 android:id="@+id/spellSaveDC"
                 android:layout_gravity="center_horizontal"/>
 
             <TextView
-                style="@style/CombatStatsTopRowLabel"
+                style="@style/SpellCastingHeaderLabel"
                 android:id="@+id/spellSaveDCLabel"
-                android:layout_gravity="center_horizontal"
                 android:text="@string/label_spell_save_dc"/>
 
         </LinearLayout>
@@ -55,25 +54,31 @@
             android:layout_weight="1">
 
             <EditText
-                style="@style/CombatStatsTopRowEditText"
+                style="@style/SpellCastingHeaderEditText"
                 android:id="@+id/spellAttackBonus"
                 android:layout_gravity="center_horizontal"/>
 
             <TextView
-                style="@style/CombatStatsTopRowLabel"
+                style="@style/SpellCastingHeaderLabel"
                 android:id="@+id/spellAttackBonusLabel"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/label_spell_attack_bonus"
-                android:layout_marginTop="-38dp"/>
+                android:text="@string/label_spell_attack_bonus"/>
 
         </LinearLayout>
     </LinearLayout>
+
+    <TextView
+        style="@style/BaseTextView"
+        android:id="@+id/spellsListLabel"
+        android:text="@string/label_spells_known"
+        android:layout_marginTop="@dimen/content_margin"
+        android:layout_below="@+id/spellCastingHeader"
+        android:layout_centerHorizontal="true"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/spellSlotsExpListView"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_below="@+id/spellCastingHeader"
+        android:layout_below="@+id/spellsListLabel"
         />
 
 </RelativeLayout>

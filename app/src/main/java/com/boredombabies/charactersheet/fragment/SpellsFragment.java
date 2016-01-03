@@ -17,8 +17,6 @@ import com.boredombabies.charactersheet.helper.EditTextTextWatcher;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
 
-import java.util.List;
-
 import io.realm.Realm;
 
 /**
@@ -57,20 +55,14 @@ public class SpellsFragment extends Fragment {
         spellSlotRecyclerView = (RecyclerView) rootView.findViewById(R.id.spellSlotsExpListView);
 
         // Spell Slots List
-        Log.d("SpellFrag onCreateView", Integer.toString(playerCharacter.getSpellCasting().getSpellSlots().size()));
-        Log.d("SpellFrag onCreateView", Integer.toString(
-                playerCharacter.getSpellCasting().getSpellSlots().first().getChildItemList().size()));
         SpellSlotExpandableListAdapter expandableAdapter =
                 new SpellSlotExpandableListAdapter(
                         getActivity(),
                         playerCharacter.getSpellCasting().getSpellSlots()
                 );
         expandableAdapter.onRestoreInstanceState(savedInstanceState);
-        Log.d("adapter", Integer.toString(expandableAdapter.getItemCount()));
-        //expandableAdapter.setExpandCollapseListener(getActivity());
         spellSlotRecyclerView.setAdapter(expandableAdapter);
         spellSlotRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        Log.d("recyclerview", spellSlotRecyclerView.toString());
 
         return rootView;
     }

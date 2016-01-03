@@ -24,15 +24,12 @@ public class SpellSlotExpandableListAdapter extends
 
     public SpellSlotExpandableListAdapter(Context context, List<? extends ParentListItem> itemList) {
         super(itemList);
-        Log.d("ExpandableListAdapter", "init adapter");
         inflater = LayoutInflater.from(context);
     }
 
     @Override
     public SpellSlotViewHolder onCreateParentViewHolder(ViewGroup parentViewGroup) {
-        Log.d("CreateParentViewHolder", "start parent create");
         View view = inflater.inflate(R.layout.adapter_item_spell_slot, parentViewGroup, false);
-        Log.d("CreateParentViewHolder", view.toString());
         return new SpellSlotViewHolder(view);
     }
 
@@ -45,7 +42,6 @@ public class SpellSlotExpandableListAdapter extends
     @Override
     public void onBindParentViewHolder(SpellSlotViewHolder parentViewHolder, int position, ParentListItem parentListItem) {
         SpellSlot spellSlot = (SpellSlot) parentListItem;
-        Log.d("onBindParentViewHolder", spellSlot.getLevel());
         parentViewHolder.spellSlotLevel.setText(spellSlot.getLevel());
     }
 

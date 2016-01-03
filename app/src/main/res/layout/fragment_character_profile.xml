@@ -1,9 +1,7 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/charactersheet_detail"
@@ -259,7 +257,7 @@
             style="@style/BaseTextView"
             android:id="@+id/backstoryLabel"
             android:text="@string/label_character_backstory"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/content_margin"
             android:layout_below="@+id/three_column_row_2"
             android:layout_centerHorizontal="true"/>
 

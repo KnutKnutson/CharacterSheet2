@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import com.boredombabies.charactersheet.fragment.CharacterAttributesFragment;
 import com.boredombabies.charactersheet.fragment.CharacterCombatStatsFragment;
 import com.boredombabies.charactersheet.fragment.CharacterProfileFragment;
+import com.boredombabies.charactersheet.fragment.SpellsFragment;
 
 import java.util.ArrayList;
 
@@ -65,10 +66,9 @@ public class FragmentSmartPagerAdapter extends SmartFragmentStatePagerAdapter {
                 return new CharacterCombatStatsFragment();
             case 3:
                 /**
-                 * Equipment
-                 * equipment, treasure
+                 * Spells
                  */
-                return new CharacterProfileFragment();
+                return new SpellsFragment();
             case 4:
                 /**
                  * Features
@@ -77,14 +77,15 @@ public class FragmentSmartPagerAdapter extends SmartFragmentStatePagerAdapter {
                 return new CharacterProfileFragment();
             case 5:
                 /**
-                 * Backstory
-                 * appearance, backstory
-                 * (can add picture here)
+                 * Equipment
+                 * equipment, treasure
                  */
                 return new CharacterProfileFragment();
             case 6:
                 /**
-                 * Spells
+                 * Backstory
+                 * appearance, backstory
+                 * (can add picture here)
                  */
                 return new CharacterProfileFragment();
             case 7:

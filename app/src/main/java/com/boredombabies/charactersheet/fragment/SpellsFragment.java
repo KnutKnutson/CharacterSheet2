@@ -1,13 +1,17 @@
 package com.boredombabies.charactersheet.fragment;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.boredombabies.charactersheet.R;
+import com.boredombabies.charactersheet.adapter.SpellSlotExpandableListAdapter;
 import com.boredombabies.charactersheet.helper.EditTextTextWatcher;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
@@ -20,6 +24,7 @@ import io.realm.Realm;
 public class SpellsFragment extends android.support.v4.app.Fragment {
     Realm realm;
     PlayerCharacter playerCharacter;
+    RecyclerView spellSlotRecyclerView;
 
     public SpellsFragment() { }
 
@@ -34,18 +39,37 @@ public class SpellsFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_equipment, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_spells, container, false);
 
         // Top Row
-        EditText armorClass = (EditText) rootView.findViewById(R.id.armorClass);
-        armorClass.setText(playerCharacter.getCombatStats().getArmorClass());
-        armorClass.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+        EditText spellCastingAbility = (EditText) rootView.findViewById(R.id.spellCastingAbility);
+        spellCastingAbility.setText(playerCharacter.getSpellCasting().getSpellCastingAbility());
+        spellCastingAbility.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
             @Override
             public void inTransactionCallback(Editable s) {
-                playerCharacter.getCombatStats().setArmorClass(s.toString());
+                playerCharacter.getSpellCasting().setSpellCastingAbility(s.toString());
             }
         });
 
+        // Spell Slots List
+        Log.d("SpellFrag onCreateView", Integer.toString(playerCharacter.getSpellCasting().getSpellSlots().size()));
+        SpellSlotExpandableListAdapter expandableAdapter =
+                new SpellSlotExpandableListAdapter(
+                        getActivity(),
+                        playerCharacter.getSpellCasting().getSpellSlots()
+                );
+        expandableAdapter.onRestoreInstanceState(savedInstanceState);
+
+        spellSlotRecyclerView = (RecyclerView) rootView.findViewById(R.id.spellSlotsExpListView);
+        spellSlotRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        spellSlotRecyclerView.setAdapter(expandableAdapter);
+
         return rootView;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        ((SpellSlotExpandableListAdapter) spellSlotRecyclerView.getAdapter()).onSaveInstanceState(outState);
     }
 }

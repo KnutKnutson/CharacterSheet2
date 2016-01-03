@@ -1,7 +1,10 @@
 package com.boredombabies.charactersheet.model;
 
+import java.util.List;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.Ignore;
 
 /**
  * Created by mark.knutson on 1/2/16.
@@ -36,11 +39,9 @@ public class SpellCasting extends RealmObject {
     public void setSpellAttackBonus(String spellAttackBonus) {
         this.spellAttackBonus = spellAttackBonus;
     }
-
     public RealmList<SpellSlot> getSpellSlots() {
         return spellSlots;
     }
-
     public void setSpellSlots(RealmList<SpellSlot> spellSlots) {
         this.spellSlots = spellSlots;
     }

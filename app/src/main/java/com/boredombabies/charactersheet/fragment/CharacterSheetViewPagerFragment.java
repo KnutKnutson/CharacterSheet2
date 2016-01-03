@@ -44,21 +44,21 @@ public class CharacterSheetViewPagerFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("onCreate", "IN onCreate");
+//        Log.d("onCreate", "IN onCreate");
 
         if (savedInstanceState != null) {
-            Log.d("VIEWPAGERFRAGMENT", "SAVEDSTATE");
-            for (String key : savedInstanceState.keySet()) {
-                Object value = savedInstanceState.get(key);
-                Log.d("SAVEDSTATE", String.format("%s %s (%s)", key,
-                        value.toString(), value.getClass().getName()));
-            }
+//            Log.d("VIEWPAGERFRAGMENT", "SAVEDSTATE");
+//            for (String key : savedInstanceState.keySet()) {
+//                Object value = savedInstanceState.get(key);
+//                Log.d("SAVEDSTATE", String.format("%s %s (%s)", key,
+//                        value.toString(), value.getClass().getName()));
+//            }
         }
         if (getArguments() != null) {
             viewPagerPreferencesNumber = getArguments().getInt(Constants.VIEW_PAGER_PREF_NUMBER);
             preferencesKey = viewPagerActivePageKey();
-            Log.e("On Create Pref Number:", Integer.toString(viewPagerPreferencesNumber));
-            Log.e("On Create Pref Key:", preferencesKey);
+//            Log.e("On Create Pref Number:", Integer.toString(viewPagerPreferencesNumber));
+//            Log.e("On Create Pref Key:", preferencesKey);
         }
         viewPagerAdapter = new FragmentSmartPagerAdapter(getChildFragmentManager());
     }
@@ -66,7 +66,7 @@ public class CharacterSheetViewPagerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d("onCreateView", "IN onCreateView");
+//        Log.d("onCreateView", "IN onCreateView");
         View viewPager = inflater.inflate(R.layout.fragment_character_sheet_view_pager, container, false);
 
         return(viewPager);
@@ -74,23 +74,23 @@ public class CharacterSheetViewPagerFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        Log.d("onViewCreated", "IN onViewCreated");
+//        Log.d("onViewCreated", "IN onViewCreated");
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.addOnPageChangeListener(getOnPageChangeListener());
-        Log.e("onViewCreated", "Preference Number: " + Integer.toString(viewPagerPreferencesNumber));
+//        Log.e("onViewCreated", "Preference Number: " + Integer.toString(viewPagerPreferencesNumber));
         int pageNumber = getActiveFragmentPage();
-        Log.e("onViewCreated", "Page Number: " + Integer.toString(pageNumber));
+//        Log.e("onViewCreated", "Page Number: " + Integer.toString(pageNumber));
         viewPager.setCurrentItem(pageNumber);
     }
 
     private void saveActiveFragmentPage(int activeFragment) {
-        Log.e("saveActiveFragmentPage", "Active fragment #: " + Integer.toString(activeFragment));
-        Log.e("saveActiveFragmentPage", "View Pager Pref Number: " + Integer.toString(viewPagerPreferencesNumber));
-        Log.e("saveActiveFragmentPage", "Preference Key: " + preferencesKey);
+//        Log.e("saveActiveFragmentPage", "Active fragment #: " + Integer.toString(activeFragment));
+//        Log.e("saveActiveFragmentPage", "View Pager Pref Number: " + Integer.toString(viewPagerPreferencesNumber));
+//        Log.e("saveActiveFragmentPage", "Preference Key: " + preferencesKey);
         Context context = getActivity();
         SharedPreferences sharedPref = context.getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
-        printPreferences(sharedPref);
+//        printPreferences(sharedPref);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt(preferencesKey, activeFragment);
         editor.apply();
@@ -100,9 +100,9 @@ public class CharacterSheetViewPagerFragment extends Fragment {
         Context context = getActivity();
         SharedPreferences sharedPref = context.getSharedPreferences(
                 Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
-        printPreferences(sharedPref);
+//        printPreferences(sharedPref);
         int number = sharedPref.getInt(preferencesKey, viewPagerPreferencesNumber - 1);
-        Log.e("getActiveFragmentPage", "Returning Page Number: " + Integer.toString(number));
+//        Log.e("getActiveFragmentPage", "Returning Page Number: " + Integer.toString(number));
         return number;
     }
 

@@ -1,5 +1,6 @@
 package com.boredombabies.charactersheet.adapter;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -16,5 +17,6 @@ public class SpellSlotViewHolder extends ParentViewHolder {
         super(itemView);
 
         spellSlotLevel = (TextView) itemView.findViewById(R.id.spellSlotLevel);
+        Log.d("SpellSlotViewHolder", spellSlotLevel.toString());
     }
 }

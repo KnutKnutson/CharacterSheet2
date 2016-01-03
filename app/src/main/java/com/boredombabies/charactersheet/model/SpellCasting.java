@@ -16,7 +16,7 @@ public class SpellCasting extends RealmObject {
     private RealmList<SpellSlot> spellSlots = new RealmList<>();
 
     public SpellCasting() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 2; i++) {
             spellSlots.add(new SpellSlot(i));
         }
     }

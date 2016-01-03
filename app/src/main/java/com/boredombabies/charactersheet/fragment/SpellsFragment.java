@@ -3,6 +3,7 @@ package com.boredombabies.charactersheet.fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,12 +17,14 @@ import com.boredombabies.charactersheet.helper.EditTextTextWatcher;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
 
+import java.util.List;
+
 import io.realm.Realm;
 
 /**
  * Created by mark.knutson on 1/1/16.
  */
-public class SpellsFragment extends android.support.v4.app.Fragment {
+public class SpellsFragment extends Fragment {
     Realm realm;
     PlayerCharacter playerCharacter;
     RecyclerView spellSlotRecyclerView;
@@ -51,18 +54,23 @@ public class SpellsFragment extends android.support.v4.app.Fragment {
             }
         });
 
+        spellSlotRecyclerView = (RecyclerView) rootView.findViewById(R.id.spellSlotsExpListView);
+
         // Spell Slots List
         Log.d("SpellFrag onCreateView", Integer.toString(playerCharacter.getSpellCasting().getSpellSlots().size()));
+        Log.d("SpellFrag onCreateView", Integer.toString(
+                playerCharacter.getSpellCasting().getSpellSlots().first().getChildItemList().size()));
         SpellSlotExpandableListAdapter expandableAdapter =
                 new SpellSlotExpandableListAdapter(
                         getActivity(),
                         playerCharacter.getSpellCasting().getSpellSlots()
                 );
         expandableAdapter.onRestoreInstanceState(savedInstanceState);
-
-        spellSlotRecyclerView = (RecyclerView) rootView.findViewById(R.id.spellSlotsExpListView);
-        spellSlotRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        Log.d("adapter", Integer.toString(expandableAdapter.getItemCount()));
+        //expandableAdapter.setExpandCollapseListener(getActivity());
         spellSlotRecyclerView.setAdapter(expandableAdapter);
+        spellSlotRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        Log.d("recyclerview", spellSlotRecyclerView.toString());
 
         return rootView;
     }

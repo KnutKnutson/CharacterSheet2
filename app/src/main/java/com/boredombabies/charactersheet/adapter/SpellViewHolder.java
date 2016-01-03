@@ -12,8 +12,8 @@ import com.boredombabies.charactersheet.R;
 public class SpellViewHolder extends ChildViewHolder {
     TextView spellName;
 
-    public SpellViewHolder(View view) {
-        super(view);
+    public SpellViewHolder(View itemView) {
+        super(itemView);
 
         spellName = (TextView) itemView.findViewById(R.id.spellName);
     }

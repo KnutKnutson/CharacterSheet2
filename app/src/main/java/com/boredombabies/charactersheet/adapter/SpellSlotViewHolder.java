@@ -30,6 +30,8 @@ public class SpellSlotViewHolder extends ParentViewHolder {
     public TextView spellSlotLevel;
     public EditText slotsTotal;
     public EditText slotsExpended;
+    EditTextTextWatcher totalWatcher;
+    EditTextTextWatcher expendedWatcher;
 
     public SpellSlotViewHolder(View itemView) {
         super(itemView);
@@ -37,27 +39,33 @@ public class SpellSlotViewHolder extends ParentViewHolder {
         spellSlotTriangle = (ImageView) itemView.findViewById(R.id.spellSlotTriangle);
         spellSlotLevel = (TextView) itemView.findViewById(R.id.spellSlotLevel);
         slotsTotal = (EditText) itemView.findViewById(R.id.slotsTotal);
+        slotsTotal.setId(View.generateViewId());
         slotsExpended = (EditText) itemView.findViewById(R.id.slotsExpended);
+        slotsExpended.setId(View.generateViewId());
     }
 
     public void bind(final SpellSlot spellSlot, Context context) {
         spellSlotLevel.setText(spellSlot.getLevel());
 
+        slotsTotal.removeTextChangedListener(totalWatcher);
         slotsTotal.setText(spellSlot.getSlotsTotal());
-        slotsTotal.addTextChangedListener(new EditTextTextWatcher(context) {
+        totalWatcher = new EditTextTextWatcher(context) {
             @Override
             public void inTransactionCallback(Editable s) {
                 spellSlot.setSlotsTotal(s.toString());
             }
-        });
+        };
+        slotsTotal.addTextChangedListener(totalWatcher);
 
+        slotsExpended.removeTextChangedListener(expendedWatcher);
         slotsExpended.setText(spellSlot.getSlotsExpended());
-        slotsExpended.addTextChangedListener(new EditTextTextWatcher(context) {
+        expendedWatcher = new EditTextTextWatcher(context) {
             @Override
             public void inTransactionCallback(Editable s) {
                 spellSlot.setSlotsExpended(s.toString());
             }
-        });
+        };
+        slotsExpended.addTextChangedListener(expendedWatcher);
     }
 
     @Override

@@ -88,7 +88,6 @@ public class SpellsFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        // TODO: rotate arrow when expanded.
         Log.d("onSaveInstanceState", outState.toString());
         ((SpellSlotExpandableListAdapter) spellSlotRecyclerView.getAdapter()).onSaveInstanceState(outState);
     }

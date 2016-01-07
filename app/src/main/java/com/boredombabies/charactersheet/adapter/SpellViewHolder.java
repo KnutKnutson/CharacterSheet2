@@ -2,6 +2,7 @@ package com.boredombabies.charactersheet.adapter;
 
 import android.content.Context;
 import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -21,24 +22,29 @@ public class SpellViewHolder extends ChildViewHolder {
 
     CheckBox spellPrepared;
     TextView spellName;
+    EditTextTextWatcher textWatcher;
 
     public SpellViewHolder(View itemView) {
         super(itemView);
 
         spellPrepared = (CheckBox) itemView.findViewById(R.id.spellPrepared);
+        spellPrepared.setId(View.generateViewId());
         spellName = (TextView) itemView.findViewById(R.id.spellName);
+        spellName.setId(View.generateViewId());
     }
 
     public void bind(final Spell spell, final Context context) {
-        // TODO: get this working
+        spellName.removeTextChangedListener(textWatcher);
         spellName.setText(spell.getName());
-        spellName.addTextChangedListener(new EditTextTextWatcher(context) {
+        textWatcher = new EditTextTextWatcher(context) {
             @Override
             public void inTransactionCallback(Editable s) {
                 spell.setName(s.toString());
             }
-        });
+        };
+        spellName.addTextChangedListener(textWatcher);
 
+        spellPrepared.setOnCheckedChangeListener(null);
         spellPrepared.setChecked(spell.isPrepared());
         spellPrepared.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

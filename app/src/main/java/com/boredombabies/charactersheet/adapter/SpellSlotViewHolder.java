@@ -1,6 +1,7 @@
 package com.boredombabies.charactersheet.adapter;
 
 import android.animation.AnimatorSet;
+import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.os.Build;

@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * Created by mark.knutson on 4/9/15.
  */
 public class FragmentSmartPagerAdapter extends SmartFragmentStatePagerAdapter {
-    private static int NUM_FRAGMENTS = 8;
+    private static int NUM_FRAGMENTS = 7;
 //    public static ArrayList<Integer> activeFragments;
 //    static {
 //        activeFragments = new ArrayList<>();
@@ -48,6 +48,9 @@ public class FragmentSmartPagerAdapter extends SmartFragmentStatePagerAdapter {
     private Fragment getFragment(int position) {
         switch (position) {
             case 0:
+                /**
+                 * profile, backstory, picture?
+                 */
                 return new CharacterProfileFragment();
             case 1:
                 /**
@@ -82,13 +85,6 @@ public class FragmentSmartPagerAdapter extends SmartFragmentStatePagerAdapter {
                  */
                 return new CharacterProfileFragment();
             case 6:
-                /**
-                 * Backstory
-                 * appearance, backstory
-                 * (can add picture here)
-                 */
-                return new CharacterProfileFragment();
-            case 7:
                 /**
                  * Allies & Organizations
                  * (links to other characters?)

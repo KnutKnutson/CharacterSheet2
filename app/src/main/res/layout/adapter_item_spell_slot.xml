@@ -2,29 +2,31 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/list_header_height"
     android:layout_marginTop="@dimen/content_margin"
     android:orientation="horizontal">
 
     <FrameLayout
-        android:layout_width="62dp"
-        android:layout_height="62dp">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/spellSlotTriangle"
-            android:elevation="4dp"
-            android:background="@drawable/spell_slot_triangle"/>
+        android:layout_width="@dimen/list_header_height"
+        android:layout_height="@dimen/list_header_height">
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/spellSlotLevel"
             android:textColor="@color/primary_text"
+            android:textSize="@dimen/font_size_title"
             android:gravity="center_vertical"
-            android:elevation="5dp"
+            android:text="9"
             android:translationX="10px"
             />
+
+        <ImageView
+            android:layout_width="@dimen/list_header_height"
+            android:layout_height="@dimen/list_header_height"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/spellSlotTriangle"
+            android:elevation="4dp"
+            android:background="@drawable/ic_chevron_right_24dp"/>
     </FrameLayout>
 
     <EditText

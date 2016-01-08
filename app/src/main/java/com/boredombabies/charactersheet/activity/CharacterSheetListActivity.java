@@ -91,13 +91,13 @@ public class CharacterSheetListActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final PlayerCharacter newPlayerCharacter = PlayerCharacterHelper.newPlayerCharacter(realm);
+                final PlayerCharacter newPlayerCharacter = PlayerCharacterHelper.newCharacter(realm);
                 refreshListAdapter();
                 Snackbar.make(view, "Undo New Character", Snackbar.LENGTH_LONG)
                         .setAction("Undo", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                PlayerCharacterHelper.deletePlayerCharacter(realm, newPlayerCharacter);
+                                PlayerCharacterHelper.killCharacter(realm, newPlayerCharacter);
                                 refreshListAdapter();
                             }
                         }).show();

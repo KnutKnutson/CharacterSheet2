@@ -1,6 +1,6 @@
 package com.boredombabies.charactersheet.helper;
 
-import android.content.Context;
+import android.util.Log;
 
 import com.boredombabies.charactersheet.interfaces.DaggerPlayerCharacterInterface;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
@@ -17,7 +17,7 @@ public class PlayerCharacterHelper {
     private static RealmResults<PlayerCharacter> characters;
     private static PlayerCharacter activeCharacter;
 
-    public static PlayerCharacter newPlayerCharacter(Realm realm) {
+    public static PlayerCharacter newCharacter(Realm realm) {
         PlayerCharacter newCharacter =
                 DaggerPlayerCharacterInterface.builder()
                 .playerCharacterModule(new PlayerCharacterModule())
@@ -32,19 +32,34 @@ public class PlayerCharacterHelper {
         return getActiveCharacter();
     }
 
-    public static void deletePlayerCharacter(Realm realm, PlayerCharacter honoredDead) {
+    public static void killCharacter(Realm realm, PlayerCharacter honoredDead) {
         realm.beginTransaction();
-        honoredDead.removeFromRealm(); // I used realm just for this line.
+        honoredDead.removeFromRealm();
         realm.commitTransaction();
+        //characters = null;
     }
 
-    public static RealmResults<PlayerCharacter> getCharacters(Realm realm) {
+    public static PlayerCharacter resurrectCharacter(Realm realm, PlayerCharacter fortunateSoul) {
+        Log.d("Resurrect", fortunateSoul.getName());
+        realm.beginTransaction();
+        PlayerCharacter resurrected = realm.copyToRealm( fortunateSoul );
+        realm.commitTransaction();
+        Log.d("Resurrect", resurrected.getName());
+        //characters = null;
+        return resurrected;
+    }
+
+    public static RealmResults<PlayerCharacter> assembleParty(Realm realm) {
         if (characters == null) {
             characters = realm.allObjects( PlayerCharacter.class );
             // Ideally this would sort by last updated, but that's not currently tracked.
             characters.sort("name");
         }
         return characters;
+    }
+
+    public static PlayerCharacter getCharacter(Realm realm, int partyMember) {
+        return assembleParty(realm).get(partyMember);
     }
 
     public static PlayerCharacter getActiveCharacter() {

@@ -35,14 +35,14 @@ public class EquipmentFragment extends android.support.v4.app.Fragment {
         View rootView = inflater.inflate(R.layout.fragment_equipment, container, false);
 
         // Top Row
-        EditText armorClass = (EditText) rootView.findViewById(R.id.armorClass);
-        armorClass.setText(playerCharacter.getCombatStats().getArmorClass());
-        armorClass.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
-            @Override
-            public void inTransactionCallback(Editable s) {
-                playerCharacter.getCombatStats().setArmorClass(s.toString());
-            }
-        });
+//        EditText armorClass = (EditText) rootView.findViewById(R.id.cpLabel);
+//        armorClass.setText(playerCharacter.getCombatStats().getArmorClass());
+//        armorClass.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+//            @Override
+//            public void inTransactionCallback(Editable s) {
+//                playerCharacter.getCombatStats().setArmorClass(s.toString());
+//            }
+//        });
 
         return rootView;
     }

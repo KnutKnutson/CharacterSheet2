@@ -34,15 +34,46 @@ public class FeaturesFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_equipment, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_features, container, false);
 
-        // Top Row
-        EditText armorClass = (EditText) rootView.findViewById(R.id.armorClass);
-        armorClass.setText(playerCharacter.getCombatStats().getArmorClass());
-        armorClass.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+        EditText personalityTraits = (EditText) rootView.findViewById(R.id.personalityTraits);
+        personalityTraits.setText(playerCharacter.getFeatures().getPersonalityTraits());
+        personalityTraits.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
             @Override
             public void inTransactionCallback(Editable s) {
-                playerCharacter.getCombatStats().setArmorClass(s.toString());
+                playerCharacter.getFeatures().setPersonalityTraits(s.toString());
+            }
+        });
+        EditText ideals = (EditText) rootView.findViewById(R.id.ideals);
+        ideals.setText(playerCharacter.getFeatures().getIdeals());
+        ideals.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                playerCharacter.getFeatures().setIdeals(s.toString());
+            }
+        });
+        EditText bonds = (EditText) rootView.findViewById(R.id.bonds);
+        bonds.setText(playerCharacter.getFeatures().getBonds());
+        bonds.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                playerCharacter.getFeatures().setBonds(s.toString());
+            }
+        });
+        EditText flaws = (EditText) rootView.findViewById(R.id.flaws);
+        flaws.setText(playerCharacter.getFeatures().getFlaws());
+        flaws.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                playerCharacter.getFeatures().setFlaws(s.toString());
+            }
+        });
+        EditText features = (EditText) rootView.findViewById(R.id.features);
+        features.setText(playerCharacter.getFeatures().getFeatures());
+        features.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                playerCharacter.getFeatures().setFeatures(s.toString());
             }
         });
 

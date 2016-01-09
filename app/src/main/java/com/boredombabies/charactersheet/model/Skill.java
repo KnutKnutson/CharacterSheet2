@@ -8,6 +8,7 @@ import io.realm.RealmObject;
  */
 public class Skill extends RealmObject {
     private boolean trained = false;
+    // TODO: autocalculate skillbonus
     private String skillBonus = "0";
     private String skillName;
     private String skillAbilityModifier;

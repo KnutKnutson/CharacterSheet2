@@ -3,9 +3,12 @@ package com.boredombabies.charactersheet.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
+import com.boredombabies.charactersheet.fragment.AlliesFragment;
 import com.boredombabies.charactersheet.fragment.CharacterAttributesFragment;
 import com.boredombabies.charactersheet.fragment.CharacterCombatStatsFragment;
 import com.boredombabies.charactersheet.fragment.CharacterProfileFragment;
+import com.boredombabies.charactersheet.fragment.EquipmentFragment;
+import com.boredombabies.charactersheet.fragment.FeaturesFragment;
 import com.boredombabies.charactersheet.fragment.SpellsFragment;
 
 import java.util.ArrayList;
@@ -77,19 +80,19 @@ public class FragmentSmartPagerAdapter extends SmartFragmentStatePagerAdapter {
                  * Features
                  * personality traits, ideals, bonds, flaws, features & traits
                  */
-                return new CharacterProfileFragment();
+                return new FeaturesFragment();
             case 5:
                 /**
                  * Equipment
                  * equipment, treasure
                  */
-                return new CharacterProfileFragment();
+                return new EquipmentFragment();
             case 6:
                 /**
                  * Allies & Organizations
                  * (links to other characters?)
                  */
-                return new CharacterProfileFragment();
+                return new AlliesFragment();
             default:
                 return null;
         }

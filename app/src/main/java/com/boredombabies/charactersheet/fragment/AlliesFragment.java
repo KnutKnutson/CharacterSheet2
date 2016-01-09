@@ -34,17 +34,17 @@ public class AlliesFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_equipment, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_allies, container, false);
 
         // Top Row
-        EditText armorClass = (EditText) rootView.findViewById(R.id.armorClass);
-        armorClass.setText(playerCharacter.getCombatStats().getArmorClass());
-        armorClass.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
-            @Override
-            public void inTransactionCallback(Editable s) {
-                playerCharacter.getCombatStats().setArmorClass(s.toString());
-            }
-        });
+//        EditText armorClass = (EditText) rootView.findViewById(R.id.armorClass);
+//        armorClass.setText(playerCharacter.getCombatStats().getArmorClass());
+//        armorClass.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+//            @Override
+//            public void inTransactionCallback(Editable s) {
+//                playerCharacter.getCombatStats().setArmorClass(s.toString());
+//            }
+//        });
 
         return rootView;
     }

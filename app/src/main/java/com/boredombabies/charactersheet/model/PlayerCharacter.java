@@ -18,6 +18,9 @@ public class PlayerCharacter extends RealmObject {
     private Attributes attributes;
     private CombatStats combatStats;
     private SpellCasting spellCasting;
+    private Features features;
+    private Equipment equipment;
+    private Allies allies;
 
     public PlayerCharacter() {}
 
@@ -28,13 +31,19 @@ public class PlayerCharacter extends RealmObject {
                            Profile profile,
                            Attributes attributes,
                            CombatStats combatStats,
-                           SpellCasting spellCasting
+                           SpellCasting spellCasting,
+                           Features features,
+                           Equipment equipment,
+                           Allies allies
                           ) {
         this.id = UUID.randomUUID().toString();
         this.profile = profile;
         this.attributes = attributes;
         this.combatStats = combatStats;
         this.spellCasting = spellCasting;
+        this.features = features;
+        this.equipment = equipment;
+        this.allies = allies;
     }
 
     public String getId() {
@@ -84,5 +93,29 @@ public class PlayerCharacter extends RealmObject {
     }
     public void setSpellCasting(SpellCasting spellCasting) {
         this.spellCasting = spellCasting;
+    }
+
+    public Features getFeatures() {
+        return features;
+    }
+
+    public void setFeatures(Features features) {
+        this.features = features;
+    }
+
+    public Equipment getEquipment() {
+        return equipment;
+    }
+
+    public void setEquipment(Equipment equipment) {
+        this.equipment = equipment;
+    }
+
+    public Allies getAllies() {
+        return allies;
+    }
+
+    public void setAllies(Allies allies) {
+        this.allies = allies;
     }
 }

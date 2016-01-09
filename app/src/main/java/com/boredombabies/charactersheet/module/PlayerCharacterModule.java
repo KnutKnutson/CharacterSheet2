@@ -1,7 +1,10 @@
 package com.boredombabies.charactersheet.module;
 
+import com.boredombabies.charactersheet.model.Allies;
 import com.boredombabies.charactersheet.model.Attributes;
 import com.boredombabies.charactersheet.model.CombatStats;
+import com.boredombabies.charactersheet.model.Equipment;
+import com.boredombabies.charactersheet.model.Features;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
 import com.boredombabies.charactersheet.model.Profile;
 import com.boredombabies.charactersheet.model.SpellCasting;
@@ -22,7 +25,10 @@ public class PlayerCharacterModule {
             new Profile(),
             new Attributes(),
             new CombatStats(),
-            new SpellCasting()
+            new SpellCasting(),
+            new Features(),
+            new Equipment(),
+            new Allies()
         );
     }
 
@@ -41,4 +47,13 @@ public class PlayerCharacterModule {
 
     @Provides
     SpellCasting provideSpellCasting() { return new SpellCasting(); }
+
+    @Provides
+    Features provideFeatures() { return new Features(); }
+
+    @Provides
+    Equipment provideEquipment() { return new Equipment(); }
+
+    @Provides
+    Allies provideAllies() { return new Allies(); }
 }

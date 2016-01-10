@@ -2,5 +2,25 @@
     <!-- Example customization of dimensions originally defined in res/values/dimens.xml
          (such as screen margins) for screens with more than 820dp of available width. This
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively). -->
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="app_bar_height">200dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">64dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
+    <dimen name="content_margin">8dp</dimen>
+    <dimen name="list_row_height">64dp</dimen>
+    <dimen name="list_header_height">64dp</dimen>
+
+    <dimen name="font_size_display4">112sp</dimen>
+    <dimen name="font_size_display3">56sp</dimen>
+    <dimen name="font_size_display2">45sp</dimen>
+    <dimen name="font_size_display1">34sp</dimen>
+    <dimen name="font_size_headline">24sp</dimen>
+    <dimen name="font_size_title">20sp</dimen>
+    <dimen name="font_size_subheading">16sp</dimen>
+    <dimen name="font_size_body2">14sp</dimen>
+    <dimen name="font_size_body1">14sp</dimen>
+    <dimen name="font_size_caption">12sp</dimen>
+    <dimen name="font_size_button">14sp</dimen>
 </resources>

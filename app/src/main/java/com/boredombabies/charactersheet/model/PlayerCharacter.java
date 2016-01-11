@@ -1,5 +1,7 @@
 package com.boredombabies.charactersheet.model;
 
+import com.boredombabies.charactersheet.R;
+
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -14,6 +16,8 @@ public class PlayerCharacter extends RealmObject {
     private String name = "New Character";
     private String characterRace = "";
     private String characterClass = "";
+    private int headerImage = R.drawable.barbarian_small;
+
     private Profile profile;
     private Attributes attributes;
     private CombatStats combatStats;
@@ -58,6 +62,15 @@ public class PlayerCharacter extends RealmObject {
     public void setName(String name) {
         this.name = name;
     }
+
+    public int getHeaderImage() {
+        return headerImage;
+    }
+
+    public void setHeaderImage(int headerImage) {
+        this.headerImage = headerImage;
+    }
+
     public Profile getProfile() {
         return profile;
     }

@@ -77,15 +77,15 @@ public class CharacterSheetListActivity extends AppCompatActivity
             // activity should be in two-pane mode.
             mTwoPane = true;
 
-            ImageView splash = (ImageView) findViewById(R.id.main_splash);
-            Picasso.with(this).load(R.drawable.main).into(splash);
-
             // In two-pane mode, list items should be given the
             // 'activated' state when touched.
             ((CharacterSheetListFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.charactersheet_list))
                     .setActivateOnItemClick(true);
         }
+
+        ImageView splash = (ImageView) findViewById(R.id.main_splash);
+        Picasso.with(this).load((mTwoPane ? R.drawable.main : R.drawable.main_small)).into(splash);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -113,25 +113,6 @@ public class CharacterSheetListActivity extends AppCompatActivity
      */
     @Override
     public void onItemSelected(String id) {
-//        if (mTwoPane) {
-//            // In two-pane mode, show the detail view in this activity by
-//            // adding or replacing the detail fragment using a
-//            // fragment transaction.
-//            Bundle arguments = new Bundle();
-//            arguments.putString(CharacterProfileFragment.ARG_ITEM_ID, id);
-//            CharacterProfileFragment fragment = new CharacterProfileFragment();
-//            fragment.setArguments(arguments);
-//            getSupportFragmentManager().beginTransaction()
-//                    .replace(R.id.charactersheet_detail_container, fragment)
-//                    .commit();
-//
-//        } else {
-//            // In single-pane mode, simply start the detail activity
-//            // for the selected item ID.
-//            Intent detailIntent = new Intent(this, CharacterProfileActivity.class);
-//            detailIntent.putExtra(CharacterProfileFragment.ARG_ITEM_ID, id);
-//            startActivity(detailIntent);
-//        }
         Intent detailIntent = new Intent(this, CharacterSheetViewPagerActivity.class);
         startActivity(detailIntent);
     }

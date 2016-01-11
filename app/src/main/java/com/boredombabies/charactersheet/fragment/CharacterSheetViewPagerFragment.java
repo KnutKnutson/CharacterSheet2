@@ -32,7 +32,6 @@ public class CharacterSheetViewPagerFragment extends Fragment {
 
     public static CharacterSheetViewPagerFragment newInstance(int viewPagerPreferenceNumber) {
         CharacterSheetViewPagerFragment fragment = new CharacterSheetViewPagerFragment();
-        Log.d("newInstance", "IN newInstance");
         Bundle args = new Bundle();
         args.putInt(Constants.VIEW_PAGER_PREF_NUMBER, viewPagerPreferenceNumber);
         fragment.setArguments(args);

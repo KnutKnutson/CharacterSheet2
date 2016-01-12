@@ -111,7 +111,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/hitPointMaxLabel"
                     android:id="@+id/currentHitPoints"
-                    android:minLines="4"/>
+                    android:minLines="2"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -133,7 +133,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/temporaryHitPoints"
-                    android:minLines="4"/>
+                    android:minLines="2"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -183,7 +183,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/hitDieTotalLabel"
                     android:id="@+id/hitDiceValue"
-                    android:minLines="4"/>
+                    android:minLines="1"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -211,7 +211,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignBottom="@+id/success0"
                     android:layout_marginBottom="8dp"
-                    android:layout_marginStart="4dp"
+                    android:layout_marginStart="2dp"
                     android:id="@+id/success_label"/>
                 <CheckBox
                     android:layout_width="wrap_content"
@@ -235,7 +235,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignBottom="@+id/failure0"
                     android:layout_marginBottom="8dp"
-                    android:layout_marginStart="4dp"
+                    android:layout_marginStart="2dp"
                     android:id="@+id/failure_label"/>
                 <CheckBox
                     android:layout_width="wrap_content"

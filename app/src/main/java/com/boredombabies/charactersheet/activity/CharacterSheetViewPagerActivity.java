@@ -37,7 +37,7 @@ public class CharacterSheetViewPagerActivity extends AppCompatActivity
 
         PlayerCharacter character = PlayerCharacterHelper.getActiveCharacter();
         setHeaderText(character.getName());
-        int headerImage = Formulas.getClassImage(character.getCharacterClass());
+        int headerImage = character.getHeaderImage();
         setHeaderImage((headerImage == 0 ? R.drawable.barbarian_small : headerImage));
 
         if (findViewById(getFragmentId(2)) != null) {

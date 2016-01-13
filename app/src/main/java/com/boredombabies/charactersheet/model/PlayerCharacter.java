@@ -16,6 +16,7 @@ public class PlayerCharacter extends RealmObject {
     private String name = "New Character";
     private String characterRace = "";
     private String characterClass = "";
+    private boolean deleted = false;
     private int headerImage = R.drawable.barbarian_small;
 
     private Profile profile;
@@ -89,6 +90,15 @@ public class PlayerCharacter extends RealmObject {
     public void setCharacterClass(String characterClass) {
         this.characterClass = characterClass;
     }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
     public Attributes getAttributes() {
         return attributes;
     }

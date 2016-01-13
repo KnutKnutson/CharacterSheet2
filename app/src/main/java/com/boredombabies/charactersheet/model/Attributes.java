@@ -17,19 +17,6 @@ public class Attributes extends RealmObject {
     private RealmList<Skill> savingThrows = new RealmList<>();
     private RealmList<Skill> skills = new RealmList<>();
 
-    @Ignore
-    private AbilityScore strAbilityScore;
-    @Ignore
-    private AbilityScore dexAbilityScore;
-    @Ignore
-    private AbilityScore conAbilityScore;
-    @Ignore
-    private AbilityScore intAbilityScore;
-    @Ignore
-    private AbilityScore wisAbilityScore;
-    @Ignore
-    private AbilityScore chaAbilityScore;
-
     public Attributes() {
         for (Constants.ABILITY_SCORE abilityScore : Constants.ABILITY_SCORE.values()) {
             abilityScores.add(new AbilityScore(abilityScore.modifier()));
@@ -40,55 +27,6 @@ public class Attributes extends RealmObject {
         for (Constants.BASE_SKILL baseSkill : Constants.BASE_SKILL.values()) {
             skills.add(new Skill(baseSkill.skillName(), baseSkill.skillModifierShort()));
         }
-    }
-
-    public AbilityScore getStrAbilityScore() {
-        for (AbilityScore as : abilityScores) {
-            if (as.getName().equals(Constants.ABILITY_SCORE.ABILITY_SCORE_STRENGTH)) {
-                return as;
-            }
-        }
-        return null;
-    }
-    public AbilityScore getDexAbilityScore() {
-        for (AbilityScore as : abilityScores) {
-            if (as.getName().equals(Constants.ABILITY_SCORE.ABILITY_SCORE_DEXTERITY)) {
-                return as;
-            }
-        }
-        return null;
-    }
-    public AbilityScore getConAbilityScore() {
-        for (AbilityScore as : abilityScores) {
-            if (as.getName().equals(Constants.ABILITY_SCORE.ABILITY_SCORE_CONSTITUTION)) {
-                return as;
-            }
-        }
-        return null;
-    }
-    public AbilityScore getIntAbilityScore() {
-        for (AbilityScore as : abilityScores) {
-            if (as.getName().equals(Constants.ABILITY_SCORE.ABILITY_SCORE_INTELLIGENCE)) {
-                return as;
-            }
-        }
-        return null;
-    }
-    public AbilityScore getWisAbilityScore() {
-        for (AbilityScore as : abilityScores) {
-            if (as.getName().equals(Constants.ABILITY_SCORE.ABILITY_SCORE_WISDOM)) {
-                return as;
-            }
-        }
-        return null;
-    }
-    public AbilityScore getChaAbilityScore() {
-        for (AbilityScore as : abilityScores) {
-            if (as.getName().equals(Constants.ABILITY_SCORE.ABILITY_SCORE_CHARISMA)) {
-                return as;
-            }
-        }
-        return null;
     }
 
     public RealmList<AbilityScore> getAbilityScores() {

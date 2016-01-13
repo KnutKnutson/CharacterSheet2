@@ -34,24 +34,21 @@ public class PlayerCharacterHelper {
 
     public static void killCharacter(Realm realm, PlayerCharacter honoredDead) {
         realm.beginTransaction();
-        honoredDead.removeFromRealm();
+        honoredDead.setDeleted(true);
         realm.commitTransaction();
-        //characters = null;
     }
 
-    public static PlayerCharacter resurrectCharacter(Realm realm, PlayerCharacter fortunateSoul) {
-        Log.d("Resurrect", fortunateSoul.getName());
+    public static void resurrectCharacter(Realm realm, PlayerCharacter fortunateSoul) {
         realm.beginTransaction();
-        PlayerCharacter resurrected = realm.copyToRealm( fortunateSoul );
+        fortunateSoul.setDeleted(false);
         realm.commitTransaction();
-        Log.d("Resurrect", resurrected.getName());
-        //characters = null;
-        return resurrected;
     }
 
     public static RealmResults<PlayerCharacter> assembleParty(Realm realm) {
         if (characters == null) {
-            characters = realm.allObjects( PlayerCharacter.class );
+            characters = realm.where( PlayerCharacter.class )
+                              .equalTo("deleted", false)
+                              .findAll();
             // Ideally this would sort by last updated, but that's not currently tracked.
             characters.sort("name");
         }

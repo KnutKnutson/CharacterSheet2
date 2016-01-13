@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -88,10 +89,6 @@ public class SpellSlotViewHolder extends ParentViewHolder {
         AnimatorSet set = new AnimatorSet();
         set.playTogether(
                 ObjectAnimator.ofFloat(spellSlotTriangle, "rotation", INITIAL_POSITION, ROTATED_POSITION)
-                        .setDuration(DEFAULT_ROTATE_DURATION_MS),
-                ObjectAnimator.ofFloat(spellSlotLevel, "translationX", 55.0f)
-                        .setDuration(DEFAULT_ROTATE_DURATION_MS),
-                ObjectAnimator.ofFloat(spellSlotLevel, "translationY", -45.0f)
                         .setDuration(DEFAULT_ROTATE_DURATION_MS)
         );
         set.start();
@@ -101,10 +98,6 @@ public class SpellSlotViewHolder extends ParentViewHolder {
         AnimatorSet set = new AnimatorSet();
         set.playTogether(
                 ObjectAnimator.ofFloat(spellSlotTriangle, "rotation", ROTATED_POSITION, INITIAL_POSITION)
-                        .setDuration(DEFAULT_ROTATE_DURATION_MS),
-                ObjectAnimator.ofFloat(spellSlotLevel, "translationX", 10.0f)
-                        .setDuration(DEFAULT_ROTATE_DURATION_MS),
-                ObjectAnimator.ofFloat(spellSlotLevel, "translationY", 0.0f)
                         .setDuration(DEFAULT_ROTATE_DURATION_MS)
         );
         set.start();

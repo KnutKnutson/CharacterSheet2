@@ -13,105 +13,95 @@
             android:id="@+id/coinLayout"
             android:orientation="horizontal">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
                 android:layout_weight="1">
 
+                <EditText
+                    style="@style/CoinEditText"
+                    android:background="@drawable/rectangle"/>
+
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/font_size_caption"
+                    style="@style/CoinLabel"
                     android:id="@+id/cpLabel"
                     android:text="@string/label_copper"/>
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@+id/cpLabel"
-                    android:background="@drawable/rectangle"/>
+            </LinearLayout>
 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
                 android:layout_weight="1">
 
+                <EditText
+                    style="@style/CoinEditText"
+                    android:background="@drawable/rectangle"/>
+
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/font_size_caption"
+                    style="@style/CoinLabel"
                     android:id="@+id/spLabel"
-                    android:text="@string/label_copper"/>
+                    android:text="@string/label_silver"/>
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@+id/spLabel"
-                    android:background="@drawable/rectangle"/>
+            </LinearLayout>
 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
                 android:layout_weight="1">
 
+                <EditText
+                    style="@style/CoinEditText"
+                    android:background="@drawable/rectangle"/>
+
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/font_size_caption"
+                    style="@style/CoinLabel"
                     android:id="@+id/epLabel"
                     android:text="@string/label_copper"/>
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@+id/epLabel"
-                    android:background="@drawable/rectangle"/>
+            </LinearLayout>
 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
                 android:layout_weight="1">
 
+                <EditText
+                    style="@style/CoinEditText"
+                    android:background="@drawable/rectangle"/>
+
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/font_size_caption"
+                    style="@style/CoinLabel"
                     android:id="@+id/gpLabel"
                     android:text="@string/label_copper"/>
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@+id/gpLabel"
-                    android:background="@drawable/rectangle"/>
+            </LinearLayout>
 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
                 android:layout_weight="1">
 
+                <EditText
+                    style="@style/CoinEditText"
+                    android:background="@drawable/rectangle"/>
+
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/font_size_caption"
+                    style="@style/CoinLabel"
                     android:id="@+id/ppLabel"
                     android:text="@string/label_copper"/>
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@+id/ppLabel"
-                    android:background="@drawable/rectangle"/>
-
-            </RelativeLayout>
+            </LinearLayout>
 
         </LinearLayout>
 

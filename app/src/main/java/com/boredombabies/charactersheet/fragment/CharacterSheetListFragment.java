@@ -222,7 +222,6 @@ public class CharacterSheetListFragment extends ListFragment {
                             .setAction("Undo", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    // TODO: get undelete working
                                     PlayerCharacterHelper.resurrectCharacter(realm, honoredDead);
                                     listAdapter.notifyDataSetChanged();
                                 }

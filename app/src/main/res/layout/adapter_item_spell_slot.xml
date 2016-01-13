@@ -4,30 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/list_header_height"
     android:layout_marginTop="@dimen/content_margin"
+    android:layout_marginStart="@dimen/content_margin"
     android:orientation="horizontal">
 
-    <FrameLayout
-        android:layout_width="@dimen/list_header_height"
-        android:layout_height="@dimen/list_header_height">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/spellSlotLevel"
-            android:textColor="@color/primary_text"
-            android:textSize="@dimen/font_size_title"
-            android:gravity="center_vertical"
-            android:text="9"
-            android:translationX="10px"
-            />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/spellSlotLevel"
+        android:textColor="@color/primary_text"
+        android:textSize="@dimen/font_size_title"
+        android:gravity="center_vertical"
+        android:layout_marginEnd="@dimen/content_margin"
+        android:text="9"
+        />
 
-        <ImageView
-            android:layout_width="@dimen/list_header_height"
-            android:layout_height="@dimen/list_header_height"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/spellSlotTriangle"
-            android:elevation="4dp"
-            android:background="@drawable/ic_chevron_right_24dp"/>
-    </FrameLayout>
+    <ImageView
+        android:layout_width="@dimen/list_header_height"
+        android:layout_height="@dimen/list_header_height"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/spellSlotTriangle"
+        android:elevation="4dp"
+        android:background="@drawable/ic_chevron_right_24dp"/>
 
     <EditText
         style="@style/BaseEditTextView"

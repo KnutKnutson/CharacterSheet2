@@ -63,7 +63,7 @@
                 <TextView
                     style="@style/CoinLabel"
                     android:id="@+id/epLabel"
-                    android:text="@string/label_copper"/>
+                    android:text="@string/label_electrum"/>
 
             </LinearLayout>
 
@@ -81,7 +81,7 @@
                 <TextView
                     style="@style/CoinLabel"
                     android:id="@+id/gpLabel"
-                    android:text="@string/label_copper"/>
+                    android:text="@string/label_gold"/>
 
             </LinearLayout>
 
@@ -99,7 +99,7 @@
                 <TextView
                     style="@style/CoinLabel"
                     android:id="@+id/ppLabel"
-                    android:text="@string/label_copper"/>
+                    android:text="@string/label_platinum"/>
 
             </LinearLayout>
 

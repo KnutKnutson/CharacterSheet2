@@ -10,6 +10,7 @@ public class Skill extends RealmObject {
     private boolean trained = false;
     // TODO: autocalculate skillbonus
     private String skillBonus = "0";
+    // TODO: save skillName and use ignored variable to return enum
     private String skillName;
     private String skillAbilityModifier;
 

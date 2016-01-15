@@ -14,9 +14,22 @@ public class Formulas {
         return PlayerCharacterHelper.getActiveCharacter().getCombatStats().getInitiative();
     }
 
+    static public Integer getSavingThrowBonus(Skill skill) {
+        PlayerCharacter playerCharacter = PlayerCharacterHelper.getActiveCharacter();
+        Integer modifier = getAbilityScore(
+                               skill.getSkillName()
+                           ).getAbilityModifier();
+        Integer bonus = (skill.isTrained() ? playerCharacter.getAttributes().getProficiencyBonus() : 0);
+        return modifier + bonus;
+    }
+
     static public Integer getSkillBonus(Skill skill) {
         PlayerCharacter playerCharacter = PlayerCharacterHelper.getActiveCharacter();
-        Integer modifier = getAbilityScore(skill.getSkillAbilityModifier()).getAbilityModifier();
+        Integer modifier = getAbilityScore(
+                               Constants.BASE_SKILL.valueOf(
+                                   skill.getSkillName()
+                               ).skillModifier()
+                           ).getAbilityModifier();
         Integer bonus = (skill.isTrained() ? playerCharacter.getAttributes().getProficiencyBonus() : 0);
         return modifier + bonus;
     }

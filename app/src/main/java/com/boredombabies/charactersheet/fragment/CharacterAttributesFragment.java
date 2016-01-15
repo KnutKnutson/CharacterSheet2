@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.helper.Constants;
 import com.boredombabies.charactersheet.helper.EditTextTextWatcher;
+import com.boredombabies.charactersheet.helper.Formulas;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
 import com.boredombabies.charactersheet.interfaces.CharacterSheetFragmentCallbacks;
 import com.boredombabies.charactersheet.model.AbilityScore;
@@ -109,6 +110,10 @@ public class CharacterAttributesFragment extends Fragment {
         for (final Skill savingThrow : playerCharacter.getAttributes().getSavingThrows()) {
             View savingThrowComponent = inflater.inflate(R.layout.component_skill, container, false);
 
+            final TextView skillBonus = (TextView) savingThrowComponent.findViewById(R.id.skillBonus);
+            skillBonus.setId(View.generateViewId());
+            skillBonus.setText( Integer.toString( Formulas.getSavingThrowBonus( savingThrow ) ));
+
             CheckBox skillTrained = (CheckBox) savingThrowComponent.findViewById(R.id.skillTrained);
             skillTrained.setId(View.generateViewId());
             skillTrained.setChecked(savingThrow.isTrained());
@@ -119,16 +124,7 @@ public class CharacterAttributesFragment extends Fragment {
                     realm.beginTransaction();
                     savingThrow.setTrained(isChecked);
                     realm.commitTransaction();
-                }
-            });
-
-            EditText skillBonus = (EditText) savingThrowComponent.findViewById(R.id.skillBonus);
-            skillBonus.setId(View.generateViewId());
-            skillBonus.setText(savingThrow.getSkillBonus());
-            skillBonus.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
-                @Override
-                public void inTransactionCallback(Editable s) {
-                    savingThrow.setSkillBonus(s.toString());
+                    skillBonus.setText( Integer.toString( Formulas.getSavingThrowBonus( savingThrow ) ));
                 }
             });
 
@@ -144,6 +140,10 @@ public class CharacterAttributesFragment extends Fragment {
         for (final Skill savingThrow : playerCharacter.getAttributes().getSkills()) {
             View skillsComponent = inflater.inflate(R.layout.component_skill, container, false);
 
+            final TextView skillBonus = (TextView) skillsComponent.findViewById(R.id.skillBonus);
+            skillBonus.setId(View.generateViewId());
+            skillBonus.setText( Integer.toString( Formulas.getSkillBonus(savingThrow) ));
+
             CheckBox skillTrained = (CheckBox) skillsComponent.findViewById(R.id.skillTrained);
             skillTrained.setId(View.generateViewId());
             skillTrained.setChecked(savingThrow.isTrained());
@@ -154,27 +154,18 @@ public class CharacterAttributesFragment extends Fragment {
                     realm.beginTransaction();
                     savingThrow.setTrained(isChecked);
                     realm.commitTransaction();
-                }
-            });
-
-            EditText skillBonus = (EditText) skillsComponent.findViewById(R.id.skillBonus);
-            skillBonus.setId(View.generateViewId());
-            skillBonus.setText(savingThrow.getSkillBonus());
-            skillBonus.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
-                @Override
-                public void inTransactionCallback(Editable s) {
-                    savingThrow.setSkillBonus(s.toString());
+                    skillBonus.setText(Integer.toString(Formulas.getSkillBonus(savingThrow)));
                 }
             });
 
             TextView skillName = (TextView) skillsComponent.findViewById(R.id.skillName);
-            //skillName.setId(View.generateViewId());
+            skillName.setId(View.generateViewId());
             skillName.setText(savingThrow.getSkillName());
 
             String modifier = savingThrow.getSkillAbilityModifier();
             modifier = (TextUtils.isEmpty(modifier) ? "" : "(" + modifier + ")");
             TextView skillModifier = (TextView) skillsComponent.findViewById(R.id.skillModifier);
-            //skillModifier.setId(View.generateViewId());
+            skillModifier.setId(View.generateViewId());
             skillModifier.setText((modifier));
 
             skillsLayout.addView(skillsComponent);

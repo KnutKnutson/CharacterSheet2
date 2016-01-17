@@ -87,4 +87,22 @@ public class Constants {
         public String skillModifier() { return skillModifier; }
         public String skillModifierShort() { return skillModifier.substring(0, 3); }
     }
+
+    public static BASE_SKILL getSkillEnumByName(String skillName) {
+        for (BASE_SKILL skill : BASE_SKILL.values()) {
+            if (skill.skillName() == skillName) {
+                return skill;
+            }
+        }
+        return null;
+    }
+
+    public static ABILITY_SCORE getAbilityScoreEnumByName(String abilityScoreName) {
+        for (ABILITY_SCORE abilityScore : ABILITY_SCORE.values()) {
+            if (abilityScore.modifier() == abilityScoreName) {
+                return abilityScore;
+            }
+        }
+        return null;
+    }
 }

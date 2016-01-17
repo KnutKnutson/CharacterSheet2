@@ -8,20 +8,20 @@ import io.realm.RealmObject;
  */
 public class Skill extends RealmObject {
     private boolean trained = false;
-    // TODO: autocalculate skillbonus
     private String skillBonus = "0";
-    // TODO: save skillName and use ignored variable to return enum
     private String skillName;
     private String skillAbilityModifier;
+    private String skillAbilityModLong;
 
     public Skill() {
     }
     public Skill(String name) {
         this.skillName = name;
     }
-    public Skill(String name, String modifier) {
+    public Skill(String name, String modifier, String modifierLong) {
         this.skillName = name;
         this.skillAbilityModifier = modifier;
+        this.skillAbilityModLong = modifierLong;
     }
 
     public boolean isTrained() {
@@ -47,5 +47,13 @@ public class Skill extends RealmObject {
     }
     public void setSkillAbilityModifier(String skillAbilityModifier) {
         this.skillAbilityModifier = skillAbilityModifier;
+    }
+
+    public String getSkillAbilityModLong() {
+        return skillAbilityModLong;
+    }
+
+    public void setSkillAbilityModLong(String skillAbilityModLong) {
+        this.skillAbilityModLong = skillAbilityModLong;
     }
 }

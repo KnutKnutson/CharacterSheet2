@@ -1,5 +1,7 @@
 package com.boredombabies.charactersheet.helper;
 
+import android.util.Log;
+
 import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.model.AbilityScore;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
@@ -14,21 +16,10 @@ public class Formulas {
         return PlayerCharacterHelper.getActiveCharacter().getCombatStats().getInitiative();
     }
 
-    static public Integer getSavingThrowBonus(Skill skill) {
-        PlayerCharacter playerCharacter = PlayerCharacterHelper.getActiveCharacter();
-        Integer modifier = getAbilityScore(
-                               skill.getSkillName()
-                           ).getAbilityModifier();
-        Integer bonus = (skill.isTrained() ? playerCharacter.getAttributes().getProficiencyBonus() : 0);
-        return modifier + bonus;
-    }
-
     static public Integer getSkillBonus(Skill skill) {
         PlayerCharacter playerCharacter = PlayerCharacterHelper.getActiveCharacter();
         Integer modifier = getAbilityScore(
-                               Constants.BASE_SKILL.valueOf(
-                                   skill.getSkillName()
-                               ).skillModifier()
+                               skill.getSkillAbilityModLong()
                            ).getAbilityModifier();
         Integer bonus = (skill.isTrained() ? playerCharacter.getAttributes().getProficiencyBonus() : 0);
         return modifier + bonus;
@@ -67,7 +58,7 @@ public class Formulas {
 
     public static Skill getSkill(String skill) {
         for (Skill s : PlayerCharacterHelper.getActiveCharacter().getAttributes().getSkills()) {
-            if (s.getSkillName() == skill) {
+            if (s.getSkillName().equals(skill)) {
                 return s;
             }
         }
@@ -76,7 +67,7 @@ public class Formulas {
 
     public static Skill getSavingThrow(String abilityScore) {
         for (Skill s : PlayerCharacterHelper.getActiveCharacter().getAttributes().getSavingThrows()) {
-            if (s.getSkillName() == abilityScore) {
+            if (s.getSkillName().equals(abilityScore)) {
                 return s;
             }
         }
@@ -85,7 +76,7 @@ public class Formulas {
 
     public static AbilityScore getAbilityScore(String abilityScore) {
         for (AbilityScore as : PlayerCharacterHelper.getActiveCharacter().getAttributes().getAbilityScores()) {
-            if (as.getName() == abilityScore) {
+            if (as.getName().equals(abilityScore)) {
                 return as;
             }
         }

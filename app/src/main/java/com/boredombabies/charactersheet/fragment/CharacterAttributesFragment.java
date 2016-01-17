@@ -112,7 +112,7 @@ public class CharacterAttributesFragment extends Fragment {
 
             final TextView skillBonus = (TextView) savingThrowComponent.findViewById(R.id.skillBonus);
             skillBonus.setId(View.generateViewId());
-            skillBonus.setText( Integer.toString( Formulas.getSavingThrowBonus( savingThrow ) ));
+            skillBonus.setText( Integer.toString( Formulas.getSkillBonus(savingThrow) ));
 
             CheckBox skillTrained = (CheckBox) savingThrowComponent.findViewById(R.id.skillTrained);
             skillTrained.setId(View.generateViewId());
@@ -124,7 +124,7 @@ public class CharacterAttributesFragment extends Fragment {
                     realm.beginTransaction();
                     savingThrow.setTrained(isChecked);
                     realm.commitTransaction();
-                    skillBonus.setText( Integer.toString( Formulas.getSavingThrowBonus( savingThrow ) ));
+                    skillBonus.setText( Integer.toString( Formulas.getSkillBonus( savingThrow)));
                 }
             });
 

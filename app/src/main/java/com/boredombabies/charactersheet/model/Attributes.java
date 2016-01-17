@@ -22,10 +22,10 @@ public class Attributes extends RealmObject {
             abilityScores.add(new AbilityScore(abilityScore.modifier()));
         }
         for (Constants.ABILITY_SCORE abilityScore : Constants.ABILITY_SCORE.values()) {
-            savingThrows.add(new Skill(abilityScore.modifier()));
+            savingThrows.add(new Skill(abilityScore.modifier(), abilityScore.modifierShort(), abilityScore.modifier()));
         }
         for (Constants.BASE_SKILL baseSkill : Constants.BASE_SKILL.values()) {
-            skills.add(new Skill(baseSkill.skillName(), baseSkill.skillModifierShort()));
+            skills.add(new Skill(baseSkill.skillName(), baseSkill.skillModifierShort(), baseSkill.skillModifier()));
         }
     }
 

@@ -22,6 +22,7 @@
 
                 <EditText
                     style="@style/CoinEditText"
+                    android:id="@+id/copper"
                     android:background="@drawable/rectangle"/>
 
                 <TextView
@@ -40,6 +41,7 @@
 
                 <EditText
                     style="@style/CoinEditText"
+                    android:id="@+id/silver"
                     android:background="@drawable/rectangle"/>
 
                 <TextView
@@ -58,6 +60,7 @@
 
                 <EditText
                     style="@style/CoinEditText"
+                    android:id="@+id/electrum"
                     android:background="@drawable/rectangle"/>
 
                 <TextView
@@ -76,6 +79,7 @@
 
                 <EditText
                     style="@style/CoinEditText"
+                    android:id="@+id/gold"
                     android:background="@drawable/rectangle"/>
 
                 <TextView
@@ -94,6 +98,7 @@
 
                 <EditText
                     style="@style/CoinEditText"
+                    android:id="@+id/platinum"
                     android:background="@drawable/rectangle"/>
 
                 <TextView

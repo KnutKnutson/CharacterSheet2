@@ -34,6 +34,10 @@ public class CharacterAttributesFragment extends Fragment {
     PlayerCharacter playerCharacter;
     CharacterSheetFragmentCallbacks callbacks;
 
+    LinearLayout savingThrowsLayout;
+    LinearLayout skillsLayout;
+    EditText passiveWis;
+
     public CharacterAttributesFragment() {
     }
 
@@ -59,6 +63,17 @@ public class CharacterAttributesFragment extends Fragment {
             }
         });
 
+        // TODO: autopopulate passiveWis
+        passiveWis = (EditText) rootView.findViewById(R.id.passiveWisdom);
+        passiveWis.setText(Integer.toString(playerCharacter.getAttributes().getPassiveWisdom()));
+        passiveWis.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                int pw = (s.toString().isEmpty() ? 0 : Integer.parseInt(s.toString()));
+                playerCharacter.getAttributes().setPassiveWisdom(pw);
+            }
+        });
+
         EditText profBonus = (EditText) rootView.findViewById(R.id.proficiencyBonus);
         profBonus.setText(Integer.toString(playerCharacter.getAttributes().getProficiencyBonus()));
         profBonus.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
@@ -66,16 +81,6 @@ public class CharacterAttributesFragment extends Fragment {
             public void inTransactionCallback(Editable s) {
                 int pb = (s.toString().isEmpty() ? 0 : Integer.parseInt(s.toString()));
                 playerCharacter.getAttributes().setProficiencyBonus(pb);
-            }
-        });
-
-        EditText passiveWis = (EditText) rootView.findViewById(R.id.passiveWisdom);
-        passiveWis.setText(Integer.toString(playerCharacter.getAttributes().getPassiveWisdom()));
-        passiveWis.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
-            @Override
-            public void inTransactionCallback(Editable s) {
-                int pw = (s.toString().isEmpty() ? 0 : Integer.parseInt(s.toString()));
-                playerCharacter.getAttributes().setPassiveWisdom(pw);
             }
         });
 
@@ -99,6 +104,9 @@ public class CharacterAttributesFragment extends Fragment {
                     int as = (s.toString().isEmpty() ? 0 : Integer.parseInt(s.toString()));
                     abilityScore.setAbilityScore(as);
                     modifier.setText(Integer.toString(abilityScore.getAbilityModifier()));
+                    //TODO: update skills
+//                    savingThrowsLayout.invalidate();
+//                    skillsLayout.invalidate();
                 }
             });
 
@@ -106,7 +114,7 @@ public class CharacterAttributesFragment extends Fragment {
         }
 
         // Add Saving Throws
-        LinearLayout savingThrowsLayout = (LinearLayout) rootView.findViewById(R.id.savingThrows);
+        savingThrowsLayout = (LinearLayout) rootView.findViewById(R.id.savingThrows);
         for (final Skill savingThrow : playerCharacter.getAttributes().getSavingThrows()) {
             View savingThrowComponent = inflater.inflate(R.layout.component_skill, container, false);
 
@@ -124,7 +132,7 @@ public class CharacterAttributesFragment extends Fragment {
                     realm.beginTransaction();
                     savingThrow.setTrained(isChecked);
                     realm.commitTransaction();
-                    skillBonus.setText( Integer.toString( Formulas.getSkillBonus( savingThrow)));
+                    skillBonus.setText( Integer.toString( Formulas.getSkillBonus(savingThrow)));
                 }
             });
 
@@ -136,7 +144,7 @@ public class CharacterAttributesFragment extends Fragment {
         }
 
         // Add Skills
-        LinearLayout skillsLayout = (LinearLayout) rootView.findViewById(R.id.skills);
+        skillsLayout = (LinearLayout) rootView.findViewById(R.id.skills);
         for (final Skill savingThrow : playerCharacter.getAttributes().getSkills()) {
             View skillsComponent = inflater.inflate(R.layout.component_skill, container, false);
 
@@ -171,7 +179,14 @@ public class CharacterAttributesFragment extends Fragment {
             skillsLayout.addView(skillsComponent);
         }
 
-        //TODO: save other profieciencies and languages
+        EditText otherProfAndLang = (EditText) rootView.findViewById(R.id.languages);
+        otherProfAndLang.setText(playerCharacter.getAttributes().getOtherProficienciesAndLanguages());
+        otherProfAndLang.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                playerCharacter.getAttributes().setOtherProficienciesAndLanguages(s.toString());
+            }
+        });
 
         return rootView;
     }

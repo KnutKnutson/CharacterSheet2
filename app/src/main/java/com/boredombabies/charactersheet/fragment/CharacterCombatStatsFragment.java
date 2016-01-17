@@ -40,14 +40,6 @@ public class CharacterCombatStatsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        Log.i("on create", "creating it");
-//        if (savedInstanceState != null) {
-//            for (String key : savedInstanceState.keySet()) {
-//                Object value = savedInstanceState.get(key);
-//                Log.d("SAVEDSTATE", String.format("%s %s (%s)", key,
-//                        value.toString(), value.getClass().getName()));
-//            }
-//        }
         playerCharacter = PlayerCharacterHelper.getActiveCharacter();
         realm = Realm.getInstance(getActivity());
 
@@ -85,6 +77,34 @@ public class CharacterCombatStatsFragment extends Fragment {
             @Override
             public void inTransactionCallback(Editable s) {
                 playerCharacter.getCombatStats().setSpeed(s.toString());
+            }
+        });
+
+        // Hit Points
+        EditText hpMax = (EditText) rootView.findViewById(R.id.hitPointMaxValue);
+        hpMax.setText(playerCharacter.getCombatStats().getHitPointMax());
+        hpMax.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                playerCharacter.getCombatStats().setHitPointMax(s.toString());
+            }
+        });
+
+        EditText currentHP = (EditText) rootView.findViewById(R.id.currentHitPoints);
+        currentHP.setText(playerCharacter.getCombatStats().getHitPointCurrent());
+        currentHP.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                playerCharacter.getCombatStats().setHitPointCurrent(s.toString());
+            }
+        });
+
+        EditText tempHP = (EditText) rootView.findViewById(R.id.temporaryHitPoints);
+        tempHP.setText(playerCharacter.getCombatStats().getHitPointTemp());
+        tempHP.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                playerCharacter.getCombatStats().setHitPointTemp(s.toString());
             }
         });
 

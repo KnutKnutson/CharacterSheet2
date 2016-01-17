@@ -93,8 +93,9 @@
     </style>
 
     <style name="CoinEditText" parent="CombatStatsTopRowEditText">
-        <item name="android:layout_width">40dp</item>
-        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:textSize">@dimen/font_size_title</item>
         <item name="android:layout_gravity">center_horizontal</item>
     </style>
 

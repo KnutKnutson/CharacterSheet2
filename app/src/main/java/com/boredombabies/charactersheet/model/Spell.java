@@ -6,7 +6,7 @@ import io.realm.RealmObject;
  * Created by mark.knutson on 4/7/15.
  */
 public class Spell extends RealmObject{
-    private String name = "new spell";
+    private String name;
     private String level;
     private boolean prepared;
     private boolean learned;

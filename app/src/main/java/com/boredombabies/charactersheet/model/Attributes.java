@@ -16,6 +16,7 @@ public class Attributes extends RealmObject {
     private RealmList<AbilityScore> abilityScores = new RealmList<>();
     private RealmList<Skill> savingThrows = new RealmList<>();
     private RealmList<Skill> skills = new RealmList<>();
+    private String otherProficienciesAndLanguages;
 
     public Attributes() {
         for (Constants.ABILITY_SCORE abilityScore : Constants.ABILITY_SCORE.values()) {
@@ -64,5 +65,13 @@ public class Attributes extends RealmObject {
     }
     public void setPassiveWisdom(int passiveWisdom) {
         this.passiveWisdom = passiveWisdom;
+    }
+
+    public String getOtherProficienciesAndLanguages() {
+        return otherProficienciesAndLanguages;
+    }
+
+    public void setOtherProficienciesAndLanguages(String otherProficienciesAndLanguages) {
+        this.otherProficienciesAndLanguages = otherProficienciesAndLanguages;
     }
 }

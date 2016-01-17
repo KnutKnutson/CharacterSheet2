@@ -1,25 +1,21 @@
 package com.boredombabies.charactersheet.model;
 
-import io.realm.RealmList;
 import io.realm.RealmObject;
 
 /**
  * Created by mark.knutson on 4/7/15.
  */
 public class Equipment extends RealmObject{
-    private RealmList<Coin> coins;
     private String equipment;
     private String treasure;
+    private String copper;
+    private String silver;
+    private String electrum;
+    private String gold;
+    private String platinum;
+
 
     public Equipment() {}
-
-    public RealmList<Coin> getCoins() {
-        return coins;
-    }
-
-    public void setCoins(RealmList<Coin> coins) {
-        this.coins = coins;
-    }
 
     public String getEquipment() {
         return equipment;
@@ -35,5 +31,45 @@ public class Equipment extends RealmObject{
 
     public void setTreasure(String treasure) {
         this.treasure = treasure;
+    }
+
+    public String getCopper() {
+        return copper;
+    }
+
+    public void setCopper(String copper) {
+        this.copper = copper;
+    }
+
+    public String getSilver() {
+        return silver;
+    }
+
+    public void setSilver(String silver) {
+        this.silver = silver;
+    }
+
+    public String getElectrum() {
+        return electrum;
+    }
+
+    public void setElectrum(String electrum) {
+        this.electrum = electrum;
+    }
+
+    public String getGold() {
+        return gold;
+    }
+
+    public void setGold(String gold) {
+        this.gold = gold;
+    }
+
+    public String getPlatinum() {
+        return platinum;
+    }
+
+    public void setPlatinum(String platinum) {
+        this.platinum = platinum;
     }
 }

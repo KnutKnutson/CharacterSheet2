@@ -104,7 +104,7 @@ public class CharacterSheetListActivity extends AppCompatActivity
             }
         });
 
-        // TODO: If exposing deep links into your app, handle intents here.
+        // If exposing deep links into your app, handle intents here.
     }
 
     /**

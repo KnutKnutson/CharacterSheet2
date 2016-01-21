@@ -4,8 +4,6 @@ package com.boredombabies.charactersheet.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +11,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.helper.Constants;
@@ -28,7 +25,6 @@ import io.realm.Realm;
 /**
  * A simple {@link Fragment} subclass.
  */
-//TODO: remove debug log lines
 public class CharacterCombatStatsFragment extends Fragment {
     Realm realm;
     PlayerCharacter playerCharacter;

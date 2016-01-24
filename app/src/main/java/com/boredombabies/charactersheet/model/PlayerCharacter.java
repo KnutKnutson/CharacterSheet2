@@ -8,10 +8,12 @@ import javax.inject.Inject;
 
 import dagger.Module;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 @Module
 public class PlayerCharacter extends RealmObject {
 
+    @PrimaryKey
     private String id;
     private String name = "New Character";
     private String characterRace = "";

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 /**
  * Created by mark.knutson on 4/9/15.
  */
+//TODO loop around
 public class FragmentSmartPagerAdapter extends SmartFragmentStatePagerAdapter {
     private static int NUM_FRAGMENTS = 7;
 //    public static ArrayList<Integer> activeFragments;

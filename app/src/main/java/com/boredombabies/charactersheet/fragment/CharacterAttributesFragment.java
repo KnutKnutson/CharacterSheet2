@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.boredombabies.charactersheet.R;
-import com.boredombabies.charactersheet.helper.Constants;
 import com.boredombabies.charactersheet.helper.EditTextTextWatcher;
 import com.boredombabies.charactersheet.helper.Formulas;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
@@ -23,6 +23,9 @@ import com.boredombabies.charactersheet.interfaces.CharacterSheetFragmentCallbac
 import com.boredombabies.charactersheet.model.AbilityScore;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
 import com.boredombabies.charactersheet.model.Skill;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import io.realm.Realm;
 
@@ -34,6 +37,9 @@ public class CharacterAttributesFragment extends Fragment {
     PlayerCharacter playerCharacter;
     CharacterSheetFragmentCallbacks callbacks;
 
+    Map<String, Integer> skillToBonusId = new HashMap<>();
+
+    View rootView;
     LinearLayout savingThrowsLayout;
     LinearLayout skillsLayout;
     EditText passiveWis;
@@ -51,7 +57,7 @@ public class CharacterAttributesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_character_attributes, container, false);
+        rootView = inflater.inflate(R.layout.fragment_character_attributes, container, false);
 
         EditText inspiration = (EditText) rootView.findViewById(R.id.inspiration);
         inspiration.setText(Integer.toString(playerCharacter.getAttributes().getInspiration()));
@@ -104,9 +110,7 @@ public class CharacterAttributesFragment extends Fragment {
                     int as = (s.toString().isEmpty() ? 0 : Integer.parseInt(s.toString()));
                     abilityScore.setAbilityScore(as);
                     modifier.setText(Integer.toString(abilityScore.getAbilityModifier()));
-                    //TODO: update skills
-//                    savingThrowsLayout.invalidate();
-//                    skillsLayout.invalidate();
+                    updateFluidValues();
                 }
             });
 
@@ -119,7 +123,7 @@ public class CharacterAttributesFragment extends Fragment {
             View savingThrowComponent = inflater.inflate(R.layout.component_skill, container, false);
 
             final TextView skillBonus = (TextView) savingThrowComponent.findViewById(R.id.skillBonus);
-            skillBonus.setId(View.generateViewId());
+            skillBonus.setId( getSkillToBonusId().get( savingThrow.getSkillName() ));
             skillBonus.setText( Integer.toString( Formulas.getSkillBonus(savingThrow) ));
 
             CheckBox skillTrained = (CheckBox) savingThrowComponent.findViewById(R.id.skillTrained);
@@ -145,32 +149,32 @@ public class CharacterAttributesFragment extends Fragment {
 
         // Add Skills
         skillsLayout = (LinearLayout) rootView.findViewById(R.id.skills);
-        for (final Skill savingThrow : playerCharacter.getAttributes().getSkills()) {
+        for (final Skill skill : playerCharacter.getAttributes().getSkills()) {
             View skillsComponent = inflater.inflate(R.layout.component_skill, container, false);
 
             final TextView skillBonus = (TextView) skillsComponent.findViewById(R.id.skillBonus);
-            skillBonus.setId(View.generateViewId());
-            skillBonus.setText( Integer.toString( Formulas.getSkillBonus(savingThrow) ));
+            skillBonus.setId( getSkillToBonusId().get( skill.getSkillName() ) );
+            skillBonus.setText(Integer.toString(Formulas.getSkillBonus(skill)));
 
             CheckBox skillTrained = (CheckBox) skillsComponent.findViewById(R.id.skillTrained);
             skillTrained.setId(View.generateViewId());
-            skillTrained.setChecked(savingThrow.isTrained());
+            skillTrained.setChecked(skill.isTrained());
             skillTrained.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     Realm realm = Realm.getInstance(getActivity());
                     realm.beginTransaction();
-                    savingThrow.setTrained(isChecked);
+                    skill.setTrained(isChecked);
                     realm.commitTransaction();
-                    skillBonus.setText(Integer.toString(Formulas.getSkillBonus(savingThrow)));
+                    skillBonus.setText(Integer.toString(Formulas.getSkillBonus(skill)));
                 }
             });
 
             TextView skillName = (TextView) skillsComponent.findViewById(R.id.skillName);
             skillName.setId(View.generateViewId());
-            skillName.setText(savingThrow.getSkillName());
+            skillName.setText(skill.getSkillName());
 
-            String modifier = savingThrow.getSkillAbilityModifier();
+            String modifier = skill.getSkillAbilityModifier();
             modifier = (TextUtils.isEmpty(modifier) ? "" : "(" + modifier + ")");
             TextView skillModifier = (TextView) skillsComponent.findViewById(R.id.skillModifier);
             skillModifier.setId(View.generateViewId());
@@ -202,4 +206,38 @@ public class CharacterAttributesFragment extends Fragment {
 
         callbacks = (CharacterSheetFragmentCallbacks) context;
     }
+
+    private void updateFluidValues() {
+        setSavingThrowsValues();
+        setSkillValues();
+    }
+
+    private void setSavingThrowsValues() {
+        for (Skill savingThrow : playerCharacter.getAttributes().getSavingThrows()) {
+            TextView skillBonus = (TextView) savingThrowsLayout.findViewById(
+                    getSkillToBonusId().get( savingThrow.getSkillName() ));
+            skillBonus.setText(Integer.toString(Formulas.getSkillBonus(savingThrow)));
+        }
+    }
+
+    private void setSkillValues() {
+        for (Skill skill : playerCharacter.getAttributes().getSkills()) {
+            TextView skillBonus = (TextView) skillsLayout.findViewById(
+                    getSkillToBonusId().get( skill.getSkillName() ));
+            skillBonus.setText(Integer.toString(Formulas.getSkillBonus(skill)));
+        }
+    }
+
+    private Map<String, Integer> getSkillToBonusId() {
+        if (skillToBonusId.isEmpty()) {
+            for (Skill savingThrow : playerCharacter.getAttributes().getSavingThrows()) {
+                skillToBonusId.put(savingThrow.getSkillName(), View.generateViewId());
+            }
+            for (Skill skill : playerCharacter.getAttributes().getSkills()) {
+                skillToBonusId.put(skill.getSkillName(), View.generateViewId());
+            }
+        }
+        return skillToBonusId;
+    }
+
 }

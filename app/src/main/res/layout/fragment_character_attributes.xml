@@ -42,8 +42,8 @@
             android:text="@string/label_proficiency_bonus"
             android:layout_toRightOf="@+id/proficiencyBonus"/>
 
-        <EditText
-            style="@style/CircularEditText"
+        <TextView
+            style="@style/CircularTextView"
             android:id="@+id/passiveWisdom"
             android:layout_below="@id/inspiration"/>
 

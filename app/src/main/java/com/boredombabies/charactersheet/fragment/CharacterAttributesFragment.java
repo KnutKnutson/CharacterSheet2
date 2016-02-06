@@ -42,7 +42,7 @@ public class CharacterAttributesFragment extends Fragment {
     View rootView;
     LinearLayout savingThrowsLayout;
     LinearLayout skillsLayout;
-    EditText passiveWis;
+    TextView passiveWis;
 
     public CharacterAttributesFragment() {
     }
@@ -69,16 +69,8 @@ public class CharacterAttributesFragment extends Fragment {
             }
         });
 
-        // TODO: autopopulate passiveWis
-        passiveWis = (EditText) rootView.findViewById(R.id.passiveWisdom);
-        passiveWis.setText(Integer.toString(playerCharacter.getAttributes().getPassiveWisdom()));
-        passiveWis.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
-            @Override
-            public void inTransactionCallback(Editable s) {
-                int pw = (s.toString().isEmpty() ? 0 : Integer.parseInt(s.toString()));
-                playerCharacter.getAttributes().setPassiveWisdom(pw);
-            }
-        });
+        passiveWis = (TextView) rootView.findViewById(R.id.passiveWisdom);
+        passiveWis.setText(Formulas.getPassiveWisdom());
 
         EditText profBonus = (EditText) rootView.findViewById(R.id.proficiencyBonus);
         profBonus.setText(Integer.toString(playerCharacter.getAttributes().getProficiencyBonus()));
@@ -87,6 +79,10 @@ public class CharacterAttributesFragment extends Fragment {
             public void inTransactionCallback(Editable s) {
                 int pb = (s.toString().isEmpty() ? 0 : Integer.parseInt(s.toString()));
                 playerCharacter.getAttributes().setProficiencyBonus(pb);
+            }
+            @Override
+            public void afterTextChangedCallback(Editable s) {
+                updateFluidValues();
             }
         });
 
@@ -110,6 +106,9 @@ public class CharacterAttributesFragment extends Fragment {
                     int as = (s.toString().isEmpty() ? 0 : Integer.parseInt(s.toString()));
                     abilityScore.setAbilityScore(as);
                     modifier.setText(Integer.toString(abilityScore.getAbilityModifier()));
+                }
+                @Override
+                public void afterTextChangedCallback(Editable s) {
                     updateFluidValues();
                 }
             });
@@ -167,6 +166,7 @@ public class CharacterAttributesFragment extends Fragment {
                     skill.setTrained(isChecked);
                     realm.commitTransaction();
                     skillBonus.setText(Integer.toString(Formulas.getSkillBonus(skill)));
+                    setWisdom();
                 }
             });
 
@@ -210,6 +210,7 @@ public class CharacterAttributesFragment extends Fragment {
     private void updateFluidValues() {
         setSavingThrowsValues();
         setSkillValues();
+        setWisdom();
     }
 
     private void setSavingThrowsValues() {
@@ -228,6 +229,10 @@ public class CharacterAttributesFragment extends Fragment {
         }
     }
 
+    private void setWisdom() {
+        passiveWis.setText(Formulas.getPassiveWisdom());
+    }
+
     private Map<String, Integer> getSkillToBonusId() {
         if (skillToBonusId.isEmpty()) {
             for (Skill savingThrow : playerCharacter.getAttributes().getSavingThrows()) {
@@ -239,5 +244,4 @@ public class CharacterAttributesFragment extends Fragment {
         }
         return skillToBonusId;
     }
-
 }

@@ -16,6 +16,10 @@ public class Formulas {
         return PlayerCharacterHelper.getActiveCharacter().getCombatStats().getInitiative();
     }
 
+    static public String getPassiveWisdom() {
+        return Integer.toString(getSkillBonus(getSkill(Constants.PERCEPTION)));
+    }
+
     static public Integer getSkillBonus(Skill skill) {
         PlayerCharacter playerCharacter = PlayerCharacterHelper.getActiveCharacter();
         Integer modifier = getAbilityScore(

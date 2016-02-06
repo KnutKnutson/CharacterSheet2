@@ -31,7 +31,7 @@
         <item name="android:inputType">textNoSuggestions</item>
     </style>
 
-    <style name="CircularEditText">
+    <style name="CircularTextView">
         <item name="android:layout_width">50dp</item>
         <item name="android:layout_height">50dp</item>
         <item name="android:layout_margin">4dp</item>
@@ -39,9 +39,12 @@
         <item name="android:textColor">@color/primary_text</item>
         <item name="android:elevation">4dp</item>
         <item name="android:background">@drawable/circle</item>
-        <item name="android:inputType">number</item>
         <item name="android:gravity">center_horizontal</item>
         <item name="android:textSize">@dimen/font_size_headline</item>
+    </style>
+
+    <style name="CircularEditText" parent="CircularTextView">
+        <item name="android:inputType">number</item>
     </style>
 
     <style name="CircularEditTextLabel">

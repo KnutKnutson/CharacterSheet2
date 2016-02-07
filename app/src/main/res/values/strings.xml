@@ -11,6 +11,7 @@
     <string name="label_allies_and_orgs">ALLIES &amp; ORGANIZATIONS</string>
     <string name="label_organization_name">NAME</string>
     <string name="label_organization_symbol">SYMBOL</string>
+    <string name="label_pick_ally">Choose ally</string>
 
     <!-- ATTRIBUTES -->
     <string name="label_passive_wisdom">PASSIVE WISDOM (PERCEPTION)</string>

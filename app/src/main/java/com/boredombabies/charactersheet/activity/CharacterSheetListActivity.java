@@ -37,7 +37,7 @@ import io.realm.Realm;
  * An activity representing a list of CharacterSheets. This activity
  * has different presentations for handset and tablet-size devices. On
  * handsets, the activity presents a list of items, which when touched,
- * lead to a {@link CharacterProfileActivity} representing
+ * lead to a CharacterProfileActivity representing
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  * <p/>

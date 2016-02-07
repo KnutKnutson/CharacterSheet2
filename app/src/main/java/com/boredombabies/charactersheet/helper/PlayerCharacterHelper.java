@@ -46,6 +46,7 @@ public class PlayerCharacterHelper {
 
     public static RealmResults<PlayerCharacter> assembleParty(Realm realm) {
         if (characters == null) {
+            // TODO: clean up deleted characters
             characters = realm.where( PlayerCharacter.class )
                               .equalTo("deleted", false)
                               .findAll();
@@ -53,6 +54,11 @@ public class PlayerCharacterHelper {
             characters.sort("name");
         }
         return characters;
+    }
+
+    public static RealmResults<PlayerCharacter> findAllies() {
+        Realm realm = Realm.getDefaultInstance();
+        return null;
     }
 
     public static PlayerCharacter getCharacter(Realm realm, int partyMember) {

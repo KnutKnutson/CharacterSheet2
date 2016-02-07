@@ -10,12 +10,26 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:background="@drawable/rectangle"
             android:elevation="4dp"
             android:layout_margin="4dp">
+
+            <TextView
+                style="@style/BaseTextView"
+                android:text="@string/label_allies"
+                android:layout_marginTop="@dimen/content_margin"
+                android:layout_gravity="center_horizontal"/>
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/allies_list">
+
+            </ListView>
 
             <EditText
                 android:layout_width="match_parent"
@@ -23,21 +37,32 @@
                 android:id="@+id/allies"
                 android:minLines="1"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_allies"
-                android:layout_below="@+id/allies"
-                android:layout_centerHorizontal="true"/>
-        </RelativeLayout>
+        </LinearLayout>
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="400dp" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/rectangle"
+            android:elevation="4dp"
+            android:layout_margin="4dp">
+
+            <TextView
+                style="@style/BaseTextView"
+                android:text="@string/label_organizations"
+                android:layout_marginTop="@dimen/content_margin"
+                android:layout_gravity="center_horizontal"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="400dp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/organizations"
+                android:minLines="1"/>
+        </LinearLayout>
 
     </LinearLayout>
 

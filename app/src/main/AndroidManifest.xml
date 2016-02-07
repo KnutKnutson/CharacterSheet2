@@ -21,6 +21,7 @@
         <activity
             android:name=".activity.CharacterSheetViewPagerActivity"
             android:label="@string/title_activity_character_sheet_view_pager"
+            android:windowSoftInputMode="adjustResize"
             android:parentActivityName=".activity.CharacterSheetListActivity"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data

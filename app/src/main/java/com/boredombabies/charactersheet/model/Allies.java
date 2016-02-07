@@ -8,7 +8,7 @@ import io.realm.RealmObject;
  */
 public class Allies extends RealmObject {
     private String allies;
-    //private RealmList<PlayerCharacter> playerCharacterAllies;
+    private RealmList<PlayerCharacter> playerCharacterAllies;
     private String organizationName;
 
     public Allies() {}
@@ -19,6 +19,14 @@ public class Allies extends RealmObject {
 
     public void setAllies(String allies) {
         this.allies = allies;
+    }
+
+    public RealmList<PlayerCharacter> getPlayerCharacterAllies() {
+        return playerCharacterAllies;
+    }
+
+    public void setPlayerCharacterAllies(RealmList<PlayerCharacter> playerCharacterAllies) {
+        this.playerCharacterAllies = playerCharacterAllies;
     }
 
     public String getOrganizationName() {

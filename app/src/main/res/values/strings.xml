@@ -7,6 +7,8 @@
     <string name="section_format">Hello World from section: %1$d</string>
 
     <!-- ALLIES -->
+    <string name="label_allies">ALLIES</string>
+    <string name="label_organizations">ORGANIZATIONS</string>
     <string name="label_allies_and_orgs">ALLIES &amp; ORGANIZATIONS</string>
     <string name="label_organization_name">NAME</string>
     <string name="label_organization_symbol">SYMBOL</string>
@@ -34,8 +36,8 @@
     <string name="label_hit_dice_total">Total</string>
     <string name="label_hit_dice">HIT DICE</string>
     <string name="label_death_saves">DEATH SAVES</string>
-    <string name="label_death_saves_successes">SUCCESSES</string>
-    <string name="label_death_saves_failures">FAILURES</string>
+    <string name="label_death_saves_successes">SUCCESS</string>
+    <string name="label_death_saves_failures">FAILURE</string>
     <string name="label_atk_and_spell_name">NAME</string>
     <string name="label_atk_and_spell_bonus">ATK BONUS</string>
     <string name="label_atk_and_spell_damage">DAMAGE/TYPE</string>

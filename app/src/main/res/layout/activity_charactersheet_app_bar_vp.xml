@@ -8,6 +8,8 @@
     tools:context=".CharacterSheetViewPagerActivity"
     tools:ignore="MergeRootFrame">
 
+    <!-- TODO: snap appbar in place. completely hide app bar.-->
+
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"

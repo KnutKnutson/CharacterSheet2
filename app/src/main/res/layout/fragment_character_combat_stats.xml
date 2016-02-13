@@ -8,7 +8,8 @@
     <RelativeLayout
         android:id="@+id/charactersheet_detail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:descendantFocusability="beforeDescendants">
 
         <RelativeLayout
             android:layout_width="match_parent"

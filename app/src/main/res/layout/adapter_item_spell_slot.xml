@@ -5,6 +5,7 @@
     android:layout_height="@dimen/list_header_height"
     android:layout_marginTop="@dimen/content_margin"
     android:layout_marginStart="@dimen/content_margin"
+    android:padding="4dp"
     android:orientation="horizontal">
 
     <TextView
@@ -23,6 +24,7 @@
         android:layout_height="@dimen/list_header_height"
         android:layout_gravity="center_vertical"
         android:id="@+id/spellSlotTriangle"
+        android:layout_margin="4dp"
         android:elevation="4dp"
         android:background="@drawable/ic_chevron_right_24dp"/>
 

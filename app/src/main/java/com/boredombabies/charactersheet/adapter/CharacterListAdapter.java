@@ -55,7 +55,6 @@ public class CharacterListAdapter extends ArrayAdapter<PlayerCharacter> {
         // Populate the data into the template view using the data object
         int headerImage = Formulas.getClassImage(character.getCharacterClass());
         Picasso.with(getContext()).load((headerImage != 0 ? headerImage : R.drawable.barbarian_small))
-                .placeholder(R.drawable.ic_person_outline_24dp)
                 .resize(100, 100)
                 .centerCrop()
                 .into(viewHolder.characterIcon);

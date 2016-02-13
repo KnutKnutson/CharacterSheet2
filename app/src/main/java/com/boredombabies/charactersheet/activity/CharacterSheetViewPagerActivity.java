@@ -2,6 +2,7 @@ package com.boredombabies.charactersheet.activity;
 
 import android.app.Activity;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.boredombabies.charactersheet.R;
+import com.boredombabies.charactersheet.fragment.AllySelectDialogFragment;
 import com.boredombabies.charactersheet.fragment.CharacterSheetViewPagerFragment;
 import com.boredombabies.charactersheet.helper.Formulas;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
@@ -19,7 +21,7 @@ import com.boredombabies.charactersheet.model.PlayerCharacter;
 import com.squareup.picasso.Picasso;
 
 public class CharacterSheetViewPagerActivity extends AppCompatActivity
-        implements CharacterSheetFragmentCallbacks {
+        implements CharacterSheetFragmentCallbacks, AllySelectDialogFragment.AllySelectListener {
 
     private boolean mTwoPane;
 
@@ -107,6 +109,11 @@ public class CharacterSheetViewPagerActivity extends AppCompatActivity
 //            }
 //            ft.commit();
 //        }
+    }
+
+    @Override
+    public void onSelectNewAlly(DialogFragment dialog) {
+
     }
 
     private int getFragmentId(int fragment) {

@@ -20,6 +20,8 @@ import com.boredombabies.charactersheet.interfaces.CharacterSheetFragmentCallbac
 import com.boredombabies.charactersheet.model.PlayerCharacter;
 import com.squareup.picasso.Picasso;
 
+import io.realm.Realm;
+
 public class CharacterSheetViewPagerActivity extends AppCompatActivity
         implements CharacterSheetFragmentCallbacks, AllySelectDialogFragment.AllySelectListener {
 
@@ -112,8 +114,12 @@ public class CharacterSheetViewPagerActivity extends AppCompatActivity
     }
 
     @Override
-    public void onSelectNewAlly(DialogFragment dialog) {
-
+    public void onSelectNewAlly(PlayerCharacter newAlly) {
+        Realm realm = Realm.getInstance(this);
+        realm.beginTransaction();
+        PlayerCharacterHelper.getActiveCharacter().getAllies().getPlayerCharacterAllies().add(newAlly);
+        realm.commitTransaction();
+        //TODO: notify data set changed.
     }
 
     private int getFragmentId(int fragment) {

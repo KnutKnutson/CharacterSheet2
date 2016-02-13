@@ -120,8 +120,10 @@ public class AlliesFragment extends ListFragment
     }
 
     @Override
-    public void onSelectNewAlly(DialogFragment dialog) {
+    public void onSelectNewAlly(PlayerCharacter newAlly) {
         //TODO add ally to list of allies
+        //playerCharacter.getAllies().getPlayerCharacterAllies().add( ally );
+        //notify data set changed?
     }
 
     public void newAlly() {

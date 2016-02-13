@@ -6,7 +6,11 @@ import com.boredombabies.charactersheet.interfaces.DaggerPlayerCharacterInterfac
 import com.boredombabies.charactersheet.model.PlayerCharacter;
 import com.boredombabies.charactersheet.module.PlayerCharacterModule;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.realm.Realm;
+import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 /**
@@ -44,6 +48,18 @@ public class PlayerCharacterHelper {
         realm.commitTransaction();
     }
 
+    public static RealmResults<PlayerCharacter> getPotentialAllies(Realm realm) {
+        RealmQuery<PlayerCharacter> allyQuery = realm.where(PlayerCharacter.class);
+        allyQuery.equalTo("deleted", false);
+        allyQuery.notEqualTo("id", getActiveCharacter().getId());
+        for (String uuid : getAllyUUIDS()) {
+            allyQuery.notEqualTo("id", uuid);
+        }
+        RealmResults<PlayerCharacter> potentialAllies = allyQuery.findAll();
+        potentialAllies.sort("name");
+        return potentialAllies;
+    }
+
     public static RealmResults<PlayerCharacter> assembleParty(Realm realm) {
         if (characters == null) {
             // TODO: clean up deleted characters
@@ -71,5 +87,13 @@ public class PlayerCharacterHelper {
 
     public static void setActiveCharacter(PlayerCharacter playerCharacter) {
         activeCharacter = playerCharacter;
+    }
+
+    public static List<String> getAllyUUIDS() {
+        List<String> uuids = new ArrayList<>();
+        for (PlayerCharacter ally : getActiveCharacter().getAllies().getPlayerCharacterAllies()) {
+            uuids.add(ally.getId());
+        }
+        return uuids;
     }
 }

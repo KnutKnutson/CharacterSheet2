@@ -8,22 +8,30 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 
 import com.boredombabies.charactersheet.R;
+import com.boredombabies.charactersheet.adapter.CharacterListAdapter;
+import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
+import com.boredombabies.charactersheet.model.PlayerCharacter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmList;
 
 /**
  * Created on 2/7/16.
  */
 public class AllySelectDialogFragment extends DialogFragment {
 
-    public interface AllySelectListener {
-        public void onSelectNewAlly(DialogFragment dialog);
-    }
-
     AllySelectListener listener;
-    String[] dummyAllies = new String[]{"ally1", "ally2", "ally3"};
+    Realm realm;
+    private CharacterListAdapter listAdapter;
+    private List<PlayerCharacter> potentialAllies;
+
+    public interface AllySelectListener {
+        public void onSelectNewAlly(PlayerCharacter newAlly);
+    }
 
     @Override
     public void onAttach(Activity activity) {
@@ -34,6 +42,9 @@ public class AllySelectDialogFragment extends DialogFragment {
             throw new ClassCastException(activity.toString()
                     + " must implement AllySelectListener");
         }
+        realm = Realm.getInstance(getActivity());
+        potentialAllies = PlayerCharacterHelper.getPotentialAllies(realm);
+        listAdapter = new CharacterListAdapter(activity, potentialAllies);
     }
 
     @Override
@@ -41,11 +52,9 @@ public class AllySelectDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         builder.setTitle(R.string.label_pick_ally)
-                .setItems(dummyAllies, new DialogInterface.OnClickListener() {
+                .setAdapter(listAdapter, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // The 'which' argument contains the index position
-                        // of the selected item
-
+                        listener.onSelectNewAlly(potentialAllies.get(which));
                     }
                 });
         return builder.create();

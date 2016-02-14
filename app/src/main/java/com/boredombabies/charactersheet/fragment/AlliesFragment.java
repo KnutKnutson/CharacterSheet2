@@ -29,8 +29,7 @@ import io.realm.Realm;
  * On import, find or create allies by uuid.
  * Only show allies where name != null
  */
-public class AlliesFragment extends ListFragment
-                            implements AllySelectDialogFragment.AllySelectListener {
+public class AlliesFragment extends ListFragment {
     Realm realm;
     PlayerCharacter playerCharacter;
     private CharacterListAdapter listAdapter;
@@ -49,7 +48,9 @@ public class AlliesFragment extends ListFragment
         getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                if (currentActionMode != null) { return false; }
+                if (currentActionMode != null) {
+                    return false;
+                }
                 allyToRemoveFromParty = position;
                 currentActionMode = getActivity().startActionMode(modeCallBack);
                 view.setSelected(true);
@@ -75,6 +76,8 @@ public class AlliesFragment extends ListFragment
 
 //        ListView pcAllies = (ListView) rootView.findViewById(R.id.allies_list);
 //        pcAllies.setAdapter(listAdapter);
+
+        //TODO: list only showing one at a time. fix.
 
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.allies_fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -119,15 +122,9 @@ public class AlliesFragment extends ListFragment
 //                .getName());
     }
 
-    @Override
-    public void onSelectNewAlly(PlayerCharacter newAlly) {
-        //TODO add ally to list of allies
-        //playerCharacter.getAllies().getPlayerCharacterAllies().add( ally );
-        //notify data set changed?
-    }
-
     public void newAlly() {
-        DialogFragment allySelectDialogFragment = new AllySelectDialogFragment();
+        AllySelectDialogFragment allySelectDialogFragment = new AllySelectDialogFragment();
+        allySelectDialogFragment.setCurrentAlliesListAdapter(listAdapter);
         allySelectDialogFragment.show(getActivity().getSupportFragmentManager(), "newAlly");
     }
 

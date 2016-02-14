@@ -12,36 +12,23 @@ import com.boredombabies.charactersheet.adapter.CharacterListAdapter;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import io.realm.Realm;
-import io.realm.RealmList;
 
 /**
  * Created on 2/7/16.
  */
 public class AllySelectDialogFragment extends DialogFragment {
 
-    AllySelectListener listener;
     Realm realm;
     private CharacterListAdapter listAdapter;
+    private CharacterListAdapter currentAlliesListAdapter;
     private List<PlayerCharacter> potentialAllies;
-
-    public interface AllySelectListener {
-        public void onSelectNewAlly(PlayerCharacter newAlly);
-    }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        try {
-            listener = (AllySelectListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement AllySelectListener");
-        }
         realm = Realm.getInstance(getActivity());
         potentialAllies = PlayerCharacterHelper.getPotentialAllies(realm);
         listAdapter = new CharacterListAdapter(activity, potentialAllies);
@@ -54,9 +41,21 @@ public class AllySelectDialogFragment extends DialogFragment {
         builder.setTitle(R.string.label_pick_ally)
                 .setAdapter(listAdapter, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        listener.onSelectNewAlly(potentialAllies.get(which));
+                        saveAlly(potentialAllies.get(which));
+                        currentAlliesListAdapter.notifyDataSetChanged();
                     }
                 });
         return builder.create();
+    }
+
+    public void setCurrentAlliesListAdapter(CharacterListAdapter currentAlliesListAdapter) {
+        this.currentAlliesListAdapter = currentAlliesListAdapter;
+    }
+
+    private void saveAlly(PlayerCharacter newAlly) {
+        Realm realm = Realm.getInstance(getActivity());
+        realm.beginTransaction();
+        PlayerCharacterHelper.getActiveCharacter().getAllies().getPlayerCharacterAllies().add(newAlly);
+        realm.commitTransaction();
     }
 }

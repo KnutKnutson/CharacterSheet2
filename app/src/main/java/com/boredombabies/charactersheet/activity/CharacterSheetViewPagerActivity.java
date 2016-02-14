@@ -3,7 +3,10 @@ package com.boredombabies.charactersheet.activity;
 import android.app.Activity;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
@@ -12,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.boredombabies.charactersheet.R;
+import com.boredombabies.charactersheet.fragment.AlliesFragment;
 import com.boredombabies.charactersheet.fragment.AllySelectDialogFragment;
 import com.boredombabies.charactersheet.fragment.CharacterSheetViewPagerFragment;
 import com.boredombabies.charactersheet.helper.Formulas;
@@ -23,11 +27,11 @@ import com.squareup.picasso.Picasso;
 import io.realm.Realm;
 
 public class CharacterSheetViewPagerActivity extends AppCompatActivity
-        implements CharacterSheetFragmentCallbacks, AllySelectDialogFragment.AllySelectListener {
+        implements CharacterSheetFragmentCallbacks {
 
     private boolean mTwoPane;
 
-    private final int numViewPagerFragments = 3;
+    private int numViewPagerFragments = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,7 @@ public class CharacterSheetViewPagerActivity extends AppCompatActivity
 
         if (findViewById(getFragmentId(2)) != null) {
             mTwoPane = true;
+            numViewPagerFragments = 3;
         }
 
         if (savedInstanceState == null) {
@@ -113,13 +118,20 @@ public class CharacterSheetViewPagerActivity extends AppCompatActivity
 //        }
     }
 
-    @Override
-    public void onSelectNewAlly(PlayerCharacter newAlly) {
-        Realm realm = Realm.getInstance(this);
-        realm.beginTransaction();
-        PlayerCharacterHelper.getActiveCharacter().getAllies().getPlayerCharacterAllies().add(newAlly);
-        realm.commitTransaction();
-        //TODO: notify data set changed.
+    public void refreshChildFragment(int childId) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment child = fragmentManager.findFragmentById(getFragmentId(childId));
+        fragmentManager.beginTransaction()
+                .detach(child)
+                .attach(child)
+                .commit();
+    }
+
+    public void refreshSiblingFragments(int childId) {
+        for (int i = 1; i <= numViewPagerFragments; i++) {
+            if (i == childId) { continue; }
+            refreshChildFragment(i);
+        }
     }
 
     private int getFragmentId(int fragment) {

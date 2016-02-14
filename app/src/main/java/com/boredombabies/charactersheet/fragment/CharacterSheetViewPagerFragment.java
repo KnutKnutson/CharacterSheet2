@@ -15,9 +15,6 @@ import com.boredombabies.charactersheet.adapter.SmartFragmentStatePagerAdapter;
 import com.boredombabies.charactersheet.helper.Constants;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
 
-/**
- * Created by mark.knutson on 4/11/15.
- */
 public class CharacterSheetViewPagerFragment extends Fragment {
 
     private SmartFragmentStatePagerAdapter viewPagerAdapter;
@@ -69,6 +66,10 @@ public class CharacterSheetViewPagerFragment extends Fragment {
         viewPager.addOnPageChangeListener(getOnPageChangeListener());
         int pageNumber = getActiveFragmentPage();
         viewPager.setCurrentItem(pageNumber);
+    }
+
+    public ViewPager getViewPager() {
+        return viewPager;
     }
 
     private void saveActiveFragmentPage(int activeFragment) {

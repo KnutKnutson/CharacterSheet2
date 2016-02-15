@@ -15,8 +15,8 @@ import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.adapter.CharacterListAdapter;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
-
-import java.util.List;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import io.realm.Realm;
 
@@ -35,7 +35,7 @@ public class CharacterSheetListFragment extends ListFragment {
     private CharacterListAdapter listAdapter;
 
     // Tracks current menu item
-    private int characterToDelete;
+    private int characterMenuItem;
     // Tracks current contextual action mode
     private ActionMode currentActionMode;
 
@@ -93,7 +93,7 @@ public class CharacterSheetListFragment extends ListFragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 if (currentActionMode != null) { return false; }
-                characterToDelete = position;
+                characterMenuItem = position;
                 currentActionMode = getActivity().startActionMode(modeCallBack);
                 view.setSelected(true);
                 return true;
@@ -200,7 +200,7 @@ public class CharacterSheetListFragment extends ListFragment {
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             mode.setTitle("Delete Character");
-            mode.getMenuInflater().inflate(R.menu.actions_list_item, menu);
+            mode.getMenuInflater().inflate(R.menu.actions_character_list_item, menu);
             return true;
         }
 
@@ -215,19 +215,12 @@ public class CharacterSheetListFragment extends ListFragment {
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.menu_delete:
-                    final PlayerCharacter honoredDead = PlayerCharacterHelper.getCharacter(realm, characterToDelete);
-                    // TODO: try copyFromRealm then delete... though that may change the id...
-                    PlayerCharacterHelper.killCharacter(realm, honoredDead);
-                    listAdapter.notifyDataSetChanged();
-                    Snackbar.make(getView(), "Character Deleted", Snackbar.LENGTH_LONG)
-                            .setAction("Undo", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    PlayerCharacterHelper.resurrectCharacter(realm, honoredDead);
-                                    listAdapter.notifyDataSetChanged();
-                                }
-                            }).show();
+                    deleteCharacter();
                     mode.finish(); // Action picked, so close the contextual menu
+                    return true;
+                case R.id.menu_share:
+                    shareCharacter();
+                    mode.finish();
                     return true;
                 default:
                     return false;
@@ -240,4 +233,25 @@ public class CharacterSheetListFragment extends ListFragment {
             currentActionMode = null; // Clear current action mode
         }
     };
+
+    private void deleteCharacter() {
+        final PlayerCharacter honoredDead = PlayerCharacterHelper.getCharacter(realm, characterMenuItem);
+        // TODO: try copyFromRealm then delete... though that may change the id...
+        PlayerCharacterHelper.killCharacter(realm, honoredDead);
+        listAdapter.notifyDataSetChanged();
+        Snackbar.make(getView(), "Character Deleted", Snackbar.LENGTH_LONG)
+                .setAction("Undo", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        PlayerCharacterHelper.resurrectCharacter(realm, honoredDead);
+                        listAdapter.notifyDataSetChanged();
+                    }
+                }).show();
+    }
+
+    private void shareCharacter() {
+        PlayerCharacter exportedCharacter = realm.copyFromRealm(PlayerCharacterHelper.getCharacter(realm, characterMenuItem));
+        Gson gson = new GsonBuilder().create();
+        String json = gson.toJson(exportedCharacter);
+    }
 }

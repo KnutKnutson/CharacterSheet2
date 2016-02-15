@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.ListFragment;
 import android.text.Editable;
 import android.view.ActionMode;
@@ -145,7 +144,7 @@ public class AlliesFragment extends ListFragment {
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             mode.setTitle("Remove Ally");
-            mode.getMenuInflater().inflate(R.menu.actions_list_item, menu);
+            mode.getMenuInflater().inflate(R.menu.actions_allies_list_item, menu);
             return true;
         }
 

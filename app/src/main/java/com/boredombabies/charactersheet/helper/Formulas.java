@@ -29,32 +29,63 @@ public class Formulas {
         return modifier + bonus;
     }
 
-    static public int getClassImage(String className) {
+    static public int getHeaderImage(String className) {
         switch (className.toLowerCase()) {
             case "barbarian":
-                return R.drawable.barbarian_small;
+                return R.drawable.header_barbarian;
             case "bard":
-                return R.drawable.bard_small;
+                return R.drawable.header_bard;
             case "cleric":
-                return R.drawable.cleric_small;
+                return R.drawable.header_cleric;
             case "druid":
-                return R.drawable.druid_small;
+                return R.drawable.header_druid;
             case "fighter":
-                return R.drawable.fighter_small;
+                return R.drawable.header_fighter;
             case "monk":
-                return R.drawable.monk_small;
+                return R.drawable.header_monk;
             case "paladin":
-                return R.drawable.paladin_small;
+                return R.drawable.header_paladin;
             case "ranger":
-                return R.drawable.ranger_small;
+                return R.drawable.header_ranger;
             case "rogue":
-                return R.drawable.rogue_small;
+                return R.drawable.header_rogue;
             case "sorcerer":
-                return R.drawable.sorcerer_small;
+                return R.drawable.header_sorcerer;
             case "warlock":
-                return R.drawable.warlock_small;
+                return R.drawable.header_warlock;
             case "wizard":
-                return R.drawable.wizard_small;
+                return R.drawable.header_wizard;
+            default:
+                return 0;
+        }
+    }
+
+    static public int getHeadShotImage(String className) {
+        switch (className.toLowerCase()) {
+            case "barbarian":
+                return R.drawable.headshot_barbarian;
+            case "bard":
+                return R.drawable.headshot_bard;
+            case "cleric":
+                return R.drawable.headshot_cleric;
+            case "druid":
+                return R.drawable.headshot_druid;
+            case "fighter":
+                return R.drawable.headshot_fighter;
+            case "monk":
+                return R.drawable.headshot_monk;
+            case "paladin":
+                return R.drawable.headshot_paladin;
+            case "ranger":
+                return R.drawable.headshot_ranger;
+            case "rogue":
+                return R.drawable.headshot_rogue;
+            case "sorcerer":
+                return R.drawable.headshot_sorcerer;
+            case "warlock":
+                return R.drawable.headshot_warlock;
+            case "wizard":
+                return R.drawable.headshot_wizard;
             default:
                 return 0;
         }

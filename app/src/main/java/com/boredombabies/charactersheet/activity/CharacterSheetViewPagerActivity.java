@@ -46,7 +46,7 @@ public class CharacterSheetViewPagerActivity extends AppCompatActivity
         PlayerCharacter character = PlayerCharacterHelper.getActiveCharacter();
         setHeaderText(character.getName());
         int headerImage = character.getHeaderImage();
-        setHeaderImage((headerImage == 0 ? R.drawable.barbarian_small : headerImage));
+        setHeaderImage((headerImage == 0 ? R.drawable.header_barbarian : headerImage));
 
         if (findViewById(getFragmentId(2)) != null) {
             mTwoPane = true;
@@ -100,7 +100,9 @@ public class CharacterSheetViewPagerActivity extends AppCompatActivity
     @Override
     public void setHeaderImage(int drawable) {
         Picasso.with(this).load(drawable)
-            .into((ImageView) findViewById(R.id.header_image));
+                .fit()
+                .centerInside()
+                .into((ImageView) findViewById(R.id.header_image));
     }
 
     @Override

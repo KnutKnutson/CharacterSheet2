@@ -83,7 +83,7 @@ public class CharacterProfileFragment extends Fragment {
             }
             @Override
             public void afterTextChangedCallback(Editable s) {
-                int headerImage = Formulas.getClassImage(playerCharacter.getCharacterClass());
+                int headerImage = Formulas.getHeaderImage(playerCharacter.getCharacterClass());
                 if (headerImage != 0) {
                     realm.beginTransaction();
                     playerCharacter.setHeaderImage(headerImage);

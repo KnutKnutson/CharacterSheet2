@@ -96,14 +96,48 @@ public class CharacterSheetViewPagerFragment extends Fragment {
 
     private ViewPager.OnPageChangeListener getOnPageChangeListener() {
         return new ViewPager.OnPageChangeListener() {
+            private int scrollState;
+            private int currentPosition = getActiveFragmentPage();
+
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
 
             @Override
-            public void onPageSelected(int position) { saveActiveFragmentPage(position); }
+            public void onPageSelected(int position) {
+                currentPosition = position;
+                saveActiveFragmentPage(position);
+            }
 
             @Override
-            public void onPageScrollStateChanged(int state) { }
+            public void onPageScrollStateChanged(int state) {
+                handleScrollState(state);
+                scrollState = state;
+            }
+
+            private void handleScrollState(final int state) {
+                if (state == ViewPager.SCROLL_STATE_IDLE) {
+                    setNextItemIfNeeded();
+                }
+            }
+
+            private void setNextItemIfNeeded() {
+                if (!isScrollStateSettling()) {
+                    handleSetNextItem();
+                }
+            }
+
+            private boolean isScrollStateSettling() {
+                return scrollState == ViewPager.SCROLL_STATE_SETTLING;
+            }
+
+            private void handleSetNextItem() {
+                final int lastPosition = viewPager.getAdapter().getCount() - 1;
+                if(currentPosition == 0) {
+                    viewPager.setCurrentItem(lastPosition, false);
+                } else if(currentPosition == lastPosition) {
+                    viewPager.setCurrentItem(0, false);
+                }
+            }
         };// end new onpagechangelistener
     }
 }

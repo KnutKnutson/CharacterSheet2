@@ -19,7 +19,7 @@ public class PlayerCharacter extends RealmObject {
     private String characterRace = "";
     private String characterClass = "";
     private boolean deleted = false;
-    private int headerImage = R.drawable.barbarian_small;
+    private int headerImage = R.drawable.header_barbarian;
 
     private Profile profile;
     private Attributes attributes;

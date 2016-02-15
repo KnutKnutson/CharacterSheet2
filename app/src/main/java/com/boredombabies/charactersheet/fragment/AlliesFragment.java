@@ -74,11 +74,6 @@ public class AlliesFragment extends ListFragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_allies, container, false);
 
-//        ListView pcAllies = (ListView) rootView.findViewById(R.id.allies_list);
-//        pcAllies.setAdapter(listAdapter);
-
-        //TODO: list only showing one at a time. fix.
-
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.allies_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

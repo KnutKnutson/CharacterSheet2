@@ -53,8 +53,8 @@ public class CharacterListAdapter extends ArrayAdapter<PlayerCharacter> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         // Populate the data into the template view using the data object
-        int headerImage = Formulas.getClassImage(character.getCharacterClass());
-        Picasso.with(getContext()).load((headerImage != 0 ? headerImage : R.drawable.barbarian_small))
+        int headerImage = Formulas.getHeadShotImage(character.getCharacterClass());
+        Picasso.with(getContext()).load((headerImage != 0 ? headerImage : R.drawable.headshot_barbarian))
                 .resize(100, 100)
                 .centerCrop()
                 .into(viewHolder.characterIcon);

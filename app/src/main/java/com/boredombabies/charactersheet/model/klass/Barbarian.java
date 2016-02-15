@@ -8,6 +8,6 @@ import com.boredombabies.charactersheet.interfaces.CharacterClass;
  */
 public class Barbarian implements CharacterClass {
     private String className = "Barbarian";
-    private int defaultImage = R.drawable.human_male_barbarian;
+    private int defaultImage = R.drawable.header_barbarian;
 
 }

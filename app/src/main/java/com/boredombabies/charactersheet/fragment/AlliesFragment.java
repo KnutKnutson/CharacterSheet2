@@ -1,5 +1,6 @@
 package com.boredombabies.charactersheet.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -38,6 +39,7 @@ public class AlliesFragment extends ListFragment {
     PlayerCharacter playerCharacter;
     List<PlayerCharacter> allies;
     private CharacterListAdapter listAdapter;
+    private int NEW_ALLY_REQUEST_CODE = 42;
 
     // Tracks current menu item
     private int allyToRemoveFromParty;
@@ -66,6 +68,14 @@ public class AlliesFragment extends ListFragment {
         });
 
         setListViewHeightBasedOnItems(listView);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == NEW_ALLY_REQUEST_CODE && resultCode != Activity.RESULT_CANCELED) {
+            setListViewHeightBasedOnItems(getListView());
+        }
     }
 
     @Override
@@ -126,10 +136,10 @@ public class AlliesFragment extends ListFragment {
     public void newAlly() {
         AllySelectDialogFragment allySelectDialogFragment = new AllySelectDialogFragment();
         allySelectDialogFragment.setCurrentAlliesListAdapter(listAdapter);
+        allySelectDialogFragment.setTargetFragment(this, 42);
         allySelectDialogFragment.show(getActivity().getSupportFragmentManager(), "newAlly");
     }
 
-// TODO: edit action menu
     private ActionMode.Callback modeCallBack = new ActionMode.Callback() {
         // Called when the action mode is created; startActionMode() was called
         @Override
@@ -150,15 +160,22 @@ public class AlliesFragment extends ListFragment {
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.menu_delete:
-                    final PlayerCharacter honoredDead = PlayerCharacterHelper.getCharacter(realm, allyToRemoveFromParty);
-                    PlayerCharacterHelper.killCharacter(realm, honoredDead);
+                    final PlayerCharacter traitor = allies.get(allyToRemoveFromParty);
+                    realm.beginTransaction();
+                    playerCharacter.getAllies().getPlayerCharacterAllies().remove(traitor);
+                    realm.commitTransaction();
                     listAdapter.notifyDataSetChanged();
+                    setListViewHeightBasedOnItems(getListView());
+
                     Snackbar.make(getView(), "Ally Removed From Party", Snackbar.LENGTH_LONG)
                             .setAction("Undo", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    PlayerCharacterHelper.resurrectCharacter(realm, honoredDead);
+                                    realm.beginTransaction();
+                                    playerCharacter.getAllies().getPlayerCharacterAllies().add(traitor);
+                                    realm.commitTransaction();
                                     listAdapter.notifyDataSetChanged();
+                                    setListViewHeightBasedOnItems(getListView());
                                 }
                             }).show();
                     mode.finish(); // Action picked, so close the contextual menu

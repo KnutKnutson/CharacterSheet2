@@ -47,6 +47,8 @@ public class AllySelectDialogFragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         saveAlly(potentialAllies.get(which));
                         currentAlliesListAdapter.notifyDataSetChanged();
+                        // nonzero in resultcode
+                        getTargetFragment().onActivityResult(getTargetRequestCode(), 42, null);
                     }
                 });
         return builder.create();

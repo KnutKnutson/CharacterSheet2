@@ -1,5 +1,6 @@
 package com.boredombabies.charactersheet.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,10 +18,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.boredombabies.charactersheet.R;
+import com.boredombabies.charactersheet.activity.CharacterSheetViewPagerActivity;
 import com.boredombabies.charactersheet.adapter.CharacterListAdapter;
 import com.boredombabies.charactersheet.helper.EditTextTextWatcher;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
+
+import java.util.List;
 
 import io.realm.Realm;
 
@@ -32,6 +36,7 @@ import io.realm.Realm;
 public class AlliesFragment extends ListFragment {
     Realm realm;
     PlayerCharacter playerCharacter;
+    List<PlayerCharacter> allies;
     private CharacterListAdapter listAdapter;
 
     // Tracks current menu item
@@ -45,7 +50,9 @@ public class AlliesFragment extends ListFragment {
     public void onActivityCreated(Bundle savedState) {
         super.onActivityCreated(savedState);
 
-        getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        ListView listView = getListView();
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 if (currentActionMode != null) {
@@ -57,6 +64,8 @@ public class AlliesFragment extends ListFragment {
                 return true;
             }
         });
+
+        setListViewHeightBasedOnItems(listView);
     }
 
     @Override
@@ -65,7 +74,8 @@ public class AlliesFragment extends ListFragment {
 
         playerCharacter = PlayerCharacterHelper.getActiveCharacter();
         realm = Realm.getInstance(getActivity());
-        listAdapter = new CharacterListAdapter(getActivity(), playerCharacter.getAllies().getPlayerCharacterAllies());
+        allies = playerCharacter.getAllies().getPlayerCharacterAllies();
+        listAdapter = new CharacterListAdapter(getActivity(), allies);
         setListAdapter(listAdapter);
     }
 
@@ -107,14 +117,10 @@ public class AlliesFragment extends ListFragment {
     public void onListItemClick(ListView listView, View view, int position, long id) {
         super.onListItemClick(listView, view, position, id);
 
-        PlayerCharacterHelper.setActiveCharacter(PlayerCharacterHelper.assembleParty(realm).get(position));
+        PlayerCharacterHelper.setActiveCharacter( allies.get(position) );
 
-        // Notify the active callbacks interface (the activity, if the
-        // fragment is attached to one) that an item has been selected.
-//        mCallbacks.onItemSelected(PlayerCharacterHelper
-//                .assembleParty(realm)
-//                .get(position)
-//                .getName());
+        Intent viewAlly = new Intent(getActivity(), CharacterSheetViewPagerActivity.class);
+        startActivity(viewAlly);
     }
 
     public void newAlly() {
@@ -168,4 +174,26 @@ public class AlliesFragment extends ListFragment {
             currentActionMode = null; // Clear current action mode
         }
     };
+
+    public void setListViewHeightBasedOnItems(ListView listView) {
+        int numberOfItems = listAdapter.getCount();
+
+        // Get total height of all items.
+        int totalItemsHeight = 100;
+        for (int itemPos = 0; itemPos < numberOfItems; itemPos++) {
+            View item = listAdapter.getView(itemPos, null, listView);
+            item.measure(0, 0);
+            totalItemsHeight += item.getMeasuredHeight();
+        }
+
+        // Get total height of all item dividers.
+        int totalDividersHeight = listView.getDividerHeight() *
+                (numberOfItems - 1);
+
+        // Set list height.
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalItemsHeight + totalDividersHeight;
+        listView.setLayoutParams(params);
+        listView.requestLayout();
+    }
 }

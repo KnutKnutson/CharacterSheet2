@@ -72,11 +72,6 @@ public class PlayerCharacterHelper {
         return characters;
     }
 
-    public static RealmResults<PlayerCharacter> findAllies() {
-        Realm realm = Realm.getDefaultInstance();
-        return null;
-    }
-
     public static PlayerCharacter getCharacter(Realm realm, int partyMember) {
         return assembleParty(realm).get(partyMember);
     }

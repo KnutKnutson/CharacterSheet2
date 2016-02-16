@@ -1,7 +1,10 @@
 package com.boredombabies.charactersheet.activity;
 
 import android.content.Intent;
+import android.nfc.NdefMessage;
+import android.nfc.NfcAdapter;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
@@ -18,46 +21,11 @@ import com.squareup.picasso.Picasso;
 
 import io.realm.Realm;
 
-/**
- *  CHARACTER SHEET FRAGMENTS
- *  - Profile (Languages?)
- *  - Attributes (Abilities?) (Ability Scores?)
- *  - Equipment
- *  - Skills (Proficiencies? )
- *  - Combat Workspace? (Attacks?)
- *  - Inventory
- *  - Feats
- *  - Attacks?
- *  - Spells
- *  - Notes (companions?  Allies and Organizations? Background?)
- *
- */
-
-/**
- * An activity representing a list of CharacterSheets. This activity
- * has different presentations for handset and tablet-size devices. On
- * handsets, the activity presents a list of items, which when touched,
- * lead to a CharacterProfileActivity representing
- * item details. On tablets, the activity presents the list of items and
- * item details side-by-side using two vertical panes.
- * <p/>
- * The activity makes heavy use of fragments. The list of items is a
- * {@link CharacterSheetListFragment} and the item details
- * (if present) is a {@link CharacterProfileFragment}.
- * <p/>
- * This activity also implements the required
- * {@link CharacterSheetListFragment.Callbacks} interface
- * to listen for item selections.
- */
 public class CharacterSheetListActivity extends AppCompatActivity
         implements CharacterSheetListFragment.Callbacks {
 
     private Realm realm;
-
-    /**
-     * Whether or not the activity is in two-pane mode, i.e. running on a tablet
-     * device.
-     */
+    // Whether or not the activity is in two-pane mode, i.e. running on a tablet device.
     private boolean mTwoPane;
 
     @Override
@@ -105,6 +73,20 @@ public class CharacterSheetListActivity extends AppCompatActivity
         });
 
         // If exposing deep links into your app, handle intents here.
+    }
+
+    public void onResume() {
+        super.onResume();
+        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
+            Parcelable[] rawMsgs = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+            if (rawMsgs != null) {
+                msgs = new NdefMessage[rawMsgs.length];
+                for (int i = 0; i < rawMsgs.length; i++) {
+                    msgs[i] = (NdefMessage) rawMsgs[i];
+                }
+            }
+        }
+        //process the msgs array
     }
 
     /**

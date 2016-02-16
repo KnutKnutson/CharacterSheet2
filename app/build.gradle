@@ -35,7 +35,7 @@ dependencies {
     compile 'io.realm:realm-android:0.87.4'
 
     // GSON
-    compile 'com.google.code.gson:gson:2.4'
+    compile 'com.google.code.gson:gson:1.7.1'
 
     // Picasso
     compile 'com.squareup.picasso:picasso:2.5.2'

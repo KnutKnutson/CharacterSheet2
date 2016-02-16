@@ -5,6 +5,8 @@ import android.util.Log;
 import com.boredombabies.charactersheet.interfaces.DaggerPlayerCharacterInterface;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
 import com.boredombabies.charactersheet.module.PlayerCharacterModule;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,7 @@ public class PlayerCharacterHelper {
         realm.commitTransaction();
 
         setActiveCharacter(realmCharacter);
+
         return getActiveCharacter();
     }
 

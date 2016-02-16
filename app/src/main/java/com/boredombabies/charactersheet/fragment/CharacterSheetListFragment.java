@@ -1,9 +1,19 @@
 package com.boredombabies.charactersheet.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.nfc.NdefRecord;
+import android.nfc.NfcAdapter;
+import android.nfc.NfcEvent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ListFragment;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,9 +24,12 @@ import android.widget.ListView;
 import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.adapter.CharacterListAdapter;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
+import com.boredombabies.charactersheet.io.CharacterSerializer;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.io.File;
 
 import io.realm.Realm;
 
@@ -29,6 +42,7 @@ import io.realm.Realm;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
+// TODO: This fragment is getting out of hand.
 public class CharacterSheetListFragment extends ListFragment {
 
     private Realm realm;
@@ -38,6 +52,12 @@ public class CharacterSheetListFragment extends ListFragment {
     private int characterMenuItem;
     // Tracks current contextual action mode
     private ActionMode currentActionMode;
+
+    NfcAdapter nfcAdapter;
+    // Flag to indicate that Android Beam is available
+    boolean androidBeamAvailable = false;
+    // Instance that returns available files from this app
+    private FileUriCallback mFileUriCallback;
 
     /**
      * The serialization (saved instance state) Bundle key representing the
@@ -65,7 +85,7 @@ public class CharacterSheetListFragment extends ListFragment {
         /**
          * Callback for when an item has been selected.
          */
-        public void onItemSelected(String id);
+        void onItemSelected(String id);
     }
 
     /**
@@ -107,6 +127,8 @@ public class CharacterSheetListFragment extends ListFragment {
         realm = Realm.getInstance(getActivity());
         listAdapter = new CharacterListAdapter(getActivity(), PlayerCharacterHelper.assembleParty(realm));
         setListAdapter(listAdapter);
+        // TODO: enable
+        //loadNfcAdapter();
     }
 
     @Override
@@ -199,8 +221,11 @@ public class CharacterSheetListFragment extends ListFragment {
         // Called when the action mode is created; startActionMode() was called
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-            mode.setTitle("Delete Character");
+            mode.setTitle("Character Options");
             mode.getMenuInflater().inflate(R.menu.actions_character_list_item, menu);
+            if (true) {//!androidBeamAvailable
+                menu.getItem(1).setEnabled(false);
+            }
             return true;
         }
 
@@ -250,8 +275,110 @@ public class CharacterSheetListFragment extends ListFragment {
     }
 
     private void shareCharacter() {
-        PlayerCharacter exportedCharacter = realm.copyFromRealm(PlayerCharacterHelper.getCharacter(realm, characterMenuItem));
-        Gson gson = new GsonBuilder().create();
-        String json = gson.toJson(exportedCharacter);
+        PlayerCharacter characterToExport = realm.copyFromRealm(PlayerCharacterHelper.getCharacter(realm, characterMenuItem));
+        new CharacterSerializer(getActivity()).exportCharacter(characterToExport);
+        //nfcAdapter.setNdefPushMessage();
+    }
+
+    private NdefRecord createNdefRecord(byte[] payload) {
+        // http://developer.android.com/guide/topics/connectivity/nfc/nfc.html#p2p
+        //byte[] payload; //assign to your data
+        String domain = "com.boredombabies.charactersheet"; //usually your app's package name
+        String type = "externalType";
+        NdefRecord extRecord = NdefRecord.createExternal(domain, type, payload);
+        return extRecord;
+    }
+
+
+    /** probably delete all that shit below here **/
+
+    /** SENDING NFC FILES **/
+
+    private void loadNfcAdapter() {
+        // NFC isn't available on the device
+        if (!getActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_NFC)) {
+            /**
+             * Disable NFC features here.
+             * For example, disable menu items or buttons that activate
+             * NFC-related features
+             */
+            androidBeamAvailable = false;
+        } else {
+            nfcAdapter = NfcAdapter.getDefaultAdapter(getActivity());
+            mFileUriCallback = new FileUriCallback();
+            nfcAdapter.setBeamPushUrisCallback(mFileUriCallback, getActivity());
+        }
+    }
+
+    // List of URIs to provide to Android Beam
+    private Uri[] fileUris = new Uri[10];
+    /**
+     * Callback that Android Beam file transfer calls to get
+     * files to share
+     */
+    private class FileUriCallback implements NfcAdapter.CreateBeamUrisCallback {
+        public FileUriCallback() { }
+
+        /**
+         * Create content URIs as needed to share with another device
+         */
+        @Override
+        public Uri[] createBeamUris(NfcEvent event) {
+            String transferFile = CharacterSerializer.CHARACTER_JSON_FILE;
+            File requestFile = new File(getActivity().getExternalFilesDir(null), transferFile);
+            requestFile.setReadable(true, false);
+            // Get a URI for the File and add it to the list of URIs
+            Uri fileUri = Uri.fromFile(requestFile);
+            if (fileUri != null) {
+                fileUris[0] = fileUri;
+            } else {
+                Log.e("List Fragment", "No File URI available for file.");
+            }
+            return fileUris;
+        }
+    }
+
+
+    /** RECEIVING NFC FILES **/
+
+    private File mParentPath;
+    // Incoming Intent
+    private Intent mIntent;
+    /*
+     * Called from onNewIntent() for a SINGLE_TOP Activity
+     * or onCreate() for a new Activity. For onNewIntent(),
+     * remember to call setIntent() to store the most
+     * current Intent
+     *
+     */
+    private void handleViewIntent() {
+        // Get the Intent action
+        mIntent = getActivity().getIntent();
+        String action = mIntent.getAction();
+        /*
+         * For ACTION_VIEW, the Activity is being asked to display data.
+         * Get the URI.
+         */
+        if (TextUtils.equals(action, Intent.ACTION_VIEW)) {
+            // Get the URI from the Intent
+            Uri beamUri = mIntent.getData();
+            /*
+             * Test for the type of URI, by getting its scheme value
+             */
+            if (TextUtils.equals(beamUri.getScheme(), "file")) {
+                mParentPath = handleFileUri(beamUri);
+            } else if (TextUtils.equals( beamUri.getScheme(), "content")) {
+                //mParentPath = handleContentUri(beamUri);
+            }
+        }
+    }
+
+    public File handleFileUri(Uri beamUri) {
+        // Get the path part of the URI
+        String fileName = beamUri.getPath();
+        // Create a File object for this filename
+        return new File(fileName);
+        // Get a string containing the file's parent directory
+        //return copiedFile.getParent();
     }
 }

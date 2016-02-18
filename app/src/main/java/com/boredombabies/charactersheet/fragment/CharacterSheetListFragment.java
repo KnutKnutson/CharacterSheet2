@@ -53,12 +53,6 @@ public class CharacterSheetListFragment extends ListFragment {
     // Tracks current contextual action mode
     private ActionMode currentActionMode;
 
-    NfcAdapter nfcAdapter;
-    // Flag to indicate that Android Beam is available
-    boolean androidBeamAvailable = false;
-    // Instance that returns available files from this app
-    private FileUriCallback mFileUriCallback;
-
     /**
      * The serialization (saved instance state) Bundle key representing the
      * activated item position. Only used on tablets.
@@ -86,6 +80,7 @@ public class CharacterSheetListFragment extends ListFragment {
          * Callback for when an item has been selected.
          */
         void onItemSelected(String id);
+        void onCharacterToShare(String playerCharacter);
     }
 
     /**
@@ -94,8 +89,9 @@ public class CharacterSheetListFragment extends ListFragment {
      */
     private static Callbacks sDummyCallbacks = new Callbacks() {
         @Override
-        public void onItemSelected(String id) {
-        }
+        public void onItemSelected(String id) { }
+        @Override
+        public void onCharacterToShare(String playerCharacter) { }
     };
 
     /**
@@ -112,7 +108,9 @@ public class CharacterSheetListFragment extends ListFragment {
         getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                if (currentActionMode != null) { return false; }
+                if (currentActionMode != null) {
+                    return false;
+                }
                 characterMenuItem = position;
                 currentActionMode = getActivity().startActionMode(modeCallBack);
                 view.setSelected(true);
@@ -127,8 +125,6 @@ public class CharacterSheetListFragment extends ListFragment {
         realm = Realm.getInstance(getActivity());
         listAdapter = new CharacterListAdapter(getActivity(), PlayerCharacterHelper.assembleParty(realm));
         setListAdapter(listAdapter);
-        // TODO: enable
-        //loadNfcAdapter();
     }
 
     @Override
@@ -171,9 +167,9 @@ public class CharacterSheetListFragment extends ListFragment {
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
         mCallbacks.onItemSelected(PlayerCharacterHelper
-                                    .assembleParty(realm)
-                                    .get(position)
-                                    .getName());
+                .assembleParty(realm)
+                .get(position)
+                .getName());
     }
 
     @Override
@@ -280,35 +276,10 @@ public class CharacterSheetListFragment extends ListFragment {
         //nfcAdapter.setNdefPushMessage();
     }
 
-    private NdefRecord createNdefRecord(byte[] payload) {
-        // http://developer.android.com/guide/topics/connectivity/nfc/nfc.html#p2p
-        //byte[] payload; //assign to your data
-        String domain = "com.boredombabies.charactersheet"; //usually your app's package name
-        String type = "externalType";
-        NdefRecord extRecord = NdefRecord.createExternal(domain, type, payload);
-        return extRecord;
-    }
-
 
     /** probably delete all that shit below here **/
 
     /** SENDING NFC FILES **/
-
-    private void loadNfcAdapter() {
-        // NFC isn't available on the device
-        if (!getActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_NFC)) {
-            /**
-             * Disable NFC features here.
-             * For example, disable menu items or buttons that activate
-             * NFC-related features
-             */
-            androidBeamAvailable = false;
-        } else {
-            nfcAdapter = NfcAdapter.getDefaultAdapter(getActivity());
-            mFileUriCallback = new FileUriCallback();
-            nfcAdapter.setBeamPushUrisCallback(mFileUriCallback, getActivity());
-        }
-    }
 
     // List of URIs to provide to Android Beam
     private Uri[] fileUris = new Uri[10];

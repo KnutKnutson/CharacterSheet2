@@ -1,9 +1,14 @@
 package com.boredombabies.charactersheet.activity;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
+import android.nfc.NfcEvent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +16,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.fragment.CharacterProfileFragment;
@@ -22,11 +28,17 @@ import com.squareup.picasso.Picasso;
 import io.realm.Realm;
 
 public class CharacterSheetListActivity extends AppCompatActivity
-        implements CharacterSheetListFragment.Callbacks {
+        implements CharacterSheetListFragment.Callbacks,
+                    NfcAdapter.CreateNdefMessageCallback,
+                    NfcAdapter.OnNdefPushCompleteCallback {
 
     private Realm realm;
     // Whether or not the activity is in two-pane mode, i.e. running on a tablet device.
     private boolean mTwoPane;
+
+    NfcAdapter nfcAdapter;
+    String messageToSend;
+    private static final int MESSAGE_SENT = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,21 +84,45 @@ public class CharacterSheetListActivity extends AppCompatActivity
             }
         });
 
-        // If exposing deep links into your app, handle intents here.
+        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        if (nfcAdapter == null) {
+            Toast.makeText(this, "NFC is not available", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        } else {
+            // Register callback
+            nfcAdapter.setNdefPushMessageCallback(this, this);
+            // Register callback to listen for message-sent success
+            nfcAdapter.setOnNdefPushCompleteCallback(this, this);
+        }
     }
 
+    @Override
     public void onResume() {
         super.onResume();
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
-            Parcelable[] rawMsgs = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+            Parcelable[] rawMsgs = getIntent().getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
             if (rawMsgs != null) {
-                msgs = new NdefMessage[rawMsgs.length];
+                NdefMessage[] msgs = new NdefMessage[rawMsgs.length];
                 for (int i = 0; i < rawMsgs.length; i++) {
                     msgs[i] = (NdefMessage) rawMsgs[i];
                 }
+                // only using first message (json string)
+                String importedCharacterJson = new String(msgs[0].getRecords()[0].getPayload());
             }
         }
-        //process the msgs array
+    }
+
+    @Override
+    public void onNewIntent(Intent intent) {
+        // onResume gets called after this to handle the intent
+        setIntent(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
     }
 
     /**
@@ -100,15 +136,59 @@ public class CharacterSheetListActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        realm.close();
+    public void onCharacterToShare(String playerCharacter) {
+
     }
+
+    // implements CreateNdefMessageCallback
+    @Override
+    public NdefMessage createNdefMessage(NfcEvent event) {
+        String text = ("Beam me up, Android!\n\n" +
+                "Beam Time: " + System.currentTimeMillis());
+        NdefMessage msg = new NdefMessage(
+                new NdefRecord[] {
+                        //createNdefRecord(text.getBytes())
+                        NdefRecord.createMime("application/com.boredombabies.charactersheet", text.getBytes())
+                });
+        return msg;
+    }
+
+    /**
+     * Implementation for the OnNdefPushCompleteCallback interface
+     */
+    @Override
+    public void onNdefPushComplete(NfcEvent arg0) {
+        // A handler is needed to send messages to the activity when this
+        // callback occurs, because it happens from a binder thread
+        mHandler.obtainMessage(MESSAGE_SENT).sendToTarget();
+    }
+
+    /** This handler receives a message from onNdefPushComplete */
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MESSAGE_SENT:
+                    Toast.makeText(getApplicationContext(), "Message sent!", Toast.LENGTH_LONG).show();
+                    break;
+            }
+        }
+    };
+
 
     private void refreshListAdapter() {
         ((CharacterSheetListFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.charactersheet_list))
                 .getListAdapter()
                 .notifyDataSetChanged();
+    }
+
+    private NdefRecord createNdefRecord(byte[] payload) {
+        // http://developer.android.com/guide/topics/connectivity/nfc/nfc.html#p2p
+        //byte[] payload; //assign to your data
+        String domain = "com.boredombabies.charactersheet";
+        String type = "externalType";
+        NdefRecord extRecord = NdefRecord.createExternal(domain, type, payload);
+        return extRecord;
     }
 }

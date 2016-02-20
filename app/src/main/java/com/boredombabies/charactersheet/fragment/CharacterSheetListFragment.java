@@ -24,7 +24,6 @@ import android.widget.ListView;
 import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.adapter.CharacterListAdapter;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
-import com.boredombabies.charactersheet.io.CharacterSerializer;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -271,11 +270,5 @@ public class CharacterSheetListFragment extends ListFragment {
                         listAdapter.notifyDataSetChanged();
                     }
                 }).show();
-    }
-
-    private void shareCharacter() {
-        PlayerCharacter characterToExport = realm.copyFromRealm(PlayerCharacterHelper.getCharacter(realm, characterMenuItem));
-        new CharacterSerializer(getActivity()).exportCharacter(characterToExport);
-        //nfcAdapter.setNdefPushMessage();
     }
 }

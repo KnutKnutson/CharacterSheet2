@@ -56,10 +56,7 @@ public class CharacterListAdapter extends ArrayAdapter<PlayerCharacter> {
         }
         // Populate the data into the template view using the data object
         int headerImage = Formulas.getHeadShotImage(character.getCharacterClass());
-        Log.e("adapterImage", Integer.toString(headerImage));
-        // TODO: only barbarian is loading
         Picasso.with(getContext()).load((headerImage != 0 ? headerImage : R.drawable.headshot_barbarian))
-                .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .resize(100, 100)
                 .centerCrop()
                 .into(viewHolder.characterIcon);

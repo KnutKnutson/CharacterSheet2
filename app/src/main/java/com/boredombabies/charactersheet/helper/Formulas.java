@@ -30,7 +30,7 @@ public class Formulas {
     }
 
     static public int getHeaderImage(String className) {
-        switch (className.toLowerCase()) {
+        switch (className.toLowerCase().trim()) {
             case "barbarian":
                 return R.drawable.header_barbarian;
             case "bard":
@@ -61,7 +61,8 @@ public class Formulas {
     }
 
     static public int getHeadShotImage(String className) {
-        switch (className.toLowerCase()) {
+        Log.e("headshotImage", "classCalled with: " + className.toLowerCase());
+        switch (className.toLowerCase().trim()) {
             case "barbarian":
                 return R.drawable.headshot_barbarian;
             case "bard":
@@ -85,6 +86,7 @@ public class Formulas {
             case "warlock":
                 return R.drawable.headshot_warlock;
             case "wizard":
+                Log.e("headshot", "isWizard");
                 return R.drawable.headshot_wizard;
             default:
                 return 0;

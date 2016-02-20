@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.helper.Formulas;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -54,7 +55,9 @@ public class CharacterListAdapter extends ArrayAdapter<PlayerCharacter> {
         }
         // Populate the data into the template view using the data object
         int headerImage = Formulas.getHeadShotImage(character.getCharacterClass());
+        // TODO: only barbarian is loading
         Picasso.with(getContext()).load((headerImage != 0 ? headerImage : R.drawable.headshot_barbarian))
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .resize(100, 100)
                 .centerCrop()
                 .into(viewHolder.characterIcon);

@@ -128,6 +128,12 @@ public class CharacterSheetListFragment extends ListFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        listAdapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -234,6 +240,7 @@ public class CharacterSheetListFragment extends ListFragment {
         // Called when the user selects a contextual menu item
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            // TODO delete not working
             switch (item.getItemId()) {
                 case R.id.menu_delete:
                     deleteCharacter();
@@ -274,82 +281,5 @@ public class CharacterSheetListFragment extends ListFragment {
         PlayerCharacter characterToExport = realm.copyFromRealm(PlayerCharacterHelper.getCharacter(realm, characterMenuItem));
         new CharacterSerializer(getActivity()).exportCharacter(characterToExport);
         //nfcAdapter.setNdefPushMessage();
-    }
-
-
-    /** probably delete all that shit below here **/
-
-    /** SENDING NFC FILES **/
-
-    // List of URIs to provide to Android Beam
-    private Uri[] fileUris = new Uri[10];
-    /**
-     * Callback that Android Beam file transfer calls to get
-     * files to share
-     */
-    private class FileUriCallback implements NfcAdapter.CreateBeamUrisCallback {
-        public FileUriCallback() { }
-
-        /**
-         * Create content URIs as needed to share with another device
-         */
-        @Override
-        public Uri[] createBeamUris(NfcEvent event) {
-            String transferFile = CharacterSerializer.CHARACTER_JSON_FILE;
-            File requestFile = new File(getActivity().getExternalFilesDir(null), transferFile);
-            requestFile.setReadable(true, false);
-            // Get a URI for the File and add it to the list of URIs
-            Uri fileUri = Uri.fromFile(requestFile);
-            if (fileUri != null) {
-                fileUris[0] = fileUri;
-            } else {
-                Log.e("List Fragment", "No File URI available for file.");
-            }
-            return fileUris;
-        }
-    }
-
-
-    /** RECEIVING NFC FILES **/
-
-    private File mParentPath;
-    // Incoming Intent
-    private Intent mIntent;
-    /*
-     * Called from onNewIntent() for a SINGLE_TOP Activity
-     * or onCreate() for a new Activity. For onNewIntent(),
-     * remember to call setIntent() to store the most
-     * current Intent
-     *
-     */
-    private void handleViewIntent() {
-        // Get the Intent action
-        mIntent = getActivity().getIntent();
-        String action = mIntent.getAction();
-        /*
-         * For ACTION_VIEW, the Activity is being asked to display data.
-         * Get the URI.
-         */
-        if (TextUtils.equals(action, Intent.ACTION_VIEW)) {
-            // Get the URI from the Intent
-            Uri beamUri = mIntent.getData();
-            /*
-             * Test for the type of URI, by getting its scheme value
-             */
-            if (TextUtils.equals(beamUri.getScheme(), "file")) {
-                mParentPath = handleFileUri(beamUri);
-            } else if (TextUtils.equals( beamUri.getScheme(), "content")) {
-                //mParentPath = handleContentUri(beamUri);
-            }
-        }
-    }
-
-    public File handleFileUri(Uri beamUri) {
-        // Get the path part of the URI
-        String fileName = beamUri.getPath();
-        // Create a File object for this filename
-        return new File(fileName);
-        // Get a string containing the file's parent directory
-        //return copiedFile.getParent();
     }
 }

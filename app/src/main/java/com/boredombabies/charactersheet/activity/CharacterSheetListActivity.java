@@ -50,19 +50,7 @@ public class CharacterSheetListActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
-        if (findViewById(R.id.charactersheet_detail_container) != null) {
-            // The detail container view will be present only in the
-            // large-screen layouts (res/values-large and
-            // res/values-sw600dp). If this view is present, then the
-            // activity should be in two-pane mode.
-            mTwoPane = true;
-
-            // In two-pane mode, list items should be given the
-            // 'activated' state when touched.
-            ((CharacterSheetListFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.charactersheet_list))
-                    .setActivateOnItemClick(true);
-        }
+        loadCharacterSheetListFragment();
 
         ImageView splash = (ImageView) findViewById(R.id.main_splash);
         Picasso.with(this).load((mTwoPane ? R.drawable.main : R.drawable.main_small)).into(splash);
@@ -87,8 +75,6 @@ public class CharacterSheetListActivity extends AppCompatActivity
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (nfcAdapter == null) {
             Toast.makeText(this, "NFC is not available", Toast.LENGTH_LONG).show();
-            finish();
-            return;
         } else {
             // Register callback
             nfcAdapter.setNdefPushMessageCallback(this, this);
@@ -174,6 +160,22 @@ public class CharacterSheetListActivity extends AppCompatActivity
             }
         }
     };
+
+    private void loadCharacterSheetListFragment() {
+        if (findViewById(R.id.charactersheet_detail_container) != null) {
+            // The detail container view will be present only in the
+            // large-screen layouts (res/values-large and
+            // res/values-sw600dp). If this view is present, then the
+            // activity should be in two-pane mode.
+            mTwoPane = true;
+
+            // In two-pane mode, list items should be given the
+            // 'activated' state when touched.
+            ((CharacterSheetListFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.charactersheet_list))
+                    .setActivateOnItemClick(true);
+        }
+    }
 
 
     private void refreshListAdapter() {

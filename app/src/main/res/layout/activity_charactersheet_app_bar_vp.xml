@@ -14,24 +14,25 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height"
-        android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:fitsSystemWindows="true">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:fitsSystemWindows="true"
             app:toolbarId="@+id/toolbar">
 
             <FrameLayout
-                android:layout_width="600dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
                 app:layout_collapseMode="parallax"
-                app:layout_scrollFlags="scroll|snap">
+                app:layout_scrollFlags="scroll|snap"
+                android:fitsSystemWindows="true">
 
                 <ImageView
                     android:id="@+id/header_image"

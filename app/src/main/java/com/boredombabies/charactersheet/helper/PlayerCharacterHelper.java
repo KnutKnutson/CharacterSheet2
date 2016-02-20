@@ -41,7 +41,7 @@ public class PlayerCharacterHelper {
 
     public static void killCharacter(Realm realm, PlayerCharacter honoredDead) {
         realm.beginTransaction();
-        honoredDead.setDeleted(true);
+        honoredDead.removeFromRealm();
         realm.commitTransaction();
     }
 

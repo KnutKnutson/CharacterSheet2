@@ -68,10 +68,6 @@ public class CharacterSheetViewPagerFragment extends Fragment {
         viewPager.setCurrentItem(pageNumber);
     }
 
-    public ViewPager getViewPager() {
-        return viewPager;
-    }
-
     private void saveActiveFragmentPage(int activeFragment) {
         Context context = getActivity();
         SharedPreferences sharedPref = context.getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
@@ -110,7 +106,7 @@ public class CharacterSheetViewPagerFragment extends Fragment {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-                handleScrollState(state);
+                //handleScrollState(state); loops pages. not pretty.
                 scrollState = state;
             }
 

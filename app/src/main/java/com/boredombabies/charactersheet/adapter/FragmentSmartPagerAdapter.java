@@ -19,15 +19,6 @@ import java.util.ArrayList;
 //TODO loop around
 public class FragmentSmartPagerAdapter extends SmartFragmentStatePagerAdapter {
     private static int NUM_FRAGMENTS = 7;
-//    public static ArrayList<Integer> activeFragments;
-//    static {
-//        activeFragments = new ArrayList<>();
-//        for (int i = 0; i < 3; i++) {
-//            activeFragments.add(i);
-//        }
-//    }
-//
-//    public int pagerNumber = 0;
 
     public FragmentSmartPagerAdapter(FragmentManager fragmentManager) { super(fragmentManager); }
 

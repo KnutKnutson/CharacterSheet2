@@ -1,19 +1,9 @@
 package com.boredombabies.charactersheet.fragment;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.nfc.NdefRecord;
-import android.nfc.NfcAdapter;
-import android.nfc.NfcEvent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ListFragment;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,10 +15,6 @@ import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.adapter.CharacterListAdapter;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import java.io.File;
 
 import io.realm.Realm;
 
@@ -258,15 +244,18 @@ public class CharacterSheetListFragment extends ListFragment {
     };
 
     private void deleteCharacter() {
-        final PlayerCharacter honoredDead = PlayerCharacterHelper.getCharacter(realm, characterMenuItem);
+        final PlayerCharacter honoredDead = realm.copyFromRealm(PlayerCharacterHelper.getCharacter(realm, characterMenuItem));
         // TODO: try copyFromRealm then delete... though that may change the id...
-        PlayerCharacterHelper.killCharacter(realm, honoredDead);
+        PlayerCharacterHelper.killCharacter(realm, PlayerCharacterHelper.getCharacter(realm, characterMenuItem));
         listAdapter.notifyDataSetChanged();
         Snackbar.make(getView(), "Character Deleted", Snackbar.LENGTH_LONG)
                 .setAction("Undo", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        PlayerCharacterHelper.resurrectCharacter(realm, honoredDead);
+                        //PlayerCharacterHelper.resurrectCharacter(realm, honoredDead);
+                        realm.beginTransaction();
+                        realm.copyToRealmOrUpdate(honoredDead);
+                        realm.commitTransaction();
                         listAdapter.notifyDataSetChanged();
                     }
                 }).show();

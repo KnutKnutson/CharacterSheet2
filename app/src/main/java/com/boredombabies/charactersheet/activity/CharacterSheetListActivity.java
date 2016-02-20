@@ -98,7 +98,9 @@ public class CharacterSheetListActivity extends AppCompatActivity
                 // only using first message (json string)
                 String importedCharacterJson = new String(msgs[0].getRecords()[0].getPayload());
                 try {
+                    realm.beginTransaction();
                     realm.copyToRealmOrUpdate(realm.createObjectFromJson(PlayerCharacter.class, importedCharacterJson));
+                    realm.commitTransaction();
                     Toast.makeText(this, "Character Imported!", Toast.LENGTH_LONG).show();
                 } catch (Exception e) {
                     Toast.makeText(this, "Error: Character Not Imported", Toast.LENGTH_LONG).show();

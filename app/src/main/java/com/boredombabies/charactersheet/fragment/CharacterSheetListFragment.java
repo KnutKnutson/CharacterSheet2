@@ -80,7 +80,7 @@ public class CharacterSheetListFragment extends ListFragment {
          * Callback for when an item has been selected.
          */
         void onItemSelected(String id);
-        void onCharacterToShare(String playerCharacter);
+        void onCharacterToShare(int playerCharacter);
     }
 
     /**
@@ -91,7 +91,7 @@ public class CharacterSheetListFragment extends ListFragment {
         @Override
         public void onItemSelected(String id) { }
         @Override
-        public void onCharacterToShare(String playerCharacter) { }
+        public void onCharacterToShare(int playerCharacter) { }
     };
 
     /**
@@ -225,9 +225,6 @@ public class CharacterSheetListFragment extends ListFragment {
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             mode.setTitle("Character Options");
             mode.getMenuInflater().inflate(R.menu.actions_character_list_item, menu);
-            if (true) {//!androidBeamAvailable
-                menu.getItem(1).setEnabled(false);
-            }
             return true;
         }
 
@@ -240,14 +237,13 @@ public class CharacterSheetListFragment extends ListFragment {
         // Called when the user selects a contextual menu item
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-            // TODO delete not working
             switch (item.getItemId()) {
                 case R.id.menu_delete:
                     deleteCharacter();
                     mode.finish(); // Action picked, so close the contextual menu
                     return true;
                 case R.id.menu_share:
-                    shareCharacter();
+                    mCallbacks.onCharacterToShare(characterMenuItem);
                     mode.finish();
                     return true;
                 default:

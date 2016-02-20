@@ -1,6 +1,7 @@
 package com.boredombabies.charactersheet.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +56,7 @@ public class CharacterListAdapter extends ArrayAdapter<PlayerCharacter> {
         }
         // Populate the data into the template view using the data object
         int headerImage = Formulas.getHeadShotImage(character.getCharacterClass());
+        Log.e("adapterImage", Integer.toString(headerImage));
         // TODO: only barbarian is loading
         Picasso.with(getContext()).load((headerImage != 0 ? headerImage : R.drawable.headshot_barbarian))
                 .memoryPolicy(MemoryPolicy.NO_CACHE)

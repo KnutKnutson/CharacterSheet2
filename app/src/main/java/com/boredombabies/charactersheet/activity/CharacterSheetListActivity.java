@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import com.boredombabies.charactersheet.fragment.CharacterProfileFragment;
 import com.boredombabies.charactersheet.fragment.CharacterSheetListFragment;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
+import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
 
 import io.realm.Realm;
@@ -37,7 +39,7 @@ public class CharacterSheetListActivity extends AppCompatActivity
     private boolean mTwoPane;
 
     NfcAdapter nfcAdapter;
-    String messageToSend;
+    String characterToSend;
     private static final int MESSAGE_SENT = 1;
 
     @Override
@@ -74,7 +76,7 @@ public class CharacterSheetListActivity extends AppCompatActivity
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (nfcAdapter == null) {
-            Toast.makeText(this, "NFC is not available", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "NFC is not available", Toast.LENGTH_LONG).show();
         } else {
             // Register callback
             nfcAdapter.setNdefPushMessageCallback(this, this);
@@ -95,6 +97,12 @@ public class CharacterSheetListActivity extends AppCompatActivity
                 }
                 // only using first message (json string)
                 String importedCharacterJson = new String(msgs[0].getRecords()[0].getPayload());
+                try {
+                    realm.copyToRealmOrUpdate(realm.createObjectFromJson(PlayerCharacter.class, importedCharacterJson));
+                    Toast.makeText(this, "Character Imported!", Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    Toast.makeText(this, "Error: Character Not Imported", Toast.LENGTH_LONG).show();
+                }
             }
         }
     }
@@ -122,19 +130,25 @@ public class CharacterSheetListActivity extends AppCompatActivity
     }
 
     @Override
-    public void onCharacterToShare(String playerCharacter) {
-
+    public void onCharacterToShare(int playerCharacter) {
+        if (nfcAdapter == null) {
+            Toast.makeText(this, "NFC is not available", Toast.LENGTH_LONG).show();
+        } else {
+            PlayerCharacter characterToShare = realm.copyFromRealm(PlayerCharacterHelper.getCharacter(realm, playerCharacter));
+            characterToSend = new GsonBuilder().create().toJson(characterToShare);
+            Log.e("characterToSend", characterToSend);
+        }
     }
 
     // implements CreateNdefMessageCallback
     @Override
     public NdefMessage createNdefMessage(NfcEvent event) {
-        String text = ("Beam me up, Android!\n\n" +
-                "Beam Time: " + System.currentTimeMillis());
+        //String text = ("Beam me up, Android!\n\n" + "Beam Time: " + System.currentTimeMillis());
+        if (characterToSend == null) { return null; }
         NdefMessage msg = new NdefMessage(
                 new NdefRecord[] {
                         //createNdefRecord(text.getBytes())
-                        NdefRecord.createMime("application/com.boredombabies.charactersheet", text.getBytes())
+                        NdefRecord.createMime("application/com.boredombabies.charactersheet", characterToSend.getBytes())
                 });
         return msg;
     }
@@ -155,7 +169,8 @@ public class CharacterSheetListActivity extends AppCompatActivity
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MESSAGE_SENT:
-                    Toast.makeText(getApplicationContext(), "Message sent!", Toast.LENGTH_LONG).show();
+                    characterToSend = null;
+                    Toast.makeText(getApplicationContext(), "Character Transferred!", Toast.LENGTH_LONG).show();
                     break;
             }
         }
@@ -183,14 +198,5 @@ public class CharacterSheetListActivity extends AppCompatActivity
                 .findFragmentById(R.id.charactersheet_list))
                 .getListAdapter()
                 .notifyDataSetChanged();
-    }
-
-    private NdefRecord createNdefRecord(byte[] payload) {
-        // http://developer.android.com/guide/topics/connectivity/nfc/nfc.html#p2p
-        //byte[] payload; //assign to your data
-        String domain = "com.boredombabies.charactersheet";
-        String type = "externalType";
-        NdefRecord extRecord = NdefRecord.createExternal(domain, type, payload);
-        return extRecord;
     }
 }

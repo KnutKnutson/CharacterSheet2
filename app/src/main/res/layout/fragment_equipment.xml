@@ -126,6 +126,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/equipment"
+                android:inputType="textMultiLine|textCapSentences"
                 android:minLines="4"/>
 
             <TextView
@@ -149,6 +150,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/treasure"
+                android:inputType="textMultiLine|textCapSentences"
                 android:minLines="4"/>
 
             <TextView

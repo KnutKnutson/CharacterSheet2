@@ -183,15 +183,6 @@ public class CharacterAttributesFragment extends Fragment {
             skillsLayout.addView(skillsComponent);
         }
 
-        EditText otherProfAndLang = (EditText) rootView.findViewById(R.id.languages);
-        otherProfAndLang.setText(playerCharacter.getAttributes().getOtherProficienciesAndLanguages());
-        otherProfAndLang.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
-            @Override
-            public void inTransactionCallback(Editable s) {
-                playerCharacter.getAttributes().setOtherProficienciesAndLanguages(s.toString());
-            }
-        });
-
         return rootView;
     }
 

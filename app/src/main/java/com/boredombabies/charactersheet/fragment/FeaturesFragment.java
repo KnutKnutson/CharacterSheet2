@@ -44,6 +44,15 @@ public class FeaturesFragment extends android.support.v4.app.Fragment {
                 playerCharacter.getFeatures().setPersonalityTraits(s.toString());
             }
         });
+        // TODO: move languages to features model
+        EditText otherProfAndLang = (EditText) rootView.findViewById(R.id.languages);
+        otherProfAndLang.setText(playerCharacter.getAttributes().getOtherProficienciesAndLanguages());
+        otherProfAndLang.addTextChangedListener(new EditTextTextWatcher(getActivity()) {
+            @Override
+            public void inTransactionCallback(Editable s) {
+                playerCharacter.getAttributes().setOtherProficienciesAndLanguages(s.toString());
+            }
+        });
         EditText ideals = (EditText) rootView.findViewById(R.id.ideals);
         ideals.setText(playerCharacter.getFeatures().getIdeals());
         ideals.addTextChangedListener(new EditTextTextWatcher(getActivity()) {

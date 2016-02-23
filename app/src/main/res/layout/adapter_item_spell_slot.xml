@@ -33,6 +33,7 @@
         android:id="@+id/slotsTotal"
         android:layout_gravity="center_vertical"
         android:gravity="center_horizontal"
+        android:inputType="number"
         android:layout_weight="1" />
 
     <EditText
@@ -40,6 +41,7 @@
         android:id="@+id/slotsExpended"
         android:layout_gravity="center_vertical"
         android:gravity="center_horizontal"
+        android:inputType="number"
         android:layout_weight="1"/>
 
 </LinearLayout>

@@ -19,48 +19,12 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"/>
 
-        <EditText
-            style="@style/CircularEditText"
-            android:id="@+id/inspiration"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"/>
-
-        <TextView
-            style="@style/CircularEditTextLabel"
-            android:id="@+id/inspirationText"
-            android:text="@string/label_inspiration"
-            android:layout_toLeftOf="@+id/strut"
-            android:layout_toRightOf="@+id/inspiration"/>
-
-        <EditText
-            style="@style/CircularEditText"
-            android:id="@+id/proficiencyBonus"
-            android:layout_toRightOf="@+id/strut"/>
-
-        <TextView
-            style="@style/CircularEditTextLabel"
-            android:id="@+id/proficiencyBonusText"
-            android:text="@string/label_proficiency_bonus"
-            android:layout_toRightOf="@+id/proficiencyBonus"/>
-
-        <TextView
-            style="@style/CircularTextView"
-            android:id="@+id/passiveWisdom"
-            android:layout_below="@id/inspiration"/>
-
-        <TextView
-            style="@style/CircularEditTextLabel"
-            android:id="@+id/passiveWisdomText"
-            android:text="@string/label_passive_wisdom"
-            android:layout_below="@+id/inspiration"
-            android:layout_toRightOf="@+id/inspiration"/>
-
         <LinearLayout
             android:id="@+id/abilities_skills"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_below="@+id/passiveWisdom"
+            android:layout_alignParentTop="true"
             android:layout_marginTop="5dp"
             android:weightSum="3">
 
@@ -127,22 +91,42 @@
             </LinearLayout>
         </LinearLayout>
 
+        <EditText
+            style="@style/CircularEditText"
+            android:id="@+id/inspiration"
+            android:layout_below="@+id/abilities_skills"/>
+
         <TextView
-            style="@style/BaseTextView"
-            android:id="@+id/languages_label"
-            android:text="@string/label_languages"
-            android:layout_marginTop="8dp"
+            style="@style/CircularEditTextLabel"
+            android:id="@+id/inspirationText"
+            android:text="@string/label_inspiration"
             android:layout_below="@+id/abilities_skills"
-            android:layout_centerHorizontal="true"/>
+            android:layout_toStartOf="@+id/strut"
+            android:layout_toEndOf="@+id/inspiration"/>
 
         <EditText
-            style="@style/BaseEditTextView"
-            android:id="@+id/languages"
-            android:lines="6"
-            android:minLines="4"
-            android:maxLines="10"
-            android:scrollbars="vertical"
-            android:inputType="textMultiLine"
-            android:layout_below="@+id/languages_label"/>
+            style="@style/CircularEditText"
+            android:id="@+id/proficiencyBonus"
+            android:layout_below="@+id/abilities_skills"
+            android:layout_toEndOf="@+id/strut"/>
+
+        <TextView
+            style="@style/CircularEditTextLabel"
+            android:id="@+id/proficiencyBonusText"
+            android:text="@string/label_proficiency_bonus"
+            android:layout_below="@+id/abilities_skills"
+            android:layout_toEndOf="@+id/proficiencyBonus"/>
+
+        <TextView
+            style="@style/CircularTextView"
+            android:id="@+id/passiveWisdom"
+            android:layout_below="@id/inspiration"/>
+
+        <TextView
+            style="@style/CircularEditTextLabel"
+            android:id="@+id/passiveWisdomText"
+            android:text="@string/label_passive_wisdom"
+            android:layout_below="@+id/inspiration"
+            android:layout_toEndOf="@+id/inspiration"/>
     </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>

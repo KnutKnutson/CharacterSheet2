@@ -27,7 +27,7 @@
         android:paddingTop="2dp"
         android:paddingEnd="0dp"
         android:paddingBottom="2dp"
-        android:inputType="textNoSuggestions"
+        android:inputType="textNoSuggestions|textCapWords"
         />
 
 </LinearLayout>

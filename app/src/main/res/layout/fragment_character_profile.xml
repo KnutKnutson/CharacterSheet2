@@ -15,6 +15,7 @@
         <EditText
             style="@style/BaseEditTextView"
             android:id="@+id/characterName"
+            android:inputType="textPersonName"
             android:layout_alignParentTop="true"/>
 
         <TextView
@@ -130,6 +131,7 @@
             style="@style/BaseTextView"
             android:id="@+id/playerNameLabel"
             android:text="@string/label_player_name"
+            android:inputType="textPersonName"
             android:layout_below="@+id/playerName"
             android:layout_toRightOf="@+id/class_race_strut"/>
 
@@ -149,6 +151,7 @@
                 <EditText
                     style="@style/BaseEditTextView"
                     android:id="@+id/age"
+                    android:inputType="number"
                     android:layout_alignParentTop="true"/>
 
                 <TextView

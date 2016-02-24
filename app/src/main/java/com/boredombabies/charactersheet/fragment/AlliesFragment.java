@@ -195,11 +195,11 @@ public class AlliesFragment extends ListFragment {
         int numberOfItems = listAdapter.getCount();
 
         // Get total height of all items.
-        int totalItemsHeight = 100;
+        int totalItemsHeight = 0;
         for (int itemPos = 0; itemPos < numberOfItems; itemPos++) {
             View item = listAdapter.getView(itemPos, null, listView);
             item.measure(0, 0);
-            totalItemsHeight += item.getMeasuredHeight();
+            totalItemsHeight += item.getMeasuredHeight() + 20; // little extra love.
         }
 
         // Get total height of all item dividers.

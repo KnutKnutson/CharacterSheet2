@@ -245,7 +245,6 @@ public class CharacterSheetListFragment extends ListFragment {
 
     private void deleteCharacter() {
         final PlayerCharacter honoredDead = realm.copyFromRealm(PlayerCharacterHelper.getCharacter(realm, characterMenuItem));
-        // TODO: try copyFromRealm then delete... though that may change the id...
         PlayerCharacterHelper.killCharacter(realm, PlayerCharacterHelper.getCharacter(realm, characterMenuItem));
         listAdapter.notifyDataSetChanged();
         Snackbar.make(getView(), "Character Deleted", Snackbar.LENGTH_LONG)

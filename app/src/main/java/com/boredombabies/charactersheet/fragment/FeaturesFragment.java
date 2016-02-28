@@ -44,7 +44,6 @@ public class FeaturesFragment extends android.support.v4.app.Fragment {
                 playerCharacter.getFeatures().setPersonalityTraits(s.toString());
             }
         });
-        // TODO: move languages to features model
         EditText otherProfAndLang = (EditText) rootView.findViewById(R.id.languages);
         otherProfAndLang.setText(playerCharacter.getAttributes().getOtherProficienciesAndLanguages());
         otherProfAndLang.addTextChangedListener(new EditTextTextWatcher(getActivity()) {

@@ -65,7 +65,6 @@ public class PlayerCharacterHelper {
 
     public static RealmResults<PlayerCharacter> assembleParty(Realm realm) {
         if (characters == null) {
-            // TODO: clean up deleted characters
             characters = realm.where( PlayerCharacter.class )
                               .equalTo("deleted", false)
                               .findAll();

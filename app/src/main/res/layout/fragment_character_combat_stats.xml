@@ -121,20 +121,27 @@
                         android:paddingTop="0dp"
                         android:paddingEnd="0dp"
                         android:paddingBottom="4dp"/>
-                    <EditText
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/hitPointMaxLabel"
-                        android:id="@+id/currentHitPoints"
-                        android:background="@android:color/transparent"
-                        android:minLines="2"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/currentHitPointsLabel"
-                        android:text="@string/label_current_hit_points"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"/>
+                        android:layout_height="match_parent"
+                        android:id="@+id/currentHPETWrapper"
+                        android:layout_below="@+id/hitPointMaxLabel">
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/currentHitPoints"
+                            android:background="@android:color/transparent"
+                            android:layout_marginBottom="@dimen/content_margin"
+                            android:minLines="2"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/currentHitPointsLabel"
+                            android:text="@string/label_current_hit_points"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true" />
+
+                    </RelativeLayout>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -151,7 +158,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/temporaryHitPoints"
-                        android:layout_above="@+id/temporaryHitPointsLabel"
                         android:background="@android:color/transparent"
                         android:minLines="2"/>
                     <TextView
@@ -221,6 +227,7 @@
                     android:layout_marginTop="@dimen/content_margin"
                     android:layout_marginBottom="@dimen/content_margin"
                     android:layout_marginEnd="@dimen/content_margin"
+                    android:paddingBottom="@dimen/content_margin"
                     android:id="@+id/deathSavesLayout">
 
                     <TextView
@@ -278,10 +285,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/label_death_saves"
-                        android:layout_below="@+id/failure2"
                         android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="5dp"/>
+                        android:layout_centerHorizontal="true" />
                 </RelativeLayout>
             </LinearLayout>
 

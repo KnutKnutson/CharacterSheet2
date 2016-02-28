@@ -25,7 +25,7 @@
             app:toolbarId="@+id/toolbar">
 
             <FrameLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/app_bar_height"
                 android:layout_gravity="right"
                 app:layout_collapseMode="parallax"
@@ -34,7 +34,7 @@
 
                 <ImageView
                     android:id="@+id/header_image"
-                    android:layout_width="match_parent"
+                    android:layout_width="500dp"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:fitsSystemWindows="true"/>

@@ -27,6 +27,8 @@ import com.boredombabies.charactersheet.model.PlayerCharacter;
 import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
 
+import java.lang.ref.WeakReference;
+
 import io.realm.Realm;
 
 public class CharacterSheetListActivity extends AppCompatActivity
@@ -166,16 +168,52 @@ public class CharacterSheetListActivity extends AppCompatActivity
     }
 
     /** This handler receives a message from onNdefPushComplete */
-    private final Handler mHandler = new Handler() {
+
+    private final NdefMessageHandler mHandler = new NdefMessageHandler(this);
+//    private final Handler mHandler = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            switch (msg.what) {
+//                case MESSAGE_SENT:
+//                    characterToSend = null;
+//                    Toast.makeText(getApplicationContext(), "Character Transferred!", Toast.LENGTH_LONG).show();
+//                    break;
+//            }
+//        }
+//    };
+
+    /**
+     * Instances of static inner classes do not hold an implicit
+     * reference to their outer class.
+     */
+    private static class NdefMessageHandler extends Handler {
+        private final WeakReference<CharacterSheetListActivity> mActivity;
+
+        public NdefMessageHandler(CharacterSheetListActivity activity) {
+            mActivity = new WeakReference<CharacterSheetListActivity>(activity);
+        }
+
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case MESSAGE_SENT:
-                    characterToSend = null;
-                    Toast.makeText(getApplicationContext(), "Character Transferred!", Toast.LENGTH_LONG).show();
-                    break;
+            CharacterSheetListActivity activity = mActivity.get();
+            if (activity != null) {
+                switch (msg.what) {
+                    case MESSAGE_SENT:
+                        activity.characterToSend = null;
+                        Toast.makeText(activity.getApplicationContext(), "Character Transferred!", Toast.LENGTH_LONG).show();
+                        break;
+                }
             }
         }
+    }
+
+    /**
+     * Instances of anonymous classes do not hold an implicit
+     * reference to their outer class when they are "static".
+     */
+    private static final Runnable sRunnable = new Runnable() {
+        @Override
+        public void run() { /* ... */ }
     };
 
     private void loadCharacterSheetListFragment() {

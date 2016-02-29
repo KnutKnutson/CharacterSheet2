@@ -8,7 +8,7 @@ import io.realm.RealmObject;
  */
 public class Allies extends RealmObject {
     private String allies;
-    private RealmList<PlayerCharacter> playerCharacterAllies;
+    private transient RealmList<PlayerCharacter> playerCharacterAllies;
     private String organizationName;
 
     public Allies() {}

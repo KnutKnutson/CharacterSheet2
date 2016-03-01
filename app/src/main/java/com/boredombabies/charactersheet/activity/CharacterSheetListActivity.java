@@ -139,8 +139,7 @@ public class CharacterSheetListActivity extends AppCompatActivity
             Toast.makeText(this, "NFC is not available", Toast.LENGTH_LONG).show();
         } else {
             PlayerCharacter characterToShare = realm.copyFromRealm(PlayerCharacterHelper.getCharacter(realm, playerCharacter));
-            characterToSend = new GsonBuilder().create().toJson(characterToShare);
-            Log.e("characterToSend", characterToSend);
+            characterToSend = serializeCharacter(characterToShare);
         }
     }
 
@@ -165,6 +164,10 @@ public class CharacterSheetListActivity extends AppCompatActivity
         // A handler is needed to send messages to the activity when this
         // callback occurs, because it happens from a binder thread
         mHandler.obtainMessage(MESSAGE_SENT).sendToTarget();
+    }
+
+    public String serializeCharacter(PlayerCharacter playerCharacter) {
+        return new GsonBuilder().create().toJson(playerCharacter);
     }
 
     /** This handler receives a message from onNdefPushComplete */

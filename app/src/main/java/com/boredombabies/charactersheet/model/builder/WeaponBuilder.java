@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.boredombabies.charactersheet.model.Weapon;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created on 3/5/16.
@@ -52,7 +53,11 @@ public class WeaponBuilder {
     public static final String LONGBOW = "Longbow";
     public static final String NET = "Net";
 
-    public static final String[] WEAPONS = {CLUB, DAGGER, GREATCLUB, HANDAXE, JAVELIN, LIGHT_HAMMER, MACE, QUARTERSTAFF, SICKLE, SPEAR, UNARMED_STRIKE, LIGHT_CROSSBOW, DART, SHORTBOW, SLING, BATTLEAXE, FLAIL, GLAIVE, GREATAXE, GREATSWORD, HALBERD, LANCE, LONGSWORD, MAUL, MORNINGSTAR, PIKE, RAPIER, SCIMITAR, SHORTSWORD, TRIDENT, WAR_PICK, WARHAMMER, WHIP, BLOWGUN, HAND_CROSSBOW, HEAVY_CROSSBOW, LONGBOW, NET};
+    public static final String[] WEAPONS = {CLUB, DAGGER, GREATCLUB, HANDAXE, JAVELIN, LIGHT_HAMMER,
+            MACE, QUARTERSTAFF, SICKLE, SPEAR, UNARMED_STRIKE, LIGHT_CROSSBOW, DART, SHORTBOW,
+            SLING, BATTLEAXE, FLAIL, GLAIVE, GREATAXE, GREATSWORD, HALBERD, LANCE, LONGSWORD, MAUL,
+            MORNINGSTAR, PIKE, RAPIER, SCIMITAR, SHORTSWORD, TRIDENT, WAR_PICK, WARHAMMER, WHIP,
+            BLOWGUN, HAND_CROSSBOW, HEAVY_CROSSBOW, LONGBOW, NET};
 
     public static final String AMMUNITION = "Ammunition";
     public static final String FINESSE = "Finesse";
@@ -79,6 +84,14 @@ public class WeaponBuilder {
     public static final String CP = "cp";
     public static final String SP = "sp";
     public static final String GP = "gp";
+
+    public static List<Weapon> buildAll() {
+        List<Weapon> weapons = new ArrayList<>();
+        for (String weaponName : WEAPONS) {
+            weapons.add(build(weaponName));
+        }
+        return weapons;
+    }
 
     public static Weapon build(String weapon) {
         switch (weapon) {
@@ -259,16 +272,17 @@ public class WeaponBuilder {
         weapon.setDamageType(BLUDGEONING);
         weapon.setWeight(weight(4));
         weapon.setProperties(properties(VERSATILE));
+        weapon.setVersatileDamage(die(1, 8));
         return weapon;
     }
 
     public static Weapon sickle() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
+        weapon.setName(SICKLE);
         weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
+        weapon.setCost(cost(1, GP));
         weapon.setDamage(die(1, 4));
-        weapon.setDamageType(BLUDGEONING);
+        weapon.setDamageType(SLASHING);
         weapon.setWeight(weight(2));
         weapon.setProperties(properties(LIGHT));
         return weapon;
@@ -276,360 +290,356 @@ public class WeaponBuilder {
 
     public static Weapon spear() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
+        weapon.setName(SPEAR);
         weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
-        weapon.setDamageType(BLUDGEONING);
-        weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
+        weapon.setCost(cost(1, GP));
+        weapon.setDamage(die(1, 6));
+        weapon.setDamageType(PIERCING);
+        weapon.setWeight(weight(3));
+        weapon.setProperties(properties(THROWN, VERSATILE));
         weapon.setRange(range(20, 60));
+        weapon.setVersatileDamage(die(1, 8));
         return weapon;
     }
 
     public static Weapon unarmedStrike() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
+        weapon.setName(UNARMED_STRIKE);
         weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
+        weapon.setDamage("1");
         weapon.setDamageType(BLUDGEONING);
-        weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
         return weapon;
     }
 
     public static Weapon lightCrossbow() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
-        weapon.setDamageType(BLUDGEONING);
-        weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
-        weapon.setRange(range(20, 60));
+        weapon.setName(LIGHT_CROSSBOW);
+        weapon.setProficiency(proficiency(SIMPLE, RANGED));
+        weapon.setCost(cost(25, GP));
+        weapon.setDamage(die(1, 8));
+        weapon.setDamageType(PIERCING);
+        weapon.setWeight(weight(5));
+        weapon.setProperties(properties(AMMUNITION, LOADING, TWO_HANDED));
+        weapon.setRange(range(80, 320));
         return weapon;
     }
 
     public static Weapon dart() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
+        weapon.setName(DART);
+        weapon.setProficiency(proficiency(SIMPLE, RANGED));
+        weapon.setCost(cost(5, CP));
         weapon.setDamage(die(1, 4));
-        weapon.setDamageType(BLUDGEONING);
-        weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
+        weapon.setDamageType(PIERCING);
+        weapon.setWeight("1/4 lb.");
+        weapon.setProperties(properties(FINESSE, THROWN));
         weapon.setRange(range(20, 60));
         return weapon;
     }
 
     public static Weapon shortBow() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
-        weapon.setDamageType(BLUDGEONING);
+        weapon.setName(SHORTBOW);
+        weapon.setProficiency(proficiency(SIMPLE, RANGED));
+        weapon.setCost(cost(25, GP));
+        weapon.setDamage(die(1, 6));
+        weapon.setDamageType(PIERCING);
         weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
-        weapon.setRange(range(20, 60));
+        weapon.setProperties(properties(AMMUNITION, TWO_HANDED));
+        weapon.setRange(range(80, 320));
         return weapon;
     }
 
     public static Weapon sling() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
+        weapon.setName(SLING);
+        weapon.setProficiency(proficiency(SIMPLE, RANGED));
         weapon.setCost(cost(1, SP));
         weapon.setDamage(die(1, 4));
         weapon.setDamageType(BLUDGEONING);
-        weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
-        weapon.setRange(range(20, 60));
+        weapon.setProperties(properties(AMMUNITION));
+        weapon.setRange(range(30, 120));
         return weapon;
     }
 
     public static Weapon battleaxe() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
-        weapon.setDamageType(BLUDGEONING);
-        weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
+        weapon.setName(BATTLEAXE);
+        weapon.setProficiency(proficiency(MARTIAL, MELEE));
+        weapon.setCost(cost(10, GP));
+        weapon.setDamage(die(1, 8));
+        weapon.setDamageType(SLASHING);
+        weapon.setWeight(weight(4));
+        weapon.setProperties(properties(VERSATILE));
+        weapon.setVersatileDamage(die(1, 10));
         return weapon;
     }
 
     public static Weapon flail() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
+        weapon.setName(FLAIL);
+        weapon.setProficiency(proficiency(MARTIAL, MELEE));
+        weapon.setCost(cost(10, GP));
+        weapon.setDamage(die(1, 8));
         weapon.setDamageType(BLUDGEONING);
         weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
         return weapon;
     }
 
     public static Weapon glaive() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
-        weapon.setDamageType(BLUDGEONING);
-        weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
+        weapon.setName(GLAIVE);
+        weapon.setProficiency(proficiency(MARTIAL, MELEE));
+        weapon.setCost(cost(20, GP));
+        weapon.setDamage(die(1, 10));
+        weapon.setDamageType(SLASHING);
+        weapon.setWeight(weight(6));
+        weapon.setProperties(properties(HEAVY, REACH, TWO_HANDED));
         return weapon;
     }
 
     public static Weapon greataxe() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
-        weapon.setDamageType(BLUDGEONING);
-        weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
+        weapon.setName(GREATAXE);
+        weapon.setProficiency(proficiency(MARTIAL, MELEE));
+        weapon.setCost(cost(30, GP));
+        weapon.setDamage(die(1, 12));
+        weapon.setDamageType(SLASHING);
+        weapon.setWeight(weight(7));
+        weapon.setProperties(properties(HEAVY, TWO_HANDED));
         return weapon;
     }
 
     public static Weapon greatsword() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
-        weapon.setDamageType(BLUDGEONING);
-        weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
+        weapon.setName(GREATSWORD);
+        weapon.setProficiency(proficiency(MARTIAL, MELEE));
+        weapon.setCost(cost(50, GP));
+        weapon.setDamage(die(2, 6));
+        weapon.setDamageType(SLASHING);
+        weapon.setWeight(weight(6));
+        weapon.setProperties(properties(HEAVY, TWO_HANDED));
         return weapon;
     }
 
     public static Weapon halberd() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
-        weapon.setDamageType(BLUDGEONING);
-        weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
+        weapon.setName(HALBERD);
+        weapon.setProficiency(proficiency(MARTIAL, MELEE));
+        weapon.setCost(cost(20, GP));
+        weapon.setDamage(die(1, 10));
+        weapon.setDamageType(SLASHING);
+        weapon.setWeight(weight(6));
+        weapon.setProperties(properties(HEAVY, REACH, TWO_HANDED));
         return weapon;
     }
 
     public static Weapon lance() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
-        weapon.setDamageType(BLUDGEONING);
-        weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
+        weapon.setName(LANCE);
+        weapon.setProficiency(proficiency(MARTIAL, MELEE));
+        weapon.setCost(cost(10, GP));
+        weapon.setDamage(die(1, 12));
+        weapon.setDamageType(PIERCING);
+        weapon.setWeight(weight(6));
+        weapon.setProperties(properties(REACH, SPECIAL));
         return weapon;
     }
 
     public static Weapon longsword() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
-        weapon.setDamageType(BLUDGEONING);
-        weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
+        weapon.setName(LONGSWORD);
+        weapon.setProficiency(proficiency(MARTIAL, MELEE));
+        weapon.setCost(cost(15, GP));
+        weapon.setDamage(die(1, 8));
+        weapon.setDamageType(SLASHING);
+        weapon.setWeight(weight(3));
+        weapon.setProperties(properties(VERSATILE));
+        weapon.setVersatileDamage(die(1, 10));
         return weapon;
     }
 
     public static Weapon maul() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
+        weapon.setName(MAUL);
+        weapon.setProficiency(proficiency(MARTIAL, MELEE));
+        weapon.setCost(cost(10, GP));
+        weapon.setDamage(die(2, 6));
         weapon.setDamageType(BLUDGEONING);
-        weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
+        weapon.setWeight(weight(10));
+        weapon.setProperties(properties(HEAVY, TWO_HANDED));
         return weapon;
     }
 
     public static Weapon morningstar() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
-        weapon.setDamageType(BLUDGEONING);
-        weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
+        weapon.setName(MORNINGSTAR);
+        weapon.setProficiency(proficiency(MARTIAL, MELEE));
+        weapon.setCost(cost(15, GP));
+        weapon.setDamage(die(1, 8));
+        weapon.setDamageType(PIERCING);
+        weapon.setWeight(weight(4));
         return weapon;
     }
 
     public static Weapon pike() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
-        weapon.setDamageType(BLUDGEONING);
-        weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
+        weapon.setName(PIKE);
+        weapon.setProficiency(proficiency(MARTIAL, MELEE));
+        weapon.setCost(cost(5, GP));
+        weapon.setDamage(die(1, 10));
+        weapon.setDamageType(PIERCING);
+        weapon.setWeight(weight(18));
+        weapon.setProperties(properties(HEAVY, REACH, TWO_HANDED));
         return weapon;
     }
 
     public static Weapon rapier() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
-        weapon.setDamageType(BLUDGEONING);
+        weapon.setName(RAPIER);
+        weapon.setProficiency(proficiency(MARTIAL, MELEE));
+        weapon.setCost(cost(25, GP));
+        weapon.setDamage(die(1, 8));
+        weapon.setDamageType(PIERCING);
         weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
+        weapon.setProperties(properties(FINESSE));
         return weapon;
     }
 
     public static Weapon scimitar() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
-        weapon.setDamageType(BLUDGEONING);
-        weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
+        weapon.setName(SCIMITAR);
+        weapon.setProficiency(proficiency(MARTIAL, MELEE));
+        weapon.setCost(cost(25, GP));
+        weapon.setDamage(die(1, 6));
+        weapon.setDamageType(SLASHING);
+        weapon.setWeight(weight(3));
+        weapon.setProperties(properties(FINESSE, LIGHT));
         return weapon;
     }
 
     public static Weapon shortsword() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
-        weapon.setDamageType(BLUDGEONING);
+        weapon.setName(SHORTSWORD);
+        weapon.setProficiency(proficiency(MARTIAL, MELEE));
+        weapon.setCost(cost(10, GP));
+        weapon.setDamage(die(1, 6));
+        weapon.setDamageType(PIERCING);
         weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
+        weapon.setProperties(properties(FINESSE, LIGHT));
         return weapon;
     }
 
     public static Weapon trident() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
-        weapon.setDamageType(BLUDGEONING);
-        weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
+        weapon.setName(TRIDENT);
+        weapon.setProficiency(proficiency(MARTIAL, MELEE));
+        weapon.setCost(cost(5, GP));
+        weapon.setDamage(die(1, 6));
+        weapon.setDamageType(PIERCING);
+        weapon.setWeight(weight(4));
+        weapon.setProperties(properties(THROWN, VERSATILE));
         weapon.setRange(range(20, 60));
+        weapon.setVersatileDamage(die(1, 8));
         return weapon;
     }
 
     public static Weapon warPick() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
-        weapon.setDamageType(BLUDGEONING);
+        weapon.setName(WAR_PICK);
+        weapon.setProficiency(proficiency(MARTIAL, MELEE));
+        weapon.setCost(cost(5, GP));
+        weapon.setDamage(die(1, 8));
+        weapon.setDamageType(PIERCING);
         weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
         return weapon;
     }
 
     public static Weapon warhammer() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
+        weapon.setName(WARHAMMER);
+        weapon.setProficiency(proficiency(MARTIAL, MELEE));
+        weapon.setCost(cost(15, GP));
+        weapon.setDamage(die(1, 8));
         weapon.setDamageType(BLUDGEONING);
         weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
+        weapon.setProperties(properties(VERSATILE));
+        weapon.setVersatileDamage(die(1, 10));
         return weapon;
     }
 
     public static Weapon whip() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
+        weapon.setName(WHIP);
+        weapon.setProficiency(proficiency(MARTIAL, MELEE));
+        weapon.setCost(cost(2, GP));
         weapon.setDamage(die(1, 4));
-        weapon.setDamageType(BLUDGEONING);
-        weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
+        weapon.setDamageType(SLASHING);
+        weapon.setWeight(weight(3));
+        weapon.setProperties(properties(FINESSE, REACH));
         return weapon;
     }
 
     public static Weapon blowgun() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
-        weapon.setDamageType(BLUDGEONING);
-        weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
-        weapon.setRange(range(20, 60));
+        weapon.setName(BLOWGUN);
+        weapon.setProficiency(proficiency(MARTIAL, RANGED));
+        weapon.setCost(cost(10, GP));
+        weapon.setDamage("1");
+        weapon.setDamageType(PIERCING);
+        weapon.setWeight(weight(1));
+        weapon.setProperties(properties(AMMUNITION, LOADING));
+        weapon.setRange(range(25, 100));
         return weapon;
     }
 
     public static Weapon handCrossbow() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
-        weapon.setDamageType(BLUDGEONING);
-        weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
-        weapon.setRange(range(20, 60));
+        weapon.setName(HAND_CROSSBOW);
+        weapon.setProficiency(proficiency(MARTIAL, RANGED));
+        weapon.setCost(cost(75, GP));
+        weapon.setDamage(die(1, 6));
+        weapon.setDamageType(PIERCING);
+        weapon.setWeight(weight(3));
+        weapon.setProperties(properties(AMMUNITION, LIGHT, LOADING));
+        weapon.setRange(range(30, 120));
         return weapon;
     }
 
     public static Weapon heavyCrossbow() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
-        weapon.setDamageType(BLUDGEONING);
-        weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
-        weapon.setRange(range(20, 60));
+        weapon.setName(HEAVY_CROSSBOW);
+        weapon.setProficiency(proficiency(MARTIAL, RANGED));
+        weapon.setCost(cost(50, GP));
+        weapon.setDamage(die(1, 10));
+        weapon.setDamageType(PIERCING);
+        weapon.setWeight(weight(18));
+        weapon.setProperties(properties(AMMUNITION, HEAVY, LOADING, TWO_HANDED));
+        weapon.setRange(range(100, 400));
         return weapon;
     }
 
     public static Weapon longbow() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
-        weapon.setDamageType(BLUDGEONING);
+        weapon.setName(LONGBOW);
+        weapon.setProficiency(proficiency(MARTIAL, RANGED));
+        weapon.setCost(cost(50, GP));
+        weapon.setDamage(die(1, 8));
+        weapon.setDamageType(PIERCING);
         weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
-        weapon.setRange(range(20, 60));
+        weapon.setProperties(properties(AMMUNITION, HEAVY, TWO_HANDED));
+        weapon.setRange(range(150, 600));
         return weapon;
     }
 
     public static Weapon net() {
         Weapon weapon = new Weapon();
-        weapon.setName(CLUB);
-        weapon.setProficiency(proficiency(SIMPLE, MELEE));
-        weapon.setCost(cost(1, SP));
-        weapon.setDamage(die(1, 4));
-        weapon.setDamageType(BLUDGEONING);
-        weapon.setWeight(weight(2));
-        weapon.setProperties(properties(LIGHT));
-        weapon.setRange(range(20, 60));
+        weapon.setName(NET);
+        weapon.setProficiency(proficiency(MARTIAL, RANGED));
+        weapon.setCost(cost(1, GP));
+        weapon.setWeight(weight(3));
+        weapon.setProperties(properties(SPECIAL, THROWN));
+        weapon.setRange(range(5, 15));
         return weapon;
     }
 
@@ -642,7 +652,7 @@ public class WeaponBuilder {
     }
 
     private static String range(int min, int max) {
-        return "range " + Integer.toString(min) + "/" + Integer.toString(max);
+        return RANGE + " " + Integer.toString(min) + "/" + Integer.toString(max);
     }
 
     private static String cost(int quantity, String denomination) {

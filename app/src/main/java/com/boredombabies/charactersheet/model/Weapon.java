@@ -1,9 +1,11 @@
 package com.boredombabies.charactersheet.model;
 
+import io.realm.RealmObject;
+
 /**
  * Created on 3/5/16.
  */
-public class Weapon {
+public class Weapon extends RealmObject {
     private String name;
     private String proficiency;
     private String cost;
@@ -12,7 +14,11 @@ public class Weapon {
     private String weight;
     private String properties;
     private String range;
+    private String versatileDamage;
     private String notes;
+    private Boolean equipped;
+    private Boolean useFinesse;
+    private Boolean useVersatile;
 
     public String getName() {
         return name;
@@ -78,11 +84,43 @@ public class Weapon {
         this.range = range;
     }
 
+    public String getVersatileDamage() {
+        return versatileDamage;
+    }
+
+    public void setVersatileDamage(String versatileDamage) {
+        this.versatileDamage = versatileDamage;
+    }
+
     public String getNotes() {
         return notes;
     }
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public Boolean getEquipped() {
+        return equipped;
+    }
+
+    public void setEquipped(Boolean equipped) {
+        this.equipped = equipped;
+    }
+
+    public Boolean getUseFinesse() {
+        return useFinesse;
+    }
+
+    public void setUseFinesse(Boolean useFinesse) {
+        this.useFinesse = useFinesse;
+    }
+
+    public Boolean getUseVersatile() {
+        return useVersatile;
+    }
+
+    public void setUseVersatile(Boolean useVersatile) {
+        this.useVersatile = useVersatile;
     }
 }

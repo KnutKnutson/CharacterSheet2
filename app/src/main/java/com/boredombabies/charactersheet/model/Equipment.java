@@ -1,5 +1,6 @@
 package com.boredombabies.charactersheet.model;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 
 /**
@@ -13,6 +14,7 @@ public class Equipment extends RealmObject{
     private String electrum;
     private String gold;
     private String platinum;
+    private RealmList<Weapon> weapons;
 
 
     public Equipment() {}
@@ -71,5 +73,13 @@ public class Equipment extends RealmObject{
 
     public void setPlatinum(String platinum) {
         this.platinum = platinum;
+    }
+
+    public RealmList<Weapon> getWeapons() {
+        return weapons;
+    }
+
+    public void setWeapons(RealmList<Weapon> weapons) {
+        this.weapons = weapons;
     }
 }

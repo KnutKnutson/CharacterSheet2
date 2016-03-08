@@ -21,7 +21,7 @@ public class CharacterSheetMigration implements RealmMigration {
         // Access the Realm schema in order to create, modify or delete classes and their fields.
         RealmSchema schema = realm.getSchema();
 
-        if (oldVersion == 0) {
+        if (oldVersion < 1) {
             RealmObjectSchema personSchema = schema.get("Person");
 
             // Combine 'firstName' and 'lastName' in a new field called 'fullName'

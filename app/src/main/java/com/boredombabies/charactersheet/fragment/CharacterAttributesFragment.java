@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.boredombabies.charactersheet.R;
+import com.boredombabies.charactersheet.db.RealmHelper;
 import com.boredombabies.charactersheet.helper.EditTextTextWatcher;
 import com.boredombabies.charactersheet.helper.Formulas;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
@@ -51,7 +52,7 @@ public class CharacterAttributesFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         playerCharacter = PlayerCharacterHelper.getActiveCharacter();
-        realm = Realm.getInstance(getActivity());
+        realm = RealmHelper.getRealm(getActivity());
     }
 
     @Override
@@ -131,7 +132,8 @@ public class CharacterAttributesFragment extends Fragment {
             skillTrained.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    Realm realm = Realm.getInstance(getActivity());
+                    // TODO: if this works then update the combatstats frag. and others. if not uncomment
+                    //Realm realm = RealmHelper.getRealm(getActivity());
                     realm.beginTransaction();
                     savingThrow.setTrained(isChecked);
                     realm.commitTransaction();
@@ -161,7 +163,7 @@ public class CharacterAttributesFragment extends Fragment {
             skillTrained.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    Realm realm = Realm.getInstance(getActivity());
+                    //Realm realm = RealmHelper.getRealm(getActivity());
                     realm.beginTransaction();
                     skill.setTrained(isChecked);
                     realm.commitTransaction();

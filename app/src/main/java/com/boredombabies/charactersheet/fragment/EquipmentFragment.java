@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.boredombabies.charactersheet.R;
+import com.boredombabies.charactersheet.db.RealmHelper;
 import com.boredombabies.charactersheet.helper.EditTextTextWatcher;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
@@ -26,7 +27,7 @@ public class EquipmentFragment extends android.support.v4.app.Fragment {
         super.onCreate(savedInstanceState);
 
         playerCharacter = PlayerCharacterHelper.getActiveCharacter();
-        realm = Realm.getInstance(getActivity());
+        realm = RealmHelper.getRealm(getActivity());
     }
 
     @Override

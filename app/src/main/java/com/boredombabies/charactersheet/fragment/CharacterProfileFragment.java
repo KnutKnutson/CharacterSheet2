@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.boredombabies.charactersheet.R;
+import com.boredombabies.charactersheet.db.RealmHelper;
 import com.boredombabies.charactersheet.helper.Constants;
 import com.boredombabies.charactersheet.helper.EditTextTextWatcher;
 import com.boredombabies.charactersheet.helper.Formulas;
@@ -52,7 +53,7 @@ public class CharacterProfileFragment extends Fragment {
 
         playerCharacter = PlayerCharacterHelper.getActiveCharacter();
 
-        realm = Realm.getInstance(getActivity());
+        realm = RealmHelper.getRealm(getActivity());
     }
 
     @Override

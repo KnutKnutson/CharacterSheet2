@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.boredombabies.charactersheet.R;
+import com.boredombabies.charactersheet.db.RealmHelper;
 import com.boredombabies.charactersheet.helper.Constants;
 import com.boredombabies.charactersheet.helper.EditTextTextWatcher;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
@@ -37,7 +38,7 @@ public class CharacterCombatStatsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         playerCharacter = PlayerCharacterHelper.getActiveCharacter();
-        realm = Realm.getInstance(getActivity());
+        realm = RealmHelper.getRealm(getActivity());
 
         Bundle parentBundle = this.getParentFragment().getArguments();
         if (parentBundle != null) {

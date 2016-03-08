@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.boredombabies.charactersheet.R;
+import com.boredombabies.charactersheet.db.RealmHelper;
 import com.boredombabies.charactersheet.fragment.CharacterProfileFragment;
 import com.boredombabies.charactersheet.fragment.CharacterSheetListFragment;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
@@ -47,7 +48,7 @@ public class CharacterSheetListActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        realm = Realm.getInstance(this);
+        realm = RealmHelper.getRealm(this);
         setContentView(R.layout.activity_charactersheet_app_bar);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

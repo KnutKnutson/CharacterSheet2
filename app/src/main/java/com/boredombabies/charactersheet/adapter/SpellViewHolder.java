@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bignerdranch.expandablerecyclerview.ViewHolder.ChildViewHolder;
 import com.boredombabies.charactersheet.R;
+import com.boredombabies.charactersheet.db.RealmHelper;
 import com.boredombabies.charactersheet.helper.EditTextTextWatcher;
 import com.boredombabies.charactersheet.model.Spell;
 
@@ -49,7 +50,7 @@ public class SpellViewHolder extends ChildViewHolder {
         spellPrepared.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Realm realm = Realm.getInstance(context);
+                Realm realm = RealmHelper.getRealm(context);
                 realm.beginTransaction();
                 spell.setPrepared(isChecked);
                 realm.commitTransaction();

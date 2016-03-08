@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.adapter.CharacterListAdapter;
+import com.boredombabies.charactersheet.db.RealmHelper;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
 
@@ -107,7 +108,7 @@ public class CharacterSheetListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        realm = Realm.getInstance(getActivity());
+        realm = RealmHelper.getRealm(getActivity());
         listAdapter = new CharacterListAdapter(getActivity(), PlayerCharacterHelper.assembleParty(realm));
         setListAdapter(listAdapter);
     }

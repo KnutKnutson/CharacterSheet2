@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 
+import com.boredombabies.charactersheet.db.RealmHelper;
 import com.boredombabies.charactersheet.interfaces.EditTextTextListener;
 
 import java.util.Timer;
@@ -57,7 +58,7 @@ public class EditTextTextWatcher implements TextWatcher, EditTextTextListener {
 //            },
 //            DELAY
 //        );
-        Realm realm = Realm.getInstance(context);
+        Realm realm = RealmHelper.getRealm(context);
         realm.beginTransaction();
         inTransactionCallback(s);
         realm.commitTransaction();

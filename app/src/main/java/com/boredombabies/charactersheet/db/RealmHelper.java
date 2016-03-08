@@ -12,8 +12,9 @@ import io.realm.RealmConfiguration;
  */
 public class RealmHelper {
 
+    /** Set to debug config to blow up db **/
     public static Realm getRealm(Context context) {
-        return Realm.getInstance(getConfig(context));
+        return Realm.getInstance( getDebugConfig(context) );
     }
 
     public static RealmConfiguration getConfig(Context context) {

@@ -13,6 +13,7 @@ import android.widget.EditText;
 
 import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.adapter.SpellSlotExpandableListAdapter;
+import com.boredombabies.charactersheet.db.RealmHelper;
 import com.boredombabies.charactersheet.helper.EditTextTextWatcher;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
@@ -34,7 +35,7 @@ public class SpellsFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         playerCharacter = PlayerCharacterHelper.getActiveCharacter();
-        realm = Realm.getInstance(getActivity());
+        realm = RealmHelper.getRealm(getActivity());
     }
 
     @Override
@@ -88,7 +89,6 @@ public class SpellsFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Log.d("onSaveInstanceState", outState.toString());
         ((SpellSlotExpandableListAdapter) spellSlotRecyclerView.getAdapter()).onSaveInstanceState(outState);
     }
 }

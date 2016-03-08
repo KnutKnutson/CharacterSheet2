@@ -51,6 +51,8 @@
     <string name="label_electrum">EP</string>
     <string name="label_gold">GP</string>
     <string name="label_platinum">PP</string>
+    <string name="label_weapons">WEAPONS</string>
+    <string name="label_armor">ARMOR</string>
 
     <!-- FEATURES -->
     <string name="label_personality_traits">PERSONALITY TRAITS</string>
@@ -88,7 +90,10 @@
     <string name="label_spells_known">SPELLS KNOWN</string>
     <string name="label_cantrips">CANTRIPS</string>
 
+    <!-- STUBS -->
+    <string name="label_items">ITEM LIST</string>
 
+    <!-- SYSTEM -->
     <string name="clear_cache_menu">Clear Caches</string>
     <string name="clear_cache_complete_toast">Caches have been cleared</string>
     <string name="imageview_description">Image Thumbnail</string>

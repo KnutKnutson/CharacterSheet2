@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 
 import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.adapter.CharacterListAdapter;
+import com.boredombabies.charactersheet.db.RealmHelper;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
 
@@ -30,7 +31,7 @@ public class AllySelectDialogFragment extends DialogFragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        realm = Realm.getInstance(getActivity());
+        realm = RealmHelper.getRealm(activity);
         potentialAllies = PlayerCharacterHelper.getPotentialAllies(realm);
         listAdapter = new CharacterListAdapter(activity, potentialAllies);
     }
@@ -59,7 +60,6 @@ public class AllySelectDialogFragment extends DialogFragment {
     }
 
     private void saveAlly(PlayerCharacter newAlly) {
-        Realm realm = Realm.getInstance(getActivity());
         realm.beginTransaction();
         PlayerCharacterHelper.getActiveCharacter().getAllies().getPlayerCharacterAllies().add(newAlly);
         realm.commitTransaction();

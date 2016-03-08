@@ -11,6 +11,7 @@ import java.util.List;
  * Created on 3/5/16.
  */
 public class WeaponBuilder {
+    // SIMPLE MELEE
     public static final String CLUB = "Club";
     public static final String DAGGER = "Dagger";
     public static final String GREATCLUB = "Greatclub";
@@ -22,12 +23,12 @@ public class WeaponBuilder {
     public static final String SICKLE = "Sickle";
     public static final String SPEAR = "Spear";
     public static final String UNARMED_STRIKE = "Unarmed Strike";
-
+    // SIMPLE RANGED
     public static final String LIGHT_CROSSBOW = "Light Crossbow";
     public static final String DART = "Dart";
     public static final String SHORTBOW = "Shortbow";
     public static final String SLING = "Sling";
-
+    // MARTIAL MELEE
     public static final String BATTLEAXE = "Battleaxe";
     public static final String FLAIL = "Flail";
     public static final String GLAIVE = "Glaive";
@@ -46,7 +47,7 @@ public class WeaponBuilder {
     public static final String WAR_PICK = "War Pick";
     public static final String WARHAMMER = "Warhammer";
     public static final String WHIP = "Whip";
-
+    // MARTIAL RANGED
     public static final String BLOWGUN = "Blowgun";
     public static final String HAND_CROSSBOW = "Hand Crossbow";
     public static final String HEAVY_CROSSBOW = "Heavy Crossbow";
@@ -59,6 +60,7 @@ public class WeaponBuilder {
             MORNINGSTAR, PIKE, RAPIER, SCIMITAR, SHORTSWORD, TRIDENT, WAR_PICK, WARHAMMER, WHIP,
             BLOWGUN, HAND_CROSSBOW, HEAVY_CROSSBOW, LONGBOW, NET};
 
+    // PROPERTIES
     public static final String AMMUNITION = "Ammunition";
     public static final String FINESSE = "Finesse";
     public static final String HEAVY = "Heavy";
@@ -70,17 +72,17 @@ public class WeaponBuilder {
     public static final String THROWN = "Thrown";
     public static final String TWO_HANDED = "Two Handed";
     public static final String VERSATILE = "Versatile";
-
+    // DAMAGE TYPES
     public static final String BLUDGEONING = "Bludgeoning";
     public static final String PIERCING = "Piercing";
     public static final String SLASHING = "Slashing";
-
+    //
     public static final String SIMPLE = "Simple";
     public static final String MARTIAL = "Martial";
 
     public static final String MELEE = "Melee";
     public static final String RANGED = "Ranged";
-
+    // COSTS TODO: MOVE TO CONSTANT ELSEWHERE
     public static final String CP = "cp";
     public static final String SP = "sp";
     public static final String GP = "gp";

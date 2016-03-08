@@ -20,6 +20,7 @@ import android.widget.ListView;
 import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.activity.CharacterSheetViewPagerActivity;
 import com.boredombabies.charactersheet.adapter.CharacterListAdapter;
+import com.boredombabies.charactersheet.db.RealmHelper;
 import com.boredombabies.charactersheet.helper.EditTextTextWatcher;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
@@ -28,17 +29,11 @@ import java.util.List;
 
 import io.realm.Realm;
 
-/**
- * Export allies as list of uuids.
- * On import, find or create allies by uuid.
- * Only show allies where name != null
- */
-public class AlliesFragment extends ListFragment {
+public class AlliesFragment extends ItemListFragment {
     Realm realm;
     PlayerCharacter playerCharacter;
     List<PlayerCharacter> allies;
     private CharacterListAdapter listAdapter;
-    private int NEW_ALLY_REQUEST_CODE = 42;
 
     // Tracks current menu item
     private int allyToRemoveFromParty;
@@ -70,19 +65,11 @@ public class AlliesFragment extends ListFragment {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == NEW_ALLY_REQUEST_CODE && resultCode != Activity.RESULT_CANCELED) {
-            setListViewHeightBasedOnItems(getListView());
-        }
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         playerCharacter = PlayerCharacterHelper.getActiveCharacter();
-        realm = Realm.getInstance(getActivity());
+        realm = RealmHelper.getRealm(getActivity());
         allies = playerCharacter.getAllies().getPlayerCharacterAllies();
         listAdapter = new CharacterListAdapter(getActivity(), allies);
         setListAdapter(listAdapter);
@@ -135,7 +122,7 @@ public class AlliesFragment extends ListFragment {
     public void newAlly() {
         AllySelectDialogFragment allySelectDialogFragment = new AllySelectDialogFragment();
         allySelectDialogFragment.setCurrentAlliesListAdapter(listAdapter);
-        allySelectDialogFragment.setTargetFragment(this, 42);
+        allySelectDialogFragment.setTargetFragment(this, NEW_ITEM_REQUEST_CODE);
         allySelectDialogFragment.show(getActivity().getSupportFragmentManager(), "newAlly");
     }
 
@@ -190,26 +177,4 @@ public class AlliesFragment extends ListFragment {
             currentActionMode = null; // Clear current action mode
         }
     };
-
-    public void setListViewHeightBasedOnItems(ListView listView) {
-        int numberOfItems = listAdapter.getCount();
-
-        // Get total height of all items.
-        int totalItemsHeight = 0;
-        for (int itemPos = 0; itemPos < numberOfItems; itemPos++) {
-            View item = listAdapter.getView(itemPos, null, listView);
-            item.measure(0, 0);
-            totalItemsHeight += item.getMeasuredHeight() + 30; // little extra love.
-        }
-
-        // Get total height of all item dividers.
-        int totalDividersHeight = listView.getDividerHeight() *
-                (numberOfItems - 1);
-
-        // Set list height.
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalItemsHeight + totalDividersHeight;
-        listView.setLayoutParams(params);
-        listView.requestLayout();
-    }
 }

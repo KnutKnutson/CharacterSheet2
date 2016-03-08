@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.adapter.CharacterListAdapter;
 import com.boredombabies.charactersheet.adapter.WeaponListAdapter;
+import com.boredombabies.charactersheet.db.RealmHelper;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
 import com.boredombabies.charactersheet.helper.WeaponComparator;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
@@ -37,7 +38,7 @@ public class DialogWeaponSelectFragment extends DialogFragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        realm = Realm.getInstance(activity);
+        realm = RealmHelper.getRealm(activity);
         weaponsSimpleList = WeaponBuilder.WEAPONS;
         //Collections.sort(weapons, new WeaponComparator());
         //listAdapter = new WeaponListAdapter(activity, weapons);
@@ -53,6 +54,8 @@ public class DialogWeaponSelectFragment extends DialogFragment {
                 .setAdapter(listAdapter, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         saveWeapon(weaponsSimpleList[which]);
+                        // nonzero in resultcode
+                        getTargetFragment().onActivityResult(getTargetRequestCode(), 42, null);
                     }
                 });
         return builder.create();
@@ -63,7 +66,6 @@ public class DialogWeaponSelectFragment extends DialogFragment {
         if (weapon == null) {
             weapon = WeaponBuilder.build(weaponName);
         }
-        Realm realm = Realm.getInstance(getActivity());
         realm.beginTransaction();
         Weapon realmWeapon = realm.copyToRealm(weapon);
         //PlayerCharacterHelper.getActiveCharacter().getEquipment().().add(realmWeapon);

@@ -16,7 +16,7 @@ import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.adapter.WeaponListAdapter;
 import com.boredombabies.charactersheet.db.RealmHelper;
 import com.boredombabies.charactersheet.dialog.WeaponSelectDialog;
-import com.boredombabies.charactersheet.dialog.WeaponViewDialog;
+import com.boredombabies.charactersheet.dialog.WeaponShowDialog;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
 import com.boredombabies.charactersheet.model.Weapon;
@@ -32,6 +32,7 @@ public class WeaponListFragment extends ItemListFragment {
     PlayerCharacter playerCharacter;
     List<Weapon> weapons;
     private WeaponListAdapter listAdapter;
+    private RealmChangeListener weaponListener;
 
     public WeaponListFragment() { }
 
@@ -41,14 +42,14 @@ public class WeaponListFragment extends ItemListFragment {
 
         playerCharacter = PlayerCharacterHelper.getActiveCharacter();
         realm = RealmHelper.getRealm(getActivity());
-        RealmChangeListener listener = new RealmChangeListener() {
+        weaponListener = new RealmChangeListener() {
             public void onChange() {
                 if (listAdapter != null) {
                     listAdapter.notifyDataSetChanged();
                 }
             }
         };
-        realm.addChangeListener(listener);
+        realm.addChangeListener(weaponListener);
         weapons = playerCharacter.getEquipment().getWeapons();
         listAdapter = new WeaponListAdapter(getActivity(), weapons);
         setListAdapter(listAdapter);
@@ -87,7 +88,7 @@ public class WeaponListFragment extends ItemListFragment {
     }
 
     public void viewWeapon(Weapon weapon) {
-        WeaponViewDialog weaponShow = WeaponViewDialog.newInstance(weapon);
+        WeaponShowDialog weaponShow = WeaponShowDialog.newInstance(weapon);
         weaponShow.setTargetFragment(this, NEW_ITEM_REQUEST_CODE);
         weaponShow.show(getActivity().getSupportFragmentManager(), "viewWeapon");
     }
@@ -118,7 +119,6 @@ public class WeaponListFragment extends ItemListFragment {
                         realm.beginTransaction();
                         playerCharacter.getEquipment().getWeapons().remove(brokenWeapon);
                         realm.commitTransaction();
-//                        listAdapter.notifyDataSetChanged();
                         setListViewHeightBasedOnItems(getListView());
 
                         Snackbar.make(getView(), "Weapon Removed From Equipment", Snackbar.LENGTH_LONG)
@@ -128,7 +128,6 @@ public class WeaponListFragment extends ItemListFragment {
                                         realm.beginTransaction();
                                         playerCharacter.getEquipment().getWeapons().add(brokenWeapon);
                                         realm.commitTransaction();
-//                                        listAdapter.notifyDataSetChanged();
                                         setListViewHeightBasedOnItems(getListView());
                                     }
                                 }).show();
@@ -147,5 +146,10 @@ public class WeaponListFragment extends ItemListFragment {
         };
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        realm.removeChangeListener(weaponListener);
+    }
 
 }

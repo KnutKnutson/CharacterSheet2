@@ -2,6 +2,7 @@ package com.boredombabies.charactersheet.model.builder;
 
 import android.text.TextUtils;
 
+import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.model.Weapon;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
  */
 public class WeaponBuilder {
     // SIMPLE MELEE
+    public static final int CLUBR = R.string.CLUB;
     public static final String CLUB = "Club";
     public static final String DAGGER = "Dagger";
     public static final String GREATCLUB = "Greatclub";
@@ -181,6 +183,7 @@ public class WeaponBuilder {
     public static Weapon club() {
         Weapon weapon = new Weapon();
         weapon.setName(CLUB);
+        weapon.setResourceName(CLUBR);
         weapon.setProficiency(proficiency(SIMPLE, MELEE));
         weapon.setCost(cost(1, SP));
         weapon.setDamage(die(1, 4));

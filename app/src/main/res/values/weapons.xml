@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="CLUB">Club</string>
+    <string name="DAGGER">Dagger</string>
+    <string name="GREATCLUB">Greatclub</string>
+    <string name="HANDAXE">Handaxe</string>
+    <string name="JAVELIN">Javelin</string>
+    <string name="LIGHT_HAMMER">Light Hammer</string>
+    <string name="MACE">Mace</string>
+    <string name="QUARTERSTAFF">Quarterstaff</string>
+    <string name="SICKLE">Sickle</string>
+    <string name="SPEAR">Spear</string>
+    <string name="UNARMED_STRIKE">Unarmed Strike</string>
+
+    <string name="LIGHT_CROSSBOW">Light Crossbow</string>
+    <string name="DART">Dart</string>
+    <string name="SHORTBOW">Shortbow</string>
+    <string name="SLING">Sling</string>
+
+    <string name="BATTLEAXE">Battleaxe</string>
+    <string name="FLAIL">Flail</string>
+    <string name="GLAIVE">Glaive</string>
+    <string name="GREATAXE">Greataxe</string>
+    <string name="GREATSWORD">Greatsword</string>
+    <string name="HALBERD">Halberd</string>
+    <string name="LANCE">Lance</string>
+    <string name="LONGSWORD">Longsword</string>
+    <string name="MAUL">Maul</string>
+    <string name="MORNINGSTAR">Morningstar</string>
+    <string name="PIKE">Pike</string>
+    <string name="RAPIER">Rapier</string>
+    <string name="SCIMITAR">Scimitar</string>
+    <string name="SHORTSWORD">Shortsword</string>
+    <string name="TRIDENT">Trident</string>
+    <string name="WAR_PICK">War Pick</string>
+    <string name="WARHAMMER">Warhammer</string>
+    <string name="WHIP">Whip</string>
+
+    <string name="BLOWGUN">Blowgun</string>
+    <string name="HAND_CROSSBOW">Hand Crossbow</string>
+    <string name="HEAVY_CROSSBOW">Heavy Crossbow</string>
+    <string name="LONGBOW">Longbow</string>
+    <string name="NET">Net</string>
+
+    <string name="AMMUNITION">Ammunition</string>
+    <string name="FINESSE">Finesse</string>
+    <string name="HEAVY">Heavy</string>
+    <string name="LIGHT">Light</string>
+    <string name="LOADING">Loading</string>
+    <string name="RANGE">Range</string>
+    <string name="REACH">Reach</string>
+    <string name="SPECIAL">Special</string>
+    <string name="THROWN">Thrown</string>
+    <string name="TWO_HANDED">Two Handed</string>
+    <string name="VERSATILE">Versatile</string>
+
+    <string name="BLUDGEONING">Bludgeoning</string>
+    <string name="PIERCING">Piercing</string>
+    <string name="SLASHING">Slashing</string>
+
+    <string name="SIMPLE">Simple</string>
+    <string name="MARTIAL">Martial</string>
+
+    <string name="MELEE">Melee</string>
+    <string name="RANGED">Ranged</string>
+
+    <string name="label_notes">NOTES</string>
+    <string name="label_cost">COST</string>
+    <string name="label_damage">DAMAGE</string>
+    <string name="label_weight">WEIGHT</string>
+    <string name="label_properties">PROPERTIES</string>
+
+</resources>

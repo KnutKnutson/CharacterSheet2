@@ -59,10 +59,7 @@ public class WeaponSelectDialog extends DialogFragment {
     }
 
     private void saveWeapon(String weaponName) {
-        Weapon weapon = realm.where(Weapon.class).equalTo("name", weaponName).findFirst();
-        if (weapon == null) {
-            weapon = WeaponBuilder.build(weaponName);
-        }
+        Weapon weapon = WeaponBuilder.build(weaponName);
         realm.beginTransaction();
         Weapon realmWeapon = realm.copyToRealm(weapon);
         PlayerCharacterHelper.getActiveCharacter().getEquipment().getWeapons().add(realmWeapon);

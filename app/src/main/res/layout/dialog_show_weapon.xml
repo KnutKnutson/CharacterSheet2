@@ -1,12 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/content_margin">
+
     <TextView
         android:id="@+id/weaponName"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/font_size_headline"
+        android:layout_marginTop="@dimen/content_margin"
         android:text="hey hey weapon"/>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/weaponProficiency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/weaponName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/content_margin"
+        android:text="Martial Melee Weapon"/>
+
+    <LinearLayout
+        android:id="@+id/weaponStats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/weaponProficiency"
+        android:layout_margin="4dp"
+        android:weightSum="4">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3">
+
+            <EditText
+                style="@style/BaseEditTextView"
+                android:id="@+id/weaponCost"/>
+
+            <TextView
+                style="@style/BaseTextView"
+                android:id="@+id/weaponCostLabel"
+                android:layout_below="@+id/weaponCost"
+                android:text="@string/label_cost"/>
+
+            <EditText
+                style="@style/BaseEditTextView"
+                android:id="@+id/weaponWeight"
+                android:layout_below="@+id/weaponCostLabel"/>
+
+            <TextView
+                style="@style/BaseTextView"
+                android:id="@+id/weaponWeightLabel"
+                android:layout_below="@+id/weaponWeight"
+                android:text="@string/label_weight"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <EditText
+                style="@style/BaseEditTextView"
+                android:id="@+id/weaponDamage"/>
+
+            <TextView
+                style="@style/BaseTextView"
+                android:id="@+id/weaponDamageLabel"
+                android:layout_below="@+id/weaponDamage"
+                android:text="@string/label_damage"/>
+
+            <EditText
+                style="@style/BaseEditTextView"
+                android:id="@+id/weaponProperties"
+                android:layout_below="@+id/weaponDamageLabel"/>
+
+            <TextView
+                style="@style/BaseTextView"
+                android:id="@+id/weaponPropertiesLabel"
+                android:layout_below="@+id/weaponProperties"
+                android:text="@string/label_properties"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/weaponNotesLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/weaponStats"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/content_margin"
+        android:text="@string/label_notes"/>
+
+    <EditText
+        android:id="@+id/weaponNotes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/weaponNotesLabel"
+        android:background="@drawable/rectangle"
+        android:layout_margin="@dimen/content_margin"
+        android:elevation="4dp"
+        android:minLines="2"/>
+
+</RelativeLayout>

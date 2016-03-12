@@ -2,8 +2,10 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:minHeight="74dp"
     android:background="@drawable/rectangle"
     android:elevation="4dp"
     android:layout_margin="@dimen/content_margin">
@@ -24,8 +26,10 @@
         android:layout_marginLeft="@dimen/content_margin"
         android:layout_marginRight="@dimen/content_margin"
         android:layout_below="@+id/label_items"
-        android:id="@id/android:list" />
+        android:id="@id/android:list"
+        tools:listitem="@android:layout/simple_list_item_checked" />
 
+    <!-- TODO: animate button to save space when list is empty. remove minheight on root layout -->
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/items_fab"
         android:layout_width="wrap_content"

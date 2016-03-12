@@ -7,18 +7,19 @@ import io.realm.RealmObject;
  */
 public class Weapon extends RealmObject {
     private String name;
+    private int resourceName;
     private String proficiency;
-    private String cost;
-    private String damage;
-    private String damageType;
-    private String weight;
-    private String properties;
-    private String range;
-    private String versatileDamage;
-    private String notes;
-    private Boolean equipped;
-    private Boolean useFinesse;
-    private Boolean useVersatile;
+    private String cost = "-";
+    private String damage = "-";
+    private String damageType = "";
+    private String weight = "-";
+    private String properties = "-";
+    private String range = "";
+    private String versatileDamage = "";
+    private String notes = "";
+    private Boolean equipped = false;
+    private Boolean useFinesse = false;
+    private Boolean useVersatile = false;
 
     public String getName() {
         return name;
@@ -26,6 +27,14 @@ public class Weapon extends RealmObject {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getResourceName() {
+        return resourceName;
+    }
+
+    public void setResourceName(int resourceName) {
+        this.resourceName = resourceName;
     }
 
     public String getProficiency() {

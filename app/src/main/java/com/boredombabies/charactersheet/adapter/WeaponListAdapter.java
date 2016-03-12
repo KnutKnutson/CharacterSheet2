@@ -23,12 +23,12 @@ import java.util.List;
 public class WeaponListAdapter extends ArrayAdapter<Weapon> {
 
     private static class ViewHolder {
-        ImageView weaponIcon;
+        //ImageView weaponIcon;
         TextView weaponName;
-        TextView cost;
-        TextView damage;
-        TextView weight;
-        TextView properties;
+//        TextView cost;
+//        TextView damage;
+//        TextView weight;
+//        TextView properties;
     }
 
     public WeaponListAdapter(Context context, List<Weapon> weapons) {
@@ -48,14 +48,15 @@ public class WeaponListAdapter extends ArrayAdapter<Weapon> {
         if (convertView == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.adapter_item_character, parent, false);
+            convertView = inflater.inflate(R.layout.adapter_item_weapon, parent, false);
 
-            viewHolder.weaponIcon  = (ImageView) convertView.findViewById(R.id.characterIcon);
-            viewHolder.weaponName  = (TextView) convertView.findViewById(R.id.characterName);
+            //viewHolder.weaponIcon  = (ImageView) convertView.findViewById(R.id.characterIcon);
+            viewHolder.weaponName  = (TextView) convertView.findViewById(R.id.weaponName);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+
         // Populate the data into the template view using the data object
 //        int headerImage = Formulas.getHeadShotImage(character.getCharacterClass());
 //        Picasso.with(getContext()).load((headerImage != 0 ? headerImage : R.drawable.headshot_barbarian))
@@ -63,6 +64,7 @@ public class WeaponListAdapter extends ArrayAdapter<Weapon> {
 //                .centerCrop()
 //                .into(viewHolder.weaponIcon);
         //viewHolder.characterIcon.setImageResource(R.drawable.ic_person_outline_24dp);
+        viewHolder.weaponName.setText(weapon.getName());
         // Return the completed view to render on screen
         return convertView;
     }

@@ -68,7 +68,7 @@ public class DialogWeaponSelectFragment extends DialogFragment {
         }
         realm.beginTransaction();
         Weapon realmWeapon = realm.copyToRealm(weapon);
-        //PlayerCharacterHelper.getActiveCharacter().getEquipment().().add(realmWeapon);
+        PlayerCharacterHelper.getActiveCharacter().getEquipment().getWeapons().add(realmWeapon);
         realm.commitTransaction();
     }
 }

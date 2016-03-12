@@ -657,7 +657,7 @@ public class WeaponBuilder {
     }
 
     private static String range(int min, int max) {
-        return RANGE + " " + Integer.toString(min) + "/" + Integer.toString(max);
+        return Integer.toString(min) + "/" + Integer.toString(max);
     }
 
     private static String cost(int quantity, String denomination) {

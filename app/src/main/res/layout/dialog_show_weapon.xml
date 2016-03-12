@@ -87,11 +87,62 @@
         </RelativeLayout>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/weaponOptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/weaponStats"
+        android:layout_margin="4dp"
+        android:weightSum="2">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <CheckBox
+                android:id="@+id/weaponUseVersatile"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/weaponUseVersatile"
+                android:layout_centerVertical="true"
+                android:text="Use Versatile?"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <CheckBox
+                android:id="@+id/weaponUseFinesse"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/weaponUseFinesse"
+                android:layout_centerVertical="true"
+                android:text="Use Finesse??"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/weaponNotesLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/weaponStats"
+        android:layout_below="@+id/weaponOptions"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/content_margin"
         android:text="@string/label_notes"/>

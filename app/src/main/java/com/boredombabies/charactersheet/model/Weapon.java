@@ -1,6 +1,9 @@
 package com.boredombabies.charactersheet.model;
 
+import com.boredombabies.charactersheet.model.builder.WeaponBuilder;
+
 import io.realm.RealmObject;
+import io.realm.annotations.Ignore;
 
 /**
  * Created on 3/5/16.
@@ -20,6 +23,16 @@ public class Weapon extends RealmObject {
     private Boolean equipped = false;
     private Boolean useFinesse = false;
     private Boolean useVersatile = false;
+
+    @Ignore
+    private String damageString;
+    @Ignore
+    private String propertiesString;
+    @Ignore
+    private Boolean isFinesse;
+    @Ignore
+    private Boolean isVersatile;
+
 
     public String getName() {
         return name;
@@ -131,5 +144,42 @@ public class Weapon extends RealmObject {
 
     public void setUseVersatile(Boolean useVersatile) {
         this.useVersatile = useVersatile;
+    }
+
+
+    public String getDamageString() {
+        String ds = getDamage();
+        if (!getVersatileDamage().equals("")) { ds += " (" + getVersatileDamage() + ")"; }
+        if (!getRange().equals("")) { ds += " (" + getRange() + ")"; }
+        ds += " " + getDamageType();
+        return ds;
+    }
+
+    public void setDamageString(String damageString) {
+        this.damageString = damageString;
+    }
+
+    public String getPropertiesString() {
+        return propertiesString;
+    }
+
+    public void setPropertiesString(String propertiesString) {
+        this.propertiesString = propertiesString;
+    }
+
+    public Boolean getIsFinesse() {
+        return getProperties().toLowerCase().contains( WeaponBuilder.FINESSE.toLowerCase() );
+    }
+
+    public void setIsFinesse(Boolean isFinesse) {
+        this.isFinesse = isFinesse;
+    }
+
+    public Boolean getIsVersatile() {
+        return getProperties().toLowerCase().contains( WeaponBuilder.VERSATILE.toLowerCase() );
+    }
+
+    public void setIsVersatile(Boolean isVersatile) {
+        this.isVersatile = isVersatile;
     }
 }

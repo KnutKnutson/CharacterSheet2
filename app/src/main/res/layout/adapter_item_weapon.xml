@@ -16,32 +16,38 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--<ImageView-->
-            <!--android:id="@+id/characterIcon"-->
-            <!--android:layout_width="64dp"-->
-            <!--android:layout_height="64dp"-->
-            <!--android:layout_marginRight="16dp"-->
-            <!--android:layout_alignParentLeft="true"-->
-            <!--android:layout_centerVertical="true"/>-->
+        <CheckBox
+            android:id="@+id/weaponEquipped"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="@dimen/content_margin"
+            android:layout_marginEnd="16dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
         <TextView
             android:id="@+id/weaponName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginTop="@dimen/content_margin"
+            android:layout_toEndOf="@+id/weaponEquipped"
+            android:text="Maul"
             android:textSize="18sp"/>
-        <!--<TextView-->
-            <!--android:id="@+id/characterLevel"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_below="@+id/weaponName"/>-->
-        <!--<TextView-->
-            <!--android:id="@+id/characterRace"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="5dp"-->
-            <!--android:layout_below="@+id/characterName"-->
-            <!--android:layout_toRightOf="@+id/characterLevel"/>-->
+        <TextView
+            android:id="@+id/characterLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_toEndOf="@+id/weaponEquipped"
+            android:text="2d6 +1 Bludgeoning"
+            android:layout_below="@+id/weaponName"/>
+        <TextView
+            android:id="@+id/weaponProperties"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/weaponName"
+            android:layout_marginStart="@dimen/content_margin"
+            android:layout_toEndOf="@+id/weaponName"
+            android:text="Thrown, Special, Versatile"/>
         <!--<TextView-->
             <!--android:id="@+id/characterClass"-->
             <!--android:layout_width="wrap_content"-->

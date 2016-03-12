@@ -1,30 +1,20 @@
 package com.boredombabies.charactersheet.activity;
 
-import android.app.Activity;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.boredombabies.charactersheet.R;
-import com.boredombabies.charactersheet.fragment.AlliesFragment;
-import com.boredombabies.charactersheet.fragment.AllySelectDialogFragment;
 import com.boredombabies.charactersheet.fragment.CharacterSheetViewPagerFragment;
-import com.boredombabies.charactersheet.helper.Formulas;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
 import com.boredombabies.charactersheet.interfaces.CharacterSheetFragmentCallbacks;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
 import com.squareup.picasso.Picasso;
-
-import io.realm.Realm;
 
 public class CharacterSheetViewPagerActivity extends AppCompatActivity
         implements CharacterSheetFragmentCallbacks {

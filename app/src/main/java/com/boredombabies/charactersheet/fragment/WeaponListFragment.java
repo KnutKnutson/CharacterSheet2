@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.adapter.WeaponListAdapter;
 import com.boredombabies.charactersheet.db.RealmHelper;
+import com.boredombabies.charactersheet.dialog.WeaponSelectDialog;
+import com.boredombabies.charactersheet.dialog.WeaponViewDialog;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
 import com.boredombabies.charactersheet.model.Weapon;
@@ -23,8 +25,6 @@ import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
-import io.realm.RealmList;
-import io.realm.RealmResults;
 
 
 public class WeaponListFragment extends ItemListFragment {
@@ -52,10 +52,6 @@ public class WeaponListFragment extends ItemListFragment {
         weapons = playerCharacter.getEquipment().getWeapons();
         listAdapter = new WeaponListAdapter(getActivity(), weapons);
         setListAdapter(listAdapter);
-
-        // TODO: Change Adapter to display your content
-//        setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-//                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS));
     }
 
     @Override
@@ -81,12 +77,19 @@ public class WeaponListFragment extends ItemListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
+        viewWeapon(weapons.get(position));
     }
 
     public void newWeapon() {
-        DialogWeaponSelectFragment weaponSelect = new DialogWeaponSelectFragment();
+        WeaponSelectDialog weaponSelect = new WeaponSelectDialog();
         weaponSelect.setTargetFragment(this, NEW_ITEM_REQUEST_CODE);
         weaponSelect.show(getActivity().getSupportFragmentManager(), "newWeapon");
+    }
+
+    public void viewWeapon(Weapon weapon) {
+        WeaponViewDialog weaponShow = WeaponViewDialog.newInstance(weapon);
+        weaponShow.setTargetFragment(this, NEW_ITEM_REQUEST_CODE);
+        weaponShow.show(getActivity().getSupportFragmentManager(), "viewWeapon");
     }
 
     @Override
@@ -143,4 +146,6 @@ public class WeaponListFragment extends ItemListFragment {
             }
         };
     }
+
+
 }

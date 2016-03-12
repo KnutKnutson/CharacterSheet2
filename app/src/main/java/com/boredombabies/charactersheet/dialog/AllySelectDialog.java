@@ -1,4 +1,4 @@
-package com.boredombabies.charactersheet.fragment;
+package com.boredombabies.charactersheet.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -7,42 +7,33 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
-import android.widget.ArrayAdapter;
 
 import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.adapter.CharacterListAdapter;
-import com.boredombabies.charactersheet.adapter.WeaponListAdapter;
 import com.boredombabies.charactersheet.db.RealmHelper;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
-import com.boredombabies.charactersheet.helper.WeaponComparator;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
-import com.boredombabies.charactersheet.model.Weapon;
-import com.boredombabies.charactersheet.model.builder.WeaponBuilder;
 
-import java.util.Collections;
 import java.util.List;
 
 import io.realm.Realm;
 
 /**
- * Created on 3/6/16.
- * TODO: IMPLEMENT
+ * Created on 2/7/16.
  */
-public class DialogWeaponSelectFragment extends DialogFragment {
+public class AllySelectDialog extends DialogFragment {
 
     Realm realm;
-    private ArrayAdapter listAdapter;
-    private List<Weapon> weapons;
-    private String[] weaponsSimpleList;
+    private CharacterListAdapter listAdapter;
+    private CharacterListAdapter currentAlliesListAdapter;
+    private List<PlayerCharacter> potentialAllies;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         realm = RealmHelper.getRealm(activity);
-        weaponsSimpleList = WeaponBuilder.WEAPONS;
-        //Collections.sort(weapons, new WeaponComparator());
-        //listAdapter = new WeaponListAdapter(activity, weapons);
-        listAdapter = new ArrayAdapter<>(activity, android.R.layout.simple_list_item_1, weaponsSimpleList);
+        potentialAllies = PlayerCharacterHelper.getPotentialAllies(realm);
+        listAdapter = new CharacterListAdapter(activity, potentialAllies);
     }
 
     @Override
@@ -50,10 +41,13 @@ public class DialogWeaponSelectFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        builder.setTitle("Choose Weapon")
+        // TODO: prettify header/view
+        builder//.setView(inflater.inflate(R.layout.dialog_allies, null))
+                .setTitle(R.string.label_pick_ally)
                 .setAdapter(listAdapter, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        saveWeapon(weaponsSimpleList[which]);
+                        saveAlly(potentialAllies.get(which));
+                        currentAlliesListAdapter.notifyDataSetChanged();
                         // nonzero in resultcode
                         getTargetFragment().onActivityResult(getTargetRequestCode(), 42, null);
                     }
@@ -61,14 +55,13 @@ public class DialogWeaponSelectFragment extends DialogFragment {
         return builder.create();
     }
 
-    private void saveWeapon(String weaponName) {
-        Weapon weapon = realm.where(Weapon.class).equalTo("name", weaponName).findFirst();
-        if (weapon == null) {
-            weapon = WeaponBuilder.build(weaponName);
-        }
+    public void setCurrentAlliesListAdapter(CharacterListAdapter currentAlliesListAdapter) {
+        this.currentAlliesListAdapter = currentAlliesListAdapter;
+    }
+
+    private void saveAlly(PlayerCharacter newAlly) {
         realm.beginTransaction();
-        Weapon realmWeapon = realm.copyToRealm(weapon);
-        PlayerCharacterHelper.getActiveCharacter().getEquipment().getWeapons().add(realmWeapon);
+        PlayerCharacterHelper.getActiveCharacter().getAllies().getPlayerCharacterAllies().add(newAlly);
         realm.commitTransaction();
     }
 }

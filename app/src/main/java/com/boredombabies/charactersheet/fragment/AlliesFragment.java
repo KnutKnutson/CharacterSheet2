@@ -18,6 +18,7 @@ import com.boredombabies.charactersheet.R;
 import com.boredombabies.charactersheet.activity.CharacterSheetViewPagerActivity;
 import com.boredombabies.charactersheet.adapter.CharacterListAdapter;
 import com.boredombabies.charactersheet.db.RealmHelper;
+import com.boredombabies.charactersheet.dialog.AllySelectDialog;
 import com.boredombabies.charactersheet.helper.EditTextTextWatcher;
 import com.boredombabies.charactersheet.helper.PlayerCharacterHelper;
 import com.boredombabies.charactersheet.model.PlayerCharacter;
@@ -90,10 +91,10 @@ public class AlliesFragment extends ItemListFragment {
     }
 
     public void newAlly() {
-        AllySelectDialogFragment allySelectDialogFragment = new AllySelectDialogFragment();
-        allySelectDialogFragment.setCurrentAlliesListAdapter(listAdapter);
-        allySelectDialogFragment.setTargetFragment(this, NEW_ITEM_REQUEST_CODE);
-        allySelectDialogFragment.show(getActivity().getSupportFragmentManager(), "newAlly");
+        AllySelectDialog allySelectDialog = new AllySelectDialog();
+        allySelectDialog.setCurrentAlliesListAdapter(listAdapter);
+        allySelectDialog.setTargetFragment(this, NEW_ITEM_REQUEST_CODE);
+        allySelectDialog.show(getActivity().getSupportFragmentManager(), "newAlly");
     }
 
     @Override
